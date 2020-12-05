@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SpotifyApi.Model {
+namespace SpotifyApi.Models {
     [Serializable]
     public class TokenModel {
         [SerializeField] string access_token;
