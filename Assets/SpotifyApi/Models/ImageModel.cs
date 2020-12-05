@@ -1,15 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
-    [Serializable]
+    [JsonObject]
     public class ImageModel {
-        [SerializeField] float height;
-        [SerializeField] string url;
-        [SerializeField] float width;
-
-        public float Height => height;
-        public string URL => url;
-        public float Width => width;
+        [JsonProperty("height")] public float? Height { private set; get; }
+        [JsonProperty("url")] public string Url { private set; get; }
+        [JsonProperty("width")] public float? Width { private set; get; }
     }
 }

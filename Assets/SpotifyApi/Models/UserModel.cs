@@ -1,27 +1,16 @@
-﻿using System;
-using UnityEngine;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
-    [Serializable]
+    [JsonObject]
     public class UserModel {
-        [SerializeField] string display_name;
-        [SerializeField] string email;
-        [SerializeField] ExternalUrlModel external_urls;
-        [SerializeField] string href;
-        [SerializeField] string id;
-        [SerializeField] ImageModel[] images;
-        [SerializeField] string product;
-        [SerializeField] string type;
-        [SerializeField] string uri;
-
-        public string Uri => uri;
-        public string Type => type;
-        public string Product => product;
-        public ImageModel[] Images => images;
-        public string ID => id;
-        public string Href => href;
-        public ExternalUrlModel ExternalUrls => external_urls;
-        public string Email => email;
-        public string DisplayName => display_name;
+        [JsonProperty("display_name")] public string DisplayName { private set; get; }
+        [JsonProperty("email")] public string Email { private set; get; }
+        [JsonProperty("external_urls")] public ExternalUrlModel ExternalUrls { private set; get; }
+        [JsonProperty("href")] public string Href { private set; get; }
+        [JsonProperty("string")] public string ID { private set; get; }
+        [JsonProperty("images")] public ImageModel[] Images { private set; get; }
+        [JsonProperty("product")] public string Product { private set; get; }
+        [JsonProperty("type")] public string Type { private set; get; }
+        [JsonProperty("uri")] public string Uri { private set; get; }
     }
 }

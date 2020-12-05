@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using SpotifyApi.Models;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,13 +9,15 @@ namespace SpotifyApi {
     public static partial class Api {
         public static async UniTask<UserModel> GetMe(ITokenProvider token,  CancellationToken cancellationToken) {
             using (var req = UnityWebRequest.Get(Endpoints.ApiMe)) {
-                var raw = $"{Environment.ClientId}:{Environment.ClientSecret}";
                 req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                req.SetRequestHeader("Content-Type", "application/json");
 
                 cancellationToken.ThrowIfCancellationRequested();
                 await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                return JsonUtility.FromJson<UserModel>(req.downloadHandler.text);
+                Debug.Log(token.Token.GetAuthorizationHeaderValue());
+                Debug.Log(req.downloadHandler.text);
+                return JsonConvert.DeserializeObject<UserModel>(req.downloadHandler.text);
             }
         }
     }

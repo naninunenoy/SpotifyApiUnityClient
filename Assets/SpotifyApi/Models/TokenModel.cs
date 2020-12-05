@@ -1,20 +1,13 @@
-﻿using System;
-using UnityEngine;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
-    [Serializable]
+    [JsonObject]
     public class TokenModel {
-        [SerializeField] string access_token;
-        [SerializeField] string token_type;
-        [SerializeField] int expires_in;
-        [SerializeField] string refresh_token;
-        [SerializeField] string scope;
-
-        public string AccessToken => access_token;
-        public string TokenType => token_type;
-        public int ExpiresIn => expires_in;
-        public string RefreshToken => refresh_token;
-        public string Scope => scope;
+        [JsonProperty("access_token")] public string AccessToken { private set; get; }
+        [JsonProperty("token_type")] public string TokenType { private set; get; }
+        [JsonProperty("expires_in")] public int ExpiresIn { private set; get; }
+        [JsonProperty("refresh_token")] public string RefreshToken { private set; get; }
+        [JsonProperty("scope")] public string Scope { private set; get; }
     }
 
     public static class TokenModelExtension {

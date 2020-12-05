@@ -1,11 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
-    [Serializable]
+    [JsonObject]
     public class ExternalUrlModel {
-        public string Spotify => spotify;
-
-        [SerializeField] string spotify;
+        [JsonProperty("spotify")] public string Spotify { private set; get; }
     }
 }
