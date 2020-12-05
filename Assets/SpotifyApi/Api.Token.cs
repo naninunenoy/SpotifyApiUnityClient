@@ -18,7 +18,7 @@ namespace SpotifyApi {
                 form.AddField("redirect_uri", redirectUri);
             }
             using (var req = UnityWebRequest.Post(Endpoints.ApiToken, form)) {
-                var raw = $"{Environment.ClientId}:{Environment.ClientSecret}";
+                var raw = $"{clientId}:{clientSecret}";
                 req.SetRequestHeader("Authorization", $"Basic {Util.ToBase64(raw)}");
 
                 cancellationToken.ThrowIfCancellationRequested();

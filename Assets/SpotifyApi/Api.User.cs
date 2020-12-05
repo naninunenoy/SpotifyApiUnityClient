@@ -2,7 +2,6 @@
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 using SpotifyApi.Models;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace SpotifyApi {
@@ -15,8 +14,6 @@ namespace SpotifyApi {
                 cancellationToken.ThrowIfCancellationRequested();
                 await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                Debug.Log(token.Token.GetAuthorizationHeaderValue());
-                Debug.Log(req.downloadHandler.text);
                 return JsonConvert.DeserializeObject<UserModel>(req.downloadHandler.text);
             }
         }
