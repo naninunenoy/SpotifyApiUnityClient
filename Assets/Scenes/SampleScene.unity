@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 130}
-  m_SizeDelta: {x: 300, y: 70}
+  m_AnchoredPosition: {x: 0, y: 129}
+  m_SizeDelta: {x: 320, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &249507169
 MonoBehaviour:
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30D6\u30E9\u30A6\u30B6\u304C\u958B\u304F\u306E\u3067[\u8A31\u53EF]\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002\n\u30EA\u30C0\u30A4\u30EC\u30AF\u30C8\u5148\u3092localhost\u306B\u3057\u3066\u3044\u308B\u5834\u5408\u306F\n\u30A2\u30AF\u30BB\u30B9\u306B\u5931\u6557\u3059\u308B\u306E\u3067\u5931\u6557\u3057\u305FURL\u3092\u4E0B\u306B\n\u8CBC\u308A\u4ED8\u3051\u3066[GetToken]\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
+  m_Text: "\u30D6\u30E9\u30A6\u30B6\u304C\u958B\u304F\u306E\u3067[\u540C\u610F\u3059\u308B]\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002\n\u30EA\u30C0\u30A4\u30EC\u30AF\u30C8\u5148\u3092localhost\u306B\u3057\u3066\u3044\u308B\u5834\u5408\u306F\n\u30A2\u30AF\u30BB\u30B9\u306B\u5931\u6557\u3059\u308B\u306E\u3067\u5931\u6557\u3057\u305FURL\u3092\u4E0B\u306B\n\u8CBC\u308A\u4ED8\u3051\u3066[GetToken]\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
 --- !u!222 &249507170
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -238,7 +238,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -42}
+  m_AnchoredPosition: {x: 0, y: -40}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &452752060
@@ -479,8 +479,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 42}
-  m_SizeDelta: {x: 300, y: 100}
+  m_AnchoredPosition: {x: 0, y: 36}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &661672554
 MonoBehaviour:
@@ -528,7 +528,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 1
   m_HideMobileInput: 0
   m_CharacterValidation: 0
   m_CharacterLimit: 0
@@ -1277,7 +1277,7 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 

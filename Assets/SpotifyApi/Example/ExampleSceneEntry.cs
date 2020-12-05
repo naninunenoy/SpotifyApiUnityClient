@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using SpotifyApi.Model;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -45,9 +46,10 @@ namespace SpotifyApi.Example {
             }
             using (var req = UnityWebRequest.Post(Endpoints.ApiToken, getTokenForm)) {
                 var raw = $"{Environment.ClientId}:{Environment.ClientSecret}";
-                req.SetRequestHeader("Authorization", $"Basic {SpotifyApiUtil.ToBase64(raw)}");
+                req.SetRequestHeader("Authorization", $"Basic {Util.ToBase64(raw)}");
                 await req.SendWebRequest().WithCancellation(this.GetCancellationTokenOnDestroy());
-                Debug.Log(req.downloadHandler.text);
+                var token = JsonUtility.FromJson<TokenModel>(req.downloadHandler.text);
+                Debug.Log(token.AccessToken);
             }
         }
     }
