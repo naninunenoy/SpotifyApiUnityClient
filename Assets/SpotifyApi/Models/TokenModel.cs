@@ -16,4 +16,10 @@ namespace SpotifyApi.Models {
         public string RefreshToken => refresh_token;
         public string Scope => scope;
     }
+
+    public static class TokenModelExtension {
+        public static string GetAuthorizationHeaderValue(this TokenModel token) {
+            return $"{token.TokenType} {token.AccessToken}";
+        }
+    }
 }
