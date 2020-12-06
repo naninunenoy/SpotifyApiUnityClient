@@ -12,6 +12,7 @@ namespace SpotifyApi.Example {
         [SerializeField] Text attentionText = default;
         [SerializeField] Button getTokenButton = default;
         [SerializeField] Text helloText = default;
+        [SerializeField] Image artwork = default;
         HttpListener listener;
 
         void Start() {
@@ -52,6 +53,11 @@ namespace SpotifyApi.Example {
                     Debug.Log(artist?.Name ?? "(null)");
                     var track = album?.Tracks.Items.FirstOrDefault();
                     Debug.Log(track?.Name ?? "(null)");
+                    var imageUrl = album?.Images.Select(x => x.Url).FirstOrDefault();
+                    if (!string.IsNullOrEmpty(imageUrl)) {
+                        var tex = await Util.DownloadTextureAsync(imageUrl, this.GetCancellationTokenOnDestroy());
+                        artwork.sprite = Util.Texture2Sprite(tex);
+                    }
                 })
                 .AddTo(this);
         }
