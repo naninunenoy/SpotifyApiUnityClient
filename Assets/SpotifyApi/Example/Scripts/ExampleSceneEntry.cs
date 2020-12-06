@@ -23,18 +23,13 @@ namespace SpotifyApi.Example {
                     listener.Prefixes.Clear();
                     listener.Prefixes.Add(Environment.RedirectUri);
                     listener.Start();
-
                     attentionText.gameObject.SetActive(true);
+                    // ブラウザを開いて同意するを待つ
                     Application.OpenURL(authUrl);
-
-                    // ブラウザから同意するを待つ
-                    var context = await listener.GetContextAsync();
-                    var rawUrl = context.Request.RawUrl;
-                    if (!rawUrl.Contains("error=access_denied")) {
-                        accessCode = rawUrl.Split('=')[1];
+                    accessCode = await GetAccessCodeAsync(listener);
+                    if (!string.IsNullOrEmpty(accessCode)) {
                         getTokenButton.interactable = true;
                     }
-                    listener.Close();
                 })
                 .AddTo(this);
             getTokenButton
@@ -57,5 +52,33 @@ namespace SpotifyApi.Example {
                 listener.Close();
             }
         }
+
+        async UniTask WriteHtml(HttpListenerResponse res, string message) {
+            var text = GetHtml(message);
+            res.Headers.Add("HttpResponseStatus:OK");
+            res.ContentLength64 = text.Length;
+            res.ContentType = "text/html";
+            await res.OutputStream.WriteAsync(System.Text.Encoding.UTF8.GetBytes(text), 0, text.Length);
+            await res.OutputStream.FlushAsync();
+        }
+
+        async UniTask<string> GetAccessCodeAsync(HttpListener listener_) {
+            var ret = "";
+            var context = await listener_.GetContextAsync();
+            var rawUrl = context.Request.RawUrl;
+            var accepted = !rawUrl.Contains("error=access_denied");
+            if (accepted) {
+                ret = rawUrl.Split('=')[1];
+            }
+            // ブラウザにメッセージを表示
+            var htmlMessage = accepted ? "thank you! Go back to unity" : "please retry and accept.";
+            await WriteHtml(context.Response, htmlMessage);
+            context.Response.Close();
+            listener.Close();
+            return ret;
+        }
+
+        static string GetHtml(string message) =>
+            $"<!DOCTYPE html><html> <head><meta charset=\"utf-8\"></head><body>{message}</body></html>";
     }
 }
