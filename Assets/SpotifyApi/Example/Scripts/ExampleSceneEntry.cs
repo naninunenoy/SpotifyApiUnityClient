@@ -1,8 +1,10 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Linq;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
+using SpotifyApi.Models;
 
 namespace SpotifyApi.Example {
     public class ExampleSceneEntry : MonoBehaviour {
@@ -14,7 +16,7 @@ namespace SpotifyApi.Example {
 
         void Start() {
             var accessCode = "";
-            var authUrl = Api.GetAuthorizeUrl(Environment.ClientId, Environment.RedirectUri);
+            var authUrl = Api.GetAuthorizeUrl(Environment.ClientId, Environment.RedirectUri, Scopes.All());
             startAuthButton
                 .OnClickAsObservable()
                 .Subscribe(async _ => {
@@ -43,6 +45,13 @@ namespace SpotifyApi.Example {
                     var me = await Api.GetMe(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
                     helloText.text = $"こんにちは\n{me.DisplayName}さん！";
                     helloText.gameObject.SetActive(true);
+                    var res = await Api.GetMyAlbums(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
+                    var album = res.Items.FirstOrDefault()?.Album;
+                    Debug.Log(album?.Name ?? "(null)");
+                    var artist = album?.Artists.FirstOrDefault();
+                    Debug.Log(artist?.Name ?? "(null)");
+                    var track = album?.Tracks.Items.FirstOrDefault();
+                    Debug.Log(track?.Name ?? "(null)");
                 })
                 .AddTo(this);
         }

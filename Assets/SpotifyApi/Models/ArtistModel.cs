@@ -3,22 +3,19 @@ using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
     [JsonObject]
-    public class UserModel {
+    public class ArtistModel {
         [JsonProperty] string id;
-        [JsonIgnore] public UserId Id { private set; get; }
-        [JsonProperty("display_name")] public string DisplayName { private set; get; }
-        [JsonProperty("email")] public string Email { private set; get; }
+        [JsonIgnore] public ArtistId Id { private set; get; }
         [JsonProperty("external_urls")] public ExternalUrlModel ExternalUrls { private set; get; }
         [JsonProperty("href")] public string Href { private set; get; }
-        [JsonProperty("images")] public ImageModel[] Images { private set; get; }
-        [JsonProperty("product")] public string Product { private set; get; }
+        [JsonProperty("name")] public string Name { private set; get; }
         [JsonProperty("type")] public string Type { private set; get; }
         [JsonProperty("uri")] public string Uri { private set; get; }
 
         [OnDeserialized]
         internal void OnDeserializeFinish(StreamingContext context)
         {
-            Id = new UserId(id);
+            Id = new ArtistId(id);
         }
     }
 }
