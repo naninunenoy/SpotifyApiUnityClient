@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SpotifyApi.Models {
     [JsonObject]
     public class DeviceModel {
-        [JsonProperty] string id;
+        [JsonProperty] string id { set; get; }
         [JsonIgnore] public DeviceId Id { private set; get; }
         [JsonProperty("is_active")] public bool IsActive { private set; get; }
         [JsonProperty("is_private_session")] public bool IsPrivateSession { private set; get; }

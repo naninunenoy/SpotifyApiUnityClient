@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SpotifyApi.Models {
     [JsonObject]
     public class UserModel {
-        [JsonProperty] string id;
+        [JsonProperty] string id { set; get; }
         [JsonIgnore] public UserId Id { private set; get; }
         [JsonProperty("display_name")] public string DisplayName { private set; get; }
         [JsonProperty("email")] public string Email { private set; get; }

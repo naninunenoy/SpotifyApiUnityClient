@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace SpotifyApi.Models {
     [JsonObject]
     public class ArtistModel {
-        [JsonProperty] string id;
+        [JsonProperty] string id { set; get; }
         [JsonIgnore] public ArtistId Id { private set; get; }
         [JsonProperty("external_urls")] public ExternalUrlModel ExternalUrls { private set; get; }
         [JsonProperty("href")] public string Href { private set; get; }
