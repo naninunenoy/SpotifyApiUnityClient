@@ -17,13 +17,11 @@ namespace SpotifyApi.Models {
             return (value != null ? value.GetHashCode() : 0);
         }
 
-        public static bool operator ==(ArtistId lhs, ArtistId rhs)
-        {
+        public static bool operator ==(ArtistId lhs, ArtistId rhs) {
             return lhs.Equals(rhs);
         }
 
-        public static bool operator !=(ArtistId lhs, ArtistId rhs)
-        {
+        public static bool operator !=(ArtistId lhs, ArtistId rhs) {
             return !(lhs == rhs);
         }
 

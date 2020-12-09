@@ -1,5 +1,7 @@
-﻿namespace SpotifyApi.Models {
-    public readonly struct UserId {
+﻿using System;
+
+namespace SpotifyApi.Models {
+    public readonly struct UserId : IEquatable<UserId> {
         public readonly string value;
         public UserId(string value) => this.value = value;
 

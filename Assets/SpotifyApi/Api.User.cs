@@ -18,7 +18,7 @@ namespace SpotifyApi {
         }
 
         public static async UniTask<AlbumsResponseModel> GetMyAlbums(ITokenProvider token, CancellationToken cancellationToken) {
-            using (var req = UnityWebRequest.Get(Endpoints.ApiMe + "/albums")) {
+            using (var req = UnityWebRequest.Get(Endpoints.ApiMyAlbums)) {
                 req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
                 cancellationToken.ThrowIfCancellationRequested();

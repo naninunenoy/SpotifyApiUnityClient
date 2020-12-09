@@ -1,9 +1,11 @@
-﻿namespace SpotifyApi.Models {
-    public readonly struct TrackId {
+﻿using System;
+
+namespace SpotifyApi.Models {
+    public readonly struct TrackId : IEquatable<TrackId> {
         public readonly string value;
         public TrackId(string value) => this.value = value;
 
-        public bool Equals(ArtistId other) {
+        public bool Equals(TrackId other) {
             return value == other.value;
         }
 
@@ -15,13 +17,11 @@
             return (value != null ? value.GetHashCode() : 0);
         }
 
-        public static bool operator ==(TrackId lhs, TrackId rhs)
-        {
+        public static bool operator ==(TrackId lhs, TrackId rhs) {
             return lhs.Equals(rhs);
         }
 
-        public static bool operator !=(TrackId lhs, TrackId rhs)
-        {
+        public static bool operator !=(TrackId lhs, TrackId rhs) {
             return !(lhs == rhs);
         }
 

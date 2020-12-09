@@ -1,11 +1,11 @@
 ﻿using System;
 
 namespace SpotifyApi.Models {
-    public readonly struct AlbumId : IEquatable<AlbumId> {
+    public readonly struct DeviceId : IEquatable<DeviceId> {
         public readonly string value;
-        public AlbumId(string value) => this.value = value;
+        public DeviceId(string value) => this.value = value;
 
-        public bool Equals(AlbumId other) {
+        public bool Equals(DeviceId other) {
             return value == other.value;
         }
 
@@ -17,11 +17,11 @@ namespace SpotifyApi.Models {
             return (value != null ? value.GetHashCode() : 0);
         }
 
-        public static bool operator ==(AlbumId lhs, AlbumId rhs) {
+        public static bool operator ==(DeviceId lhs, DeviceId rhs) {
             return lhs.Equals(rhs);
         }
 
-        public static bool operator !=(AlbumId lhs, AlbumId rhs) {
+        public static bool operator !=(DeviceId lhs, DeviceId rhs) {
             return !(lhs == rhs);
         }
 
