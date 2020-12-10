@@ -4,6 +4,7 @@
         public const string ApiToken = "https://accounts.spotify.com/api/token";
         public const string ApiMe = "https://api.spotify.com/v1/me";
         public const string ApiMyAlbums = "https://api.spotify.com/v1/me/albums";
+        public const string ApiMyPlaylist = "https://api.spotify.com/v1/me/playlist";
         public const string ApiMyPlayer = "https://api.spotify.com/v1/me/player";
         public const string ApiMyPlayerQueue = "https://api.spotify.com/v1/me/player/queue";
         public const string ApiMyPlayerDevices = "https://api.spotify.com/v1/me/player/devices";
@@ -21,5 +22,6 @@
         public const string ApiAudioFeatures = "https://api.spotify.com/v1/audio-features";
         public const string ApiAlbums = "https://api.spotify.com/v1/albums";
         public const string ApiArtists = "https://api.spotify.com/v1/artists";
+        public const string ApiPlaylist = "https://api.spotify.com/v1/playlist";
     }
 }
