@@ -21,7 +21,7 @@ namespace SpotifyApi.Models {
         [JsonProperty("release_date")] public string ReleaseDate { private set; get; }
         [JsonProperty("release_date_precision")] public string ReleaseDatePrecision { private set; get; }
         [JsonProperty("total_tracks")] public int TotalTracks { private set; get; }
-        [JsonProperty("tracks")] public TracksResponseModel Tracks { private set; get; }
+        [JsonProperty("tracks")] public TracksPagingModel Tracks { private set; get; }
         [JsonProperty("type")] public string Type { private set; get; }
         [JsonProperty("uri")] public string Uri { private set; get; }
 

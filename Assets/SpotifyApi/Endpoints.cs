@@ -19,5 +19,7 @@
         public const string ApiMyPlayerShuffle = "https://api.spotify.com/v1/me/player/shuffle";
         public const string ApiAudioAnalysis = "https://api.spotify.com/v1/audio-analysis";
         public const string ApiAudioFeatures = "https://api.spotify.com/v1/audio-features";
+        public const string ApiAlbums = "https://api.spotify.com/v1/albums";
+        public const string ApiArtists = "https://api.spotify.com/v1/artists";
     }
 }
