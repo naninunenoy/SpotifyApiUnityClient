@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 namespace SpotifyApi {
     public static partial class Api {
-        public static async UniTask<UserModel> GetMe(ITokenProvider token,  CancellationToken cancellationToken) {
+        public static async UniTask<UserModel> GetMeAsync(ITokenProvider token,  CancellationToken cancellationToken) {
             using (var req = UnityWebRequest.Get(Endpoints.ApiMe)) {
                 req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -17,7 +17,7 @@ namespace SpotifyApi {
             }
         }
 
-        public static async UniTask<AlbumsResponseModel> GetMyAlbums(ITokenProvider token, CancellationToken cancellationToken) {
+        public static async UniTask<AlbumsResponseModel> GetMyAlbumsAsync(ITokenProvider token, CancellationToken cancellationToken) {
             using (var req = UnityWebRequest.Get(Endpoints.ApiMyAlbums)) {
                 req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 

@@ -8,7 +8,7 @@ namespace SpotifyApi {
     public static partial class Api {
         public static class Player {
             const string emptyBody = "{}";
-            public static async UniTask PostQueue(string uri, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PostQueueAsync(string uri, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&uri={uri}";
                 using (var req = UnityWebRequest.Post(Endpoints.ApiMyPlayerQueue + query, "")) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -17,7 +17,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask<UserModel> GetDevices(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask<UserModel> GetDevicesAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Get(Endpoints.ApiMyPlayerDevices)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -27,7 +27,7 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<UserModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask<PlayerModel> GetPlayer(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask<PlayerModel> GetPlayerAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Get(Endpoints.ApiMyPlayer)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -37,7 +37,7 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<PlayerModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask PutPlayer(DeviceId deviceId, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutPlayerAsync(DeviceId deviceId, ITokenProvider token,  CancellationToken cancellationToken) {
                 var body = "{\"device_ids\":\"" + deviceId.value + "\"}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayer, body)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -46,7 +46,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask<RecentlyPlayedTrackModel> GetRecentlyPlayed(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask<RecentlyPlayedTrackModel> GetRecentlyPlayedAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Get(Endpoints.ApiMyPlayerRecentlyPlayed)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -56,7 +56,7 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<RecentlyPlayedTrackModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask<CurrentlyPlayingTrackModel> GetCurrentlyPlaying(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask<CurrentlyPlayingTrackModel> GetCurrentlyPlayingAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Get(Endpoints.ApiMyPlayerCurrentlyPlaying)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -66,7 +66,7 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<CurrentlyPlayingTrackModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask PutPause(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutPauseAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerPause, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -74,7 +74,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutSeek(int positionMs, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutSeekAsync(int positionMs, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&position_ms={positionMs}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerSeek + query, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -83,7 +83,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutRepeat(RepeatState repeatState, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutRepeatAsync(RepeatState repeatState, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&state={repeatState.Value()}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerRepeat + query, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -92,7 +92,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutRepeat(int volumePercent, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutRepeatAsync(int volumePercent, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&volume_percent={volumePercent}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerVolume + query, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -101,7 +101,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PostNext(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PostNextAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Post(Endpoints.ApiMyPlayerNext, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -109,7 +109,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PostPrevious(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PostPreviousAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Post(Endpoints.ApiMyPlayerPrevious, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -117,7 +117,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutPlay(string contextUri, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutPlayAsync(string contextUri, ITokenProvider token,  CancellationToken cancellationToken) {
                 var body = string.IsNullOrEmpty(contextUri) ? emptyBody : "{\"context_uri\":\"" + contextUri + "\"}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerPlay, body)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
@@ -126,7 +126,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutShuffle(bool shuffle, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutShuffleAsync(bool shuffle, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&state={shuffle}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerShuffle + "query", emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());

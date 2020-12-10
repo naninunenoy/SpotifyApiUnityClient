@@ -17,5 +17,7 @@
         public const string ApiMyPlayerPrevious = "https://api.spotify.com/v1/me/player/previous";
         public const string ApiMyPlayerPlay = "https://api.spotify.com/v1/me/player/play";
         public const string ApiMyPlayerShuffle = "https://api.spotify.com/v1/me/player/shuffle";
+        public const string ApiAudioAnalysis = "https://api.spotify.com/v1/audio-analysis";
+        public const string ApiAudioFeatures = "https://api.spotify.com/v1/audio-features";
     }
 }

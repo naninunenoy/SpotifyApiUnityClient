@@ -43,10 +43,10 @@ namespace SpotifyApi.Example {
                         this.GetCancellationTokenOnDestroy());
                     TokenHolder.Instance.SetToken(token);
                     // 自分の情報取得
-                    var me = await Api.GetMe(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
+                    var me = await Api.GetMeAsync(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
                     helloText.text = $"こんにちは\n{me.DisplayName}さん！";
                     helloText.gameObject.SetActive(true);
-                    var res = await Api.GetMyAlbums(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
+                    var res = await Api.GetMyAlbumsAsync(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
                     var album = res.Items.FirstOrDefault()?.Album;
                     Debug.Log(album?.Name ?? "(null)");
                     var artist = album?.Artists.FirstOrDefault();
