@@ -7,7 +7,7 @@ namespace SpotifyApi.Models {
         [JsonProperty] string id { set; get; }
         [JsonIgnore] public AlbumId Id { private set; get; }
         [JsonProperty("album_type")] public string AlbumType { private set; get; }
-        [JsonProperty("artists")] public ArtistModel[] Artists { private set; get; }
+        [JsonProperty("artists")] public SimplifiedArtistModel[] Artists { private set; get; }
         [JsonProperty("available_markets")] public string[] AvailableMarkets { private set; get; }
         [JsonProperty("copyrights")] public CopyrightsModel[] Copyrights { private set; get; }
         [JsonProperty("external_ids")] public ExternalIdModel ExternalIds { private set; get; }

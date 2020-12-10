@@ -11,7 +11,7 @@ namespace SpotifyApi.Models {
     }
     [JsonObject]
     public class RecentlyPlayedTrackItem {
-        [JsonProperty("track")] public TrackModel Track { private set; get; }
+        [JsonProperty("track")] public SimplifiedTrackModel SimplifiedTrack { private set; get; }
         [JsonProperty("played_at")] public string PlayedAt { private set; get; }
         [JsonProperty("context")] public ContextModel Context { private set; get; }
     }
