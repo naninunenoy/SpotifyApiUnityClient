@@ -3,12 +3,12 @@
 namespace SpotifyApi.Models {
     [JsonObject]
     public class AudioAnalysisModel {
-        [JsonProperty("bars")] public AudioAnalysisBars[] bars { private set; get; }
-        [JsonProperty("beats")] public AudioAnalysisBeats[] beats { private set; get; }
-        [JsonProperty("sections")] public AudioAnalysisSections[] sections { private set; get; }
-        [JsonProperty("segments")] public AudioAnalysisSegments[] segments { private set; get; }
-        [JsonProperty("tatums")] public AudioAnalysisTatums[] tatums { private set; get; }
-        [JsonProperty("track")] public AudioAnalysisTrack track { private set; get; }
+        [JsonProperty("bars")] public AudioAnalysisBars[] Bars { private set; get; }
+        [JsonProperty("beats")] public AudioAnalysisBeats[] Beats { private set; get; }
+        [JsonProperty("sections")] public AudioAnalysisSections[] Sections { private set; get; }
+        [JsonProperty("segments")] public AudioAnalysisSegments[] Segments { private set; get; }
+        [JsonProperty("tatums")] public AudioAnalysisTatums[] Tatums { private set; get; }
+        [JsonProperty("track")] public AudioAnalysisTrack Track { private set; get; }
     }
     [JsonObject]
     public class AudioAnalysisBars {

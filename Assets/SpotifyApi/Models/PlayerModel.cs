@@ -4,6 +4,7 @@ namespace SpotifyApi.Models {
     [JsonObject]
     public class PlayerModel {
         [JsonProperty("timestamp")] public long Timestamp { private set; get; }
+        [JsonProperty("device")] public DeviceModel Device { private set; get; }
         [JsonProperty("progress_ms")] public string ProgressMs { private set; get; }
         [JsonProperty("is_playing")] public bool IsPlaying { private set; get; }
         [JsonProperty("currently_playing_type")] public string CurrentlyPlayingType { private set; get; }

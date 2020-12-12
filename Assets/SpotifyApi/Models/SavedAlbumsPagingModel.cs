@@ -2,7 +2,7 @@
 
 namespace SpotifyApi.Models {
     [JsonObject]
-    public class UsersSavedAlbumsModel : PagingModel {
+    public class SavedAlbumsPagingModel : PagingModel {
         [JsonProperty("items")] public SavedAlbumModel[] Items { private set; get; }
     }
 

@@ -1,0 +1,17 @@
+{
+    "name": "SpotifyApi.Tests.EditMode",
+    "references": [
+        "GUID:225b7c7c0260d2d4fa569b150d70be4d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

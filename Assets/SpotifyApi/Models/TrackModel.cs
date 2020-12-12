@@ -12,8 +12,10 @@ namespace SpotifyApi.Models {
         [JsonProperty("disc_number")] public int DiscNumber { private set; get; }
         [JsonProperty("duration_ms")] public int DurationMs { private set; get; }
         [JsonProperty("explicit")] public bool Explicit { private set; get; }
+        [JsonProperty("external_ids")] public ExternalIdModel ExternalIds { private set; get; }
         [JsonProperty("external_urls")] public ExternalUrlModel ExternalUrls { private set; get; }
         [JsonProperty("href")] public string Href { private set; get; }
+        [JsonProperty("is_local")] public bool IsLocal { private set; get; }
         [JsonProperty("is_playable")] public bool IsPlayable { private set; get; }
         //[JsonProperty("linked_from")] public object LinkedFrom { private set; get; }
         //[JsonProperty("restrictions")] public object Restrictions { private set; get; }
