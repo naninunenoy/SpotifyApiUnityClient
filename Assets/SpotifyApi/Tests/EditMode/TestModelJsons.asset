@@ -12,71 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e5ed0a8bfd474e94ace9eacfc452b8, type: 3}
   m_Name: TestModelJsons
   m_EditorClassIdentifier: 
-  albumsResponse: "{\r\n  \"albums\" : [ {\r\n    \"album_type\" : \"album\",\r\n   
-    \"artists\" : [ {\r\n      \"external_urls\" : {\r\n        \"spotify\" : \"https://open.spotify.com/artist/53A0W3U0s8diEn9RhXQhVz\"\r\n     
-    },\r\n      \"href\" : \"https://api.spotify.com/v1/artists/53A0W3U0s8diEn9RhXQhVz\",\r\n     
-    \"id\" : \"53A0W3U0s8diEn9RhXQhVz\",\r\n      \"name\" : \"Keane\",\r\n     
-    \"type\" : \"artist\",\r\n      \"uri\" : \"spotify:artist:53A0W3U0s8diEn9RhXQhVz\"\r\n   
-    } ],\r\n    \"available_markets\" : [ \"AD\", \"AR\", \"AT\", \"AU\", \"BE\",
-    \"BG\", \"BO\", \"BR\", \"CH\", \"CL\", \"CO\", \"CR\", \"CY\", \"CZ\", \"DE\",
-    \"DK\", \"DO\", \"EC\", \"EE\", \"ES\", \"FI\", \"FR\", \"GB\", \"GR\", \"GT\",
-    \"HK\", \"HN\", \"HU\", \"IE\", \"IS\", \"IT\", \"LI\", \"LT\", \"LU\", \"LV\",
-    \"MC\", \"MT\", \"MY\", \"NI\", \"NL\", \"NO\", \"NZ\", \"PA\", \"PE\", \"PH\",
-    \"PL\", \"PT\", \"PY\", \"RO\", \"SE\", \"SG\", \"SI\", \"SK\", \"SV\", \"TR\",
-    \"TW\", \"UY\" ],\r\n    \"copyrights\" : [ {\r\n      \"text\" : \"(C) 2013
-    Universal Island Records, a division of Universal Music Operations Limited\",\r\n     
-    \"type\" : \"C\"\r\n    }, {\r\n      \"text\" : \"(P) 2013 Universal Island
-    Records, a division of Universal Music Operations Limited\",\r\n      \"type\"
-    : \"P\"\r\n    } ],\r\n    \"external_ids\" : {\r\n      \"upc\" : \"00602537518357\"\r\n   
-    },\r\n    \"external_urls\" : {\r\n      \"spotify\" : \"https://open.spotify.com/album/41MnTivkwTO3UUJ8DrqEJJ\"\r\n   
-    },\r\n    \"genres\" : [ ],\r\n    \"href\" : \"https://api.spotify.com/v1/albums/41MnTivkwTO3UUJ8DrqEJJ\",\r\n   
-    \"id\" : \"41MnTivkwTO3UUJ8DrqEJJ\",\r\n    \"images\" : [ {\r\n      \"height\"
-    : 640,\r\n      \"url\" : \"https://i.scdn.co/image/89b92c6b59131776c0cd8e5df46301ffcf36ed69\",\r\n     
-    \"width\" : 640\r\n    }, {\r\n      \"height\" : 300,\r\n      \"url\" : \"https://i.scdn.co/image/eb6f0b2594d81f8d9dced193f3e9a3bc4318aedc\",\r\n     
-    \"width\" : 300\r\n    }, {\r\n      \"height\" : 64,\r\n      \"url\" : \"https://i.scdn.co/image/21e1ebcd7ebd3b679d9d5084bba1e163638b103a\",\r\n     
-    \"width\" : 64\r\n    } ],\r\n    \"name\" : \"The Best Of Keane (Deluxe Edition)\",\r\n   
-    \"popularity\" : 65,\r\n    \"release_date\" : \"2013-11-08\",\r\n    \"release_date_precision\"
-    : \"day\",\r\n    \"tracks\" : {\r\n      \"href\" : \"https://api.spotify.com/v1/albums/41MnTivkwTO3UUJ8DrqEJJ/tracks?offset=0&limit=50\",\r\n     
-    \"items\" : [ {\r\n        \"artists\" : [ {\r\n          \"external_urls\" :
-    {\r\n            \"spotify\" : \"https://open.spotify.com/artist/53A0W3U0s8diEn9RhXQhVz\"\r\n         
-    },\r\n          \"href\" : \"https://api.spotify.com/v1/artists/53A0W3U0s8diEn9RhXQhVz\",\r\n         
-    \"id\" : \"53A0W3U0s8diEn9RhXQhVz\",\r\n          \"name\" : \"Keane\",\r\n         
-    \"type\" : \"artist\",\r\n          \"uri\" : \"spotify:artist:53A0W3U0s8diEn9RhXQhVz\"\r\n       
-    } ],\r\n        \"available_markets\" : [ \"AD\", \"AR\", \"AT\", \"AU\", \"BE\",
-    \"BG\", \"BO\", \"BR\", \"CH\", \"CL\", \"CO\", \"CR\", \"CY\", \"CZ\", \"DE\",
-    \"DK\", \"DO\", \"EC\", \"EE\", \"ES\", \"FI\", \"FR\", \"GB\", \"GR\", \"GT\",
-    \"HK\", \"HN\", \"HU\", \"IE\", \"IS\", \"IT\", \"LI\", \"LT\", \"LU\", \"LV\",
-    \"MC\", \"MT\", \"MY\", \"NI\", \"NL\", \"NO\", \"NZ\", \"PA\", \"PE\", \"PH\",
-    \"PL\", \"PT\", \"PY\", \"RO\", \"SE\", \"SG\", \"SI\", \"SK\", \"SV\", \"TR\",
-    \"TW\", \"UY\" ],\r\n        \"disc_number\" : 1,\r\n        \"duration_ms\"
-    : 215986,\r\n        \"explicit\" : false,\r\n        \"external_urls\" : {\r\n         
-    \"spotify\" : \"https://open.spotify.com/track/4r9PmSmbAOOWqaGWLf6M9Q\"\r\n       
-    },\r\n        \"href\" : \"https://api.spotify.com/v1/tracks/4r9PmSmbAOOWqaGWLf6M9Q\",\r\n       
-    \"id\" : \"4r9PmSmbAOOWqaGWLf6M9Q\",\r\n        \"name\" : \"Everybody's Changing\",\r\n       
-    \"preview_url\" : \"https://p.scdn.co/mp3-preview/641fd877ee0f42f3713d1649e20a9734cc64b8f9\",\r\n       
-    \"track_number\" : 1,\r\n        \"type\" : \"track\",\r\n        \"uri\" : \"spotify:track:4r9PmSmbAOOWqaGWLf6M9Q\"\r\n     
-    }, {\r\n        \"artists\" : [ {\r\n          \"external_urls\" : {\r\n           
-    \"spotify\" : \"https://open.spotify.com/artist/53A0W3U0s8diEn9RhXQhVz\"\r\n         
-    },\r\n          \"href\" : \"https://api.spotify.com/v1/artists/53A0W3U0s8diEn9RhXQhVz\",\r\n         
-    \"id\" : \"53A0W3U0s8diEn9RhXQhVz\",\r\n          \"name\" : \"Keane\",\r\n         
-    \"type\" : \"artist\",\r\n          \"uri\" : \"spotify:artist:53A0W3U0s8diEn9RhXQhVz\"\r\n       
-    } ],\r\n        \"available_markets\" : [ \"AD\", \"AR\", \"AT\", \"AU\", \"BE\",
-    \"BG\", \"BO\", \"BR\", \"CH\", \"CL\", \"CO\", \"CR\", \"CY\", \"CZ\", \"DE\",
-    \"DK\", \"DO\", \"EC\", \"EE\", \"ES\", \"FI\", \"FR\", \"GB\", \"GR\", \"GT\",
-    \"HK\", \"HN\", \"HU\", \"IE\", \"IS\", \"IT\", \"LI\", \"LT\", \"LU\", \"LV\",
-    \"MC\", \"MT\", \"MY\", \"NI\", \"NL\", \"NO\", \"NZ\", \"PA\", \"PE\", \"PH\",
-    \"PL\", \"PT\", \"PY\", \"RO\", \"SE\", \"SG\", \"SI\", \"SK\", \"SV\", \"TR\",
-    \"TW\", \"UY\" ],\r\n        \"disc_number\" : 1,\r\n        \"duration_ms\"
-    : 235880,\r\n        \"explicit\" : false,\r\n        \"external_urls\" : {\r\n         
-    \"spotify\" : \"https://open.spotify.com/track/0HJQD8uqX2Bq5HVdLnd3ep\"\r\n       
-    },\r\n        \"href\" : \"https://api.spotify.com/v1/tracks/0HJQD8uqX2Bq5HVdLnd3ep\",\r\n       
-    \"id\" : \"0HJQD8uqX2Bq5HVdLnd3ep\",\r\n        \"name\" : \"Somewhere Only We
-    Know\",\r\n        \"preview_url\" : \"https://p.scdn.co/mp3-preview/e001676375ea2b4807cee2f98b51f2f3fe0d109b\",\r\n       
-    \"track_number\" : 2,\r\n        \"type\" : \"track\",\r\n        \"uri\" : \"spotify:track:0HJQD8uqX2Bq5HVdLnd3ep\"\r\n     
-    }, {\r\n        ...\r\n      }],\r\n      \"limit\" : 50,\r\n      \"next\" :
-    null,\r\n      \"offset\" : 0,\r\n      \"previous\" : null,\r\n      \"total\"
-    : 9\r\n    },\r\n    \"type\" : \"album\",\r\n    \"uri\" : \"spotify:album:6UXCm6bOO4gFlDQZV5yL37\"\r\n 
-    } ]\r\n}"
   albumResponse: "{\r\n  \"album_type\" : \"album\",\r\n  \"artists\" : [ {\r\n   
     \"external_urls\" : {\r\n      \"spotify\" : \"https://open.spotify.com/artist/2BTZIqw0ntH9MvilQ3ewNY\"\r\n   
     },\r\n    \"href\" : \"https://api.spotify.com/v1/artists/2BTZIqw0ntH9MvilQ3ewNY\",\r\n   
@@ -117,9 +52,9 @@ MonoBehaviour:
     \"id\" : \"3f9zqUnrnIq0LANhmnaF0V\",\r\n      \"name\" : \"Money Changes Everything\",\r\n     
     \"preview_url\" : \"https://p.scdn.co/mp3-preview/01bb2a6c9a89c05a4300aea427241b1719a26b06\",\r\n     
     \"track_number\" : 1,\r\n      \"type\" : \"track\",\r\n      \"uri\" : \"spotify:track:3f9zqUnrnIq0LANhmnaF0V\"\r\n   
-    }, {\r\n      ...\r\n    } ],\r\n    \"limit\" : 50,\r\n    \"next\" : null,\r\n   
-    \"offset\" : 0,\r\n    \"previous\" : null,\r\n    \"total\" : 13\r\n  },\r\n 
-    \"type\" : \"album\",\r\n  \"uri\" : \"spotify:album:0sNOF9WDwhWunNAHPD3Baj\"\r\n}"
+    }],\r\n    \"limit\" : 50,\r\n    \"next\" : null,\r\n    \"offset\" : 0,\r\n   
+    \"previous\" : null,\r\n    \"total\" : 13\r\n  },\r\n  \"type\" : \"album\",\r\n 
+    \"uri\" : \"spotify:album:0sNOF9WDwhWunNAHPD3Baj\"\r\n}"
   albumTracksResponse: "{\r\n  \"href\": \"https://api.spotify.com/v1/albums/6akEvsycLGftJxYudPjmqK/tracks?offset=0&limit=2\",\r\n 
     \"items\": [ {\r\n    \"artists\": [ {\r\n      \"external_urls\": {\r\n       
     \"spotify\": \"https://open.spotify.com/artist/08td7MxkoHQkXnWAYD8d6Q\"\r\n     
@@ -159,29 +94,6 @@ MonoBehaviour:
     \"track_number\": 2,\r\n    \"type\": \"track\",\r\n    \"uri\": \"spotify:track:4PjcfyZZVE10TFd9EKA72r\"\r\n 
     } ],\r\n  \"limit\": 2,\r\n  \"next\": \"https://api.spotify.com/v1/albums/6akEvsycLGftJxYudPjmqK/tracks?offset=2&limit=2\",\r\n 
     \"offset\": 0,\r\n  \"previous\": null,\r\n  \"total\": 11\r\n}"
-  artistsResponse: "{\r\n  \"artists\" : [ {\r\n    \"external_urls\" : {\r\n     
-    \"spotify\" : \"https://open.spotify.com/artist/0oSGxfWSnnOXhD2fKuz2Gy\"\r\n   
-    },\r\n    \"followers\" : {\r\n      \"href\" : null,\r\n      \"total\" : 633494\r\n   
-    },\r\n    \"genres\" : [ \"art rock\", \"glam rock\", \"permanent wave\" ],\r\n   
-    \"href\" : \"https://api.spotify.com/v1/artists/0oSGxfWSnnOXhD2fKuz2Gy\",\r\n   
-    \"id\" : \"0oSGxfWSnnOXhD2fKuz2Gy\",\r\n    \"images\" : [ {\r\n      \"height\"
-    : 1000,\r\n      \"url\" : \"https://i.scdn.co/image/32bd9707b42a2c081482ec9cd3ffa8879f659f95\",\r\n     
-    \"width\" : 1000\r\n    }, {\r\n      \"height\" : 640,\r\n      \"url\" : \"https://i.scdn.co/image/865f24753e5e4f40a383bf24a9cdda598a4559a8\",\r\n     
-    \"width\" : 640\r\n    }, {\r\n      \"height\" : 200,\r\n      \"url\" : \"https://i.scdn.co/image/7ddd6fa5cf78aee2f2e8b347616151393022b7d9\",\r\n     
-    \"width\" : 200\r\n    }, {\r\n      \"height\" : 64,\r\n      \"url\" : \"https://i.scdn.co/image/c8dc28c191432862afce298216458a6f00bbfbd8\",\r\n     
-    \"width\" : 64\r\n    } ],\r\n    \"name\" : \"David Bowie\",\r\n    \"popularity\"
-    : 77,\r\n    \"type\" : \"artist\",\r\n    \"uri\" : \"spotify:artist:0oSGxfWSnnOXhD2fKuz2Gy\"\r\n 
-    }, {\r\n    \"external_urls\" : {\r\n      \"spotify\" : \"https://open.spotify.com/artist/3dBVyJ7JuOMt4GE9607Qin\"\r\n   
-    },\r\n    \"followers\" : {\r\n      \"href\" : null,\r\n      \"total\" : 52338\r\n   
-    },\r\n    \"genres\" : [ \"glam rock\", \"protopunk\" ],\r\n    \"href\" : \"https://api.spotify.com/v1/artists/3dBVyJ7JuOMt4GE9607Qin\",\r\n   
-    \"id\" : \"3dBVyJ7JuOMt4GE9607Qin\",\r\n    \"images\" : [ {\r\n      \"height\"
-    : 1300,\r\n      \"url\" : \"https://i.scdn.co/image/5515a710c94ccd4edd8b9a0587778ed5e3f997da\",\r\n     
-    \"width\" : 1000\r\n    }, {\r\n      \"height\" : 832,\r\n      \"url\" : \"https://i.scdn.co/image/c990e667b4ca8240c73b0db06e6d76a3b27ce929\",\r\n     
-    \"width\" : 640\r\n    }, {\r\n      \"height\" : 260,\r\n      \"url\" : \"https://i.scdn.co/image/de2fa1d11c59e63143117d44ec9990b9e40451a2\",\r\n     
-    \"width\" : 200\r\n    }, {\r\n      \"height\" : 83,\r\n      \"url\" : \"https://i.scdn.co/image/b39638735adb4a4a54621293b99ab65c546f605e\",\r\n     
-    \"width\" : 64\r\n    } ],\r\n    \"name\" : \"T. Rex\",\r\n    \"popularity\"
-    : 58,\r\n    \"type\" : \"artist\",\r\n    \"uri\" : \"spotify:artist:3dBVyJ7JuOMt4GE9607Qin\"\r\n 
-    } ]\r\n}"
   artistResponse: "{\r\n  \"external_urls\" : {\r\n    \"spotify\" : \"https://open.spotify.com/artist/0OdUWJ0sBjDrqHygGUXeCF\"\r\n 
     },\r\n  \"followers\" : {\r\n    \"href\" : null,\r\n    \"total\" : 306565\r\n 
     },\r\n  \"genres\" : [ \"indie folk\", \"indie pop\" ],\r\n  \"href\" : \"https://api.spotify.com/v1/artists/0OdUWJ0sBjDrqHygGUXeCF\",\r\n 

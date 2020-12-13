@@ -699,5 +699,184 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(model.Total, Is.Not.Zero);
             }
         }
+
+        [Test]
+        public void TestArtistsPagingModel() {
+            var model = JsonConvert.DeserializeObject<AlbumsPagingModel>(testJson.ArtistAlbumsResponse);
+            Assert.That(model.Href, Is.Not.Empty);
+            Assert.That(model.Items, Is.Not.Empty);
+            {
+                var album = model.Items[0];
+                Assert.That(album.AlbumType, Is.Not.Empty);
+                Assert.That(album.Artists, Is.Not.Empty);
+                {
+                    var artist = album.Artists[0];
+                    Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
+                    Assert.That(artist.Href, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
+                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Name, Is.Not.Empty);
+                    Assert.That(artist.Type, Is.Not.Empty);
+                    Assert.That(artist.Uri, Is.Not.Empty);
+                }
+                Assert.That(album.AvailableMarkets, Is.Not.Empty);
+                Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
+                Assert.That(album.Href, Is.Not.Empty);
+                Assert.That(album.Id, Is.InstanceOf<AlbumId>());
+                Assert.That(album.Id.value, Is.Not.Empty);
+                Assert.That(album.Images, Is.Not.Empty);
+                {
+                    var image = album.Images[0];
+                    Assert.That(image.Height, Is.Not.Zero);
+                    Assert.That(image.Url, Is.Not.Empty);
+                    Assert.That(image.Width, Is.Not.Zero);
+                }
+                Assert.That(album.Name, Is.Not.Empty);
+                Assert.That(album.ReleaseDate, Is.Not.Empty);
+                Assert.That(album.ReleaseDatePrecision, Is.Not.Empty);
+                Assert.That(album.Type, Is.Not.Empty);
+                Assert.That(album.Uri, Is.Not.Empty);
+            }
+            Assert.That(model.Limit, Is.Not.Zero);
+            Assert.That(model.Next, Is.Not.Empty);
+            Assert.That(model.Offset, Is.Zero);
+            Assert.That(model.Previous, Is.Null);
+            Assert.That(model.Total, Is.Not.Zero);
+        }
+
+        [Test]
+        public void TestArtistModel() {
+            var model = JsonConvert.DeserializeObject<ArtistModel>(testJson.ArtistResponse);
+            Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
+            Assert.That(model.Genres, Is.Not.Empty);
+            Assert.That(model.Href, Is.Not.Empty);
+            Assert.That(model.Id, Is.InstanceOf<ArtistId>());
+            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Images, Is.Not.Empty);
+            {
+                var image = model.Images[0];
+                Assert.That(image.Height, Is.Not.Zero);
+                Assert.That(image.Url, Is.Not.Empty);
+                Assert.That(image.Width, Is.Not.Zero);
+            }
+            Assert.That(model.Name, Is.Not.Empty);
+            Assert.That(model.Popularity, Is.Not.Zero);
+            Assert.That(model.Type, Is.Not.Empty);
+            Assert.That(model.Uri, Is.Not.Empty);
+        }
+
+        [Test]
+        public void TestTracksPagingModel() {
+            var model = JsonConvert.DeserializeObject<TracksPagingModel>(testJson.AlbumTracksResponse);
+            Assert.That(model.Href, Is.Not.Empty);
+            Assert.That(model.Items, Is.Not.Empty);
+            {
+                var track = model.Items[0];
+                Assert.That(track.Artists, Is.Not.Empty);
+                {
+                    var artist = track.Artists[0];
+                    Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
+                    Assert.That(artist.Href, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
+                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Name, Is.Not.Empty);
+                    Assert.That(artist.Type, Is.Not.Empty);
+                    Assert.That(artist.Uri, Is.Not.Empty);
+                }
+                Assert.That(track.AvailableMarkets, Is.Not.Empty);
+                Assert.That(track.DiscNumber, Is.Not.Zero);
+                Assert.That(track.DurationMs, Is.Not.Zero);
+                Assert.That(track.Explicit, Is.False);
+                Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
+                Assert.That(track.Href, Is.Not.Empty);
+                Assert.That(track.Id, Is.InstanceOf<TrackId>());
+                Assert.That(track.Id.value, Is.Not.Empty);
+                Assert.That(track.Name, Is.Not.Empty);
+                Assert.That(track.PreviewUrl, Is.Not.Empty);
+                Assert.That(track.TrackNumber, Is.Not.Zero);
+                Assert.That(track.Type, Is.Not.Empty);
+                Assert.That(track.Uri, Is.Not.Empty);
+            }
+            Assert.That(model.Limit, Is.Not.Zero);
+            Assert.That(model.Next, Is.Not.Empty);
+            Assert.That(model.Offset, Is.Zero);
+            Assert.That(model.Previous, Is.Null);
+            Assert.That(model.Total, Is.Not.Zero);
+        }
+
+
+        [Test]
+        public void TestAlbumModel() {
+            var model = JsonConvert.DeserializeObject<AlbumModel>(testJson.AlbumResponse);
+            Assert.That(model.Href, Is.Not.Empty);
+            Assert.That(model.Artists, Is.Not.Empty);
+            {
+                var artist = model.Artists[0];
+                Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
+                Assert.That(artist.Href, Is.Not.Empty);
+                Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
+                Assert.That(artist.Id.value, Is.Not.Empty);
+                Assert.That(artist.Name, Is.Not.Empty);
+                Assert.That(artist.Type, Is.Not.Empty);
+                Assert.That(artist.Uri, Is.Not.Empty);
+            }
+            Assert.That(model.Copyrights, Is.Not.Empty);
+            {
+                var copyrights = model.Copyrights[0];
+                Assert.That(copyrights.Text, Is.Not.Empty);
+                Assert.That(copyrights.Type, Is.Not.Empty);
+            }
+            Assert.That(model.ExternalIds.Upc, Is.Not.Empty);
+            Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
+            Assert.That(model.Genres, Is.Empty);
+            Assert.That(model.Href, Is.Not.Empty);
+            Assert.That(model.Id, Is.InstanceOf<AlbumId>());
+            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Images, Is.Not.Empty);
+            {
+                var image = model.Images[0];
+                Assert.That(image.Height, Is.Not.Zero);
+                Assert.That(image.Url, Is.Not.Empty);
+                Assert.That(image.Width, Is.Not.Zero);
+            }
+            Assert.That(model.Name, Is.Not.Empty);
+            Assert.That(model.Popularity, Is.Not.Zero);
+            Assert.That(model.ReleaseDate, Is.Not.Empty);
+            Assert.That(model.ReleaseDatePrecision, Is.Not.Empty);
+            {
+                var tracks = model.Tracks;
+                Assert.That(tracks.Href, Is.Not.Empty);
+                Assert.That(tracks.Items, Is.Not.Empty);
+                {
+                    var track = tracks.Items[0];
+                    Assert.That(track.Artists, Is.Not.Empty);
+                    {
+                        var artist = track.Artists[0];
+                        Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
+                        Assert.That(artist.Href, Is.Not.Empty);
+                        Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
+                        Assert.That(artist.Id.value, Is.Not.Empty);
+                        Assert.That(artist.Name, Is.Not.Empty);
+                        Assert.That(artist.Type, Is.Not.Empty);
+                        Assert.That(artist.Uri, Is.Not.Empty);
+                    }
+                    Assert.That(track.AvailableMarkets, Is.Not.Empty);
+                    Assert.That(track.DiscNumber, Is.Not.Zero);
+                    Assert.That(track.DurationMs, Is.Not.Zero);
+                    Assert.That(track.Explicit, Is.False);
+                    Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
+                    Assert.That(track.Href, Is.Not.Empty);
+                    Assert.That(track.Id, Is.InstanceOf<TrackId>());
+                    Assert.That(track.Id.value, Is.Not.Empty);
+                    Assert.That(track.Name, Is.Not.Empty);
+                    Assert.That(track.PreviewUrl, Is.Not.Empty);
+                    Assert.That(track.TrackNumber, Is.Not.Zero);
+                    Assert.That(track.Type, Is.Not.Empty);
+                    Assert.That(track.Uri, Is.Not.Empty);
+                }
+            }
+            Assert.That(model.Type, Is.Not.Empty);
+            Assert.That(model.Uri, Is.Not.Empty);
+        }
     }
 }

@@ -3,10 +3,8 @@
 namespace SpotifyApi.Tests.EditMode {
     //[CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
     public class TestModelJsons : ScriptableObject {
-        [SerializeField] [Multiline] string albumsResponse = "";
         [SerializeField] [Multiline] string albumResponse = "";
         [SerializeField] [Multiline] string albumTracksResponse = "";
-        [SerializeField] [Multiline] string artistsResponse = "";
         [SerializeField] [Multiline] string artistResponse = "";
         [SerializeField] [Multiline] string artistAlbumsResponse = "";
         [SerializeField] [Multiline] string userSavedAlbumsResponse = "";
@@ -38,9 +36,7 @@ namespace SpotifyApi.Tests.EditMode {
         public string UserSavedAlbumsResponse => userSavedAlbumsResponse;
         public string ArtistAlbumsResponse => artistAlbumsResponse;
         public string ArtistResponse => artistResponse;
-        public string ArtistsResponse => artistsResponse;
         public string AlbumTracksResponse => albumTracksResponse;
         public string AlbumResponse => albumResponse;
-        public string AlbumsResponse => albumsResponse;
     }
 }
