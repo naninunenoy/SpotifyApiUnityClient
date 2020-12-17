@@ -1,12 +1,30 @@
-﻿using SpotifyApi.Models;
+﻿using System;
+using Cysharp.Threading.Tasks;
+using SpotifyApi.Models;
+using UniRx;
 using UnityEngine;
 
 namespace SpotifyApi {
     public class TokenHolder : MonoBehaviour, ITokenProvider {
+        static readonly object lockObj = new object();
         static TokenHolder instance;
         TokenModel token;
-        public TokenModel Token => instance.token;
-        public void SetToken(TokenModel token_) => instance.token = token_;
+        string refreshToken;
+
+        public TokenModel Token {
+            get {
+                lock (lockObj) {
+                    return instance.token;
+                }
+            }
+        }
+        public void SetFirstToken(TokenModel firstToken) {
+            lock (lockObj) {
+                // RefreshToken があるのは最初に取得される TokenModel のみ
+                instance.refreshToken = firstToken.RefreshToken;
+                instance.token = firstToken;
+            }
+        }
 
         public static TokenHolder Instance
         {
@@ -14,21 +32,43 @@ namespace SpotifyApi {
             {
                 if (instance == null)
                 {
-                    instance = (TokenHolder)FindObjectOfType(typeof(TokenHolder));
-                    if ((instance == null))
+                    lock (lockObj) {
+                        instance = (TokenHolder)FindObjectOfType(typeof(TokenHolder));
+                    }
+
+                    if (instance == null)
                     {
                         Debug.LogWarning(typeof(TokenHolder) + "is nothing");
                     }
                 }
-                return instance;
+
+                lock (lockObj) {
+                    return instance;
+                }
             }
         }
 
         void Awake()
         {
-            if (this.CheckInstance())
+            if (CheckInstance())
             {
-                DontDestroyOnLoad(this.gameObject);
+                DontDestroyOnLoad(gameObject);
+                // tokenの期限が1時間なので55分ごとにrefreshを行う
+                Observable
+                    .Interval(TimeSpan.FromMinutes(55), Scheduler.ThreadPool)
+                    .ObserveOnMainThread()
+                    .Subscribe(async _ => {
+                        string refresh;
+                        lock (lockObj) {
+                            refresh = instance.refreshToken;
+                        }
+                        var newToken = await Api.RefreshTokenAsync(refresh, Environment.ClientId,
+                            Environment.ClientSecret, this.GetCancellationTokenOnDestroy());
+                        lock (lockObj) {
+                            instance.token = newToken;
+                        }
+                    })
+                    .AddTo(this);
             }
         }
 
@@ -36,14 +76,16 @@ namespace SpotifyApi {
         {
             if (instance == null)
             {
-                instance = (TokenHolder)this;
+                lock (lockObj) {
+                    instance = this;
+                }
                 return true;
             }
-            else if (Instance == this)
+            if (Instance == this)
             {
                 return true;
             }
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return false;
         }
     }

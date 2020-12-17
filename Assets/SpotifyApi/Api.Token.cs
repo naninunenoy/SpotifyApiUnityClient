@@ -25,5 +25,22 @@ namespace SpotifyApi {
                 return JsonConvert.DeserializeObject<TokenModel>(req.downloadHandler.text);
             }
         }
+        public static async UniTask<TokenModel> RefreshTokenAsync(string refreshToken,
+            string clientId, string clientSecret, CancellationToken cancellationToken) {
+            var form = new WWWForm();
+            {
+                form.AddField("grant_type", "refresh_token");
+                form.AddField("refresh_token", refreshToken);
+            }
+            using (var req = UnityWebRequest.Post(Endpoints.ApiToken, form)) {
+                var raw = $"{clientId}:{clientSecret}";
+                req.SetRequestHeader("Authorization", $"Basic {Util.ToBase64(raw)}");
+
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
+
+                return JsonConvert.DeserializeObject<TokenModel>(req.downloadHandler.text);
+            }
+        }
     }
 }

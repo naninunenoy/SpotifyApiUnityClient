@@ -12,7 +12,6 @@ namespace SpotifyApi.Example {
         [SerializeField] Text attentionText = default;
         [SerializeField] Button getTokenButton = default;
         [SerializeField] Text helloText = default;
-        [SerializeField] Image artwork = default;
         HttpListener listener;
 
         void Start() {
@@ -41,23 +40,23 @@ namespace SpotifyApi.Example {
                     var token = await Api.GetTokenAsync(accessCode,
                         Environment.RedirectUri, Environment.ClientId, Environment.ClientSecret,
                         this.GetCancellationTokenOnDestroy());
-                    TokenHolder.Instance.SetToken(token);
+                    TokenHolder.Instance.SetFirstToken(token);
                     // 自分の情報取得
                     var me = await Api.GetMeAsync(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
                     helloText.text = $"こんにちは\n{me.DisplayName}さん！";
                     helloText.gameObject.SetActive(true);
-                    var res = await Api.GetMyAlbumsAsync(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
-                    var album = res.Items.FirstOrDefault()?.Album;
-                    Debug.Log(album?.Name ?? "(null)");
-                    var artist = album?.Artists.FirstOrDefault();
-                    Debug.Log(artist?.Name ?? "(null)");
-                    var track = album?.Tracks.Items.FirstOrDefault();
-                    Debug.Log(track?.Name ?? "(null)");
-                    var imageUrl = album?.Images.Select(x => x.Url).FirstOrDefault();
-                    if (!string.IsNullOrEmpty(imageUrl)) {
-                        var tex = await Util.DownloadTextureAsync(imageUrl, this.GetCancellationTokenOnDestroy());
-                        artwork.sprite = Util.Texture2Sprite(tex);
-                    }
+
+                    Debug.Log(token.AccessToken);
+                    Debug.Log(token.ExpiresIn);
+                    Debug.Log(token.RefreshToken);
+
+                    var token2 = await Api.RefreshTokenAsync(token.RefreshToken, Environment.ClientId,
+                        Environment.ClientSecret, this.GetCancellationTokenOnDestroy());
+
+                    Debug.Log(token2.AccessToken);
+                    Debug.Log(token2.ExpiresIn);
+                    Debug.Log(token2.RefreshToken);
+
                 })
                 .AddTo(this);
         }
