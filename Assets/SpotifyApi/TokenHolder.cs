@@ -1,11 +1,13 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using SpotifyApi.Models;
-using UniRx;
 using UnityEngine;
 
 namespace SpotifyApi {
     public class TokenHolder : MonoBehaviour, ITokenProvider {
+        // tokenの期限が1時間固定なので55分ごとに refresh を行う
+        static readonly TimeSpan tokenRefreshInterval = TimeSpan.FromMinutes(55);
         static readonly object lockObj = new object();
         static TokenHolder instance;
         TokenModel token;
@@ -48,27 +50,23 @@ namespace SpotifyApi {
             }
         }
 
-        void Awake()
-        {
-            if (CheckInstance())
-            {
+        void Awake() {
+            if (CheckInstance()) {
                 DontDestroyOnLoad(gameObject);
-                // tokenの期限が1時間なので55分ごとにrefreshを行う
-                Observable
-                    .Interval(TimeSpan.FromMinutes(55), Scheduler.ThreadPool)
-                    .ObserveOnMainThread()
-                    .Subscribe(async _ => {
-                        string refresh;
+                var ct = this.GetCancellationTokenOnDestroy();
+                UniTaskAsyncEnumerable
+                    .Interval(tokenRefreshInterval)
+                    .Select(_ => {
                         lock (lockObj) {
-                            refresh = instance.refreshToken;
+                            return instance.refreshToken;
                         }
-                        var newToken = await Api.RefreshTokenAsync(refresh, Environment.ClientId,
-                            Environment.ClientSecret, this.GetCancellationTokenOnDestroy());
+                    })
+                    .SelectAwait(refresh => Api.RefreshTokenAsync(refresh, Environment.ClientId, Environment.ClientSecret, ct))
+                    .ForEachAsync(newToken => {
                         lock (lockObj) {
                             instance.token = newToken;
                         }
-                    })
-                    .AddTo(this);
+                    }, ct);
             }
         }
 

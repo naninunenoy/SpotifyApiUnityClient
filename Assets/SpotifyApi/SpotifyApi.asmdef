@@ -1,7 +1,9 @@
 {
     "name": "SpotifyApi",
+    "rootNamespace": "SpotifyApi",
     "references": [
         "UniTask",
+        "UniTask.Linq",
         "UniRx"
     ],
     "includePlatforms": [],

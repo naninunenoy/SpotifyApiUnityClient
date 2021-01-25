@@ -1,6 +1,6 @@
 using System;
-using System.Threading;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Linq;
 using SpotifyApi.Models;
 using UniRx;
 using UnityEngine;
@@ -28,14 +28,13 @@ namespace SpotifyApi.SpotifyConnect {
             // Spotifyの再生情報を定期的に取りに行く
             var currentTrackId = TrackId.Empty;
             var trackLength = 0;
-            Observable
+            var ct = attachTo.GetCancellationTokenOnDestroy();
+            UniTaskAsyncEnumerable
                 .Interval(TimeSpan.FromSeconds(interval))
-                .Subscribe(async _ => {
-                    var playing = await api.GetCurrentlyPlayingAsync(attachTo.GetCancellationTokenOnDestroy());
-                    if (!playing.IsPlaying) {
-                        return;
-                    }
-                    var track = playing.Item;
+                .SelectAwait(_ => api.GetCurrentlyPlayingAsync(ct))
+                .Where(x => x.IsPlaying)
+                .ForEachAsync(x => {
+                    var track = x.Item;
                     if (track.Id != currentTrackId) {
                         trackName.Value = track.Name;
                         albumName.Value = track.Album.Name;
@@ -44,20 +43,18 @@ namespace SpotifyApi.SpotifyConnect {
                         elapsedMs.Value = 0;
                         UniTask.Run(async () => {
                             await UniTask.Yield();
-                            var tex = await Util.DownloadTextureAsync(track.Album.Images[0].Url,
-                                attachTo.GetCancellationTokenOnDestroy());
+                            var tex = await Util.DownloadTextureAsync(track.Album.Images[0].Url, ct);
                             image.Value = Util.Texture2Sprite(tex);
                         }).Forget();
                         currentTrackId = track.Id;
                         trackLength = track.DurationMs;
                     } else {
-                        elapsedMs.Value = playing.ProgressMs;
+                        elapsedMs.Value = x.ProgressMs;
                         if (trackLength > 0) {
-                            progress.Value = playing.ProgressMs / (float)trackLength;
+                            progress.Value = x.ProgressMs / (float)trackLength;
                         }
                     }
-                })
-                .AddTo(attachTo);
+                }, ct);
         }
 
         public void Dispose() {
