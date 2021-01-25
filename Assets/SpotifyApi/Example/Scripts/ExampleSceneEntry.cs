@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
 using SpotifyApi.Models;
+using SpotifyApi.SpotifyConnect;
 
 namespace SpotifyApi.Example {
     public class ExampleSceneEntry : MonoBehaviour {
@@ -12,7 +13,10 @@ namespace SpotifyApi.Example {
         [SerializeField] Text attentionText = default;
         [SerializeField] Button getTokenButton = default;
         [SerializeField] Text helloText = default;
+
         HttpListener listener;
+        ISpotifyConnectClient client;
+
 
         void Start() {
             var accessCode = "";
@@ -45,18 +49,19 @@ namespace SpotifyApi.Example {
                     var me = await Api.GetMeAsync(TokenHolder.Instance, this.GetCancellationTokenOnDestroy());
                     helloText.text = $"こんにちは\n{me.DisplayName}さん！";
                     helloText.gameObject.SetActive(true);
-
-                    Debug.Log(token.AccessToken);
-                    Debug.Log(token.ExpiresIn);
-                    Debug.Log(token.RefreshToken);
-
-                    var token2 = await Api.RefreshTokenAsync(token.RefreshToken, Environment.ClientId,
-                        Environment.ClientSecret, this.GetCancellationTokenOnDestroy());
-
-                    Debug.Log(token2.AccessToken);
-                    Debug.Log(token2.ExpiresIn);
-                    Debug.Log(token2.RefreshToken);
-
+                    // 再生情報
+                    var adapter = new SpotifyConnectApiAdapter(TokenHolder.Instance);
+                    client = new SpotifyConnectClient(adapter, 2.0F, this);
+                    client.TrackName
+                        .Subscribe(x => {
+                            Debug.Log(x);
+                        })
+                        .AddTo(this);
+                    client.ElapsedMs
+                        .Subscribe(x => {
+                            Debug.Log(x);
+                        })
+                        .AddTo(this);
                 })
                 .AddTo(this);
         }
@@ -65,6 +70,7 @@ namespace SpotifyApi.Example {
             if (listener?.IsListening == true) {
                 listener.Close();
             }
+            client?.Dispose();
         }
 
         async UniTask WriteHtml(HttpListenerResponse res, string message) {

@@ -92,7 +92,7 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask PutRepeatAsync(int volumePercent, ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask PutVolumeAsync(int volumePercent, ITokenProvider token,  CancellationToken cancellationToken) {
                 var query = $"&volume_percent={volumePercent}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayerVolume + query, emptyBody)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());

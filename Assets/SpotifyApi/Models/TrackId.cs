@@ -28,5 +28,7 @@ namespace SpotifyApi.Models {
         public override string ToString() {
             return value;
         }
+
+        public static TrackId Empty => new TrackId("");
     }
 }
