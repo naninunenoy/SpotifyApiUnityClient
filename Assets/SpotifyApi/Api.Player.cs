@@ -17,14 +17,14 @@ namespace SpotifyApi {
                     await req.SendWebRequest().WithCancellation(cancellationToken);
                 }
             }
-            public static async UniTask<UserModel> GetDevicesAsync(ITokenProvider token,  CancellationToken cancellationToken) {
+            public static async UniTask<DeviceListModel> GetDevicesAsync(ITokenProvider token,  CancellationToken cancellationToken) {
                 using (var req = UnityWebRequest.Get(Endpoints.ApiMyPlayerDevices)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
                     cancellationToken.ThrowIfCancellationRequested();
                     await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<UserModel>(req.downloadHandler.text);
+                    return JsonConvert.DeserializeObject<DeviceListModel>(req.downloadHandler.text);
                 }
             }
             public static async UniTask<PlayerModel> GetPlayerAsync(ITokenProvider token,  CancellationToken cancellationToken) {
