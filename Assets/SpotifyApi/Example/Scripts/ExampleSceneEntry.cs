@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.Net;
 using SpotifyApi.Models;
 using SpotifyApi.SpotifyConnect;
+using SpotifyApi.SpotifyConnect.View;
 
 namespace SpotifyApi.Example {
     public class ExampleSceneEntry : MonoBehaviour {
@@ -13,10 +14,11 @@ namespace SpotifyApi.Example {
         [SerializeField] Text attentionText = default;
         [SerializeField] Button getTokenButton = default;
         [SerializeField] Text helloText = default;
+        [SerializeField] SpotifyConnectClientView _clientView = default;
 
         HttpListener listener;
         ISpotifyConnectClient client;
-
+        ISpotifyConnectClientView clientView => _clientView;
 
         void Start() {
             var accessCode = "";
@@ -52,16 +54,23 @@ namespace SpotifyApi.Example {
                     // 再生情報
                     var adapter = new SpotifyConnectApiAdapter(TokenHolder.Instance);
                     client = new SpotifyConnectClient(adapter, 2.0F, this);
-                    client.TrackName
+                    Observable.Zip(client.TrackName, client.ArtistName)
                         .Subscribe(x => {
-                            Debug.Log(x);
+                            clientView.SetTrack(x[0], x[1]);
                         })
                         .AddTo(this);
-                    client.ElapsedMs
+                    client.Image
                         .Subscribe(x => {
-                            Debug.Log(x);
+                            clientView.SetImage(x);
                         })
                         .AddTo(this);
+                    Observable.Zip<int, float, (int, float)>(client.ElapsedMs, client.Progress, (i, f) => (i, f))
+                        .Subscribe(x => {
+                            var (elapsed, progress) = x;
+                            clientView.UpdateTime(elapsed, progress);
+                        })
+                        .AddTo(this);
+                    _clientView.gameObject.SetActive(true);
                 })
                 .AddTo(this);
         }

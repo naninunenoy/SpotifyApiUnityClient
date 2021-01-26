@@ -7,17 +7,17 @@ using UnityEngine;
 
 namespace SpotifyApi.SpotifyConnect {
     public class SpotifyConnectClient : ISpotifyConnectClient {
-        ISpotifyConnectApiAdapter api;
-        ReactiveProperty<string> trackName;
-        ReactiveProperty<string> albumName;
-        ReactiveProperty<string> artistName;
-        ReactiveProperty<Sprite> image;
-        ReactiveProperty<float> progress;
-        ReactiveProperty<int> elapsedMs;
+        const int elapsedInterval = 500;
+        readonly ReactiveProperty<string> trackName;
+        readonly ReactiveProperty<string> albumName;
+        readonly ReactiveProperty<string> artistName;
+        readonly ReactiveProperty<Sprite> image;
+        readonly ReactiveProperty<float> progress;
+        readonly ReactiveProperty<int> elapsedMs;
 
+        int trackLength = 0;
 
         public SpotifyConnectClient(ISpotifyConnectApiAdapter api, float interval, Component attachTo) {
-            this.api = api;
             trackName = new ReactiveProperty<string>();
             albumName = new ReactiveProperty<string>();
             artistName = new ReactiveProperty<string>();
@@ -27,14 +27,16 @@ namespace SpotifyApi.SpotifyConnect {
 
             // Spotifyの再生情報を定期的に取りに行く
             var currentTrackId = TrackId.Empty;
-            var trackLength = 0;
             var ct = attachTo.GetCancellationTokenOnDestroy();
+            var localElapsed = 0;
             UniTaskAsyncEnumerable
                 .Interval(TimeSpan.FromSeconds(interval))
                 .SelectAwait(_ => api.GetCurrentlyPlayingAsync(ct))
                 .Where(x => x.IsPlaying)
-                .ForEachAsync(x => {
+                .Where(x => x.Item != null)
+                .ForEachAwaitAsync(async x => {
                     var track = x.Item;
+                    await UniTask.Yield();
                     if (track.Id != currentTrackId) {
                         trackName.Value = track.Name;
                         albumName.Value = track.Album.Name;
@@ -49,12 +51,25 @@ namespace SpotifyApi.SpotifyConnect {
                         currentTrackId = track.Id;
                         trackLength = track.DurationMs;
                     } else {
-                        elapsedMs.Value = x.ProgressMs;
-                        if (trackLength > 0) {
-                            progress.Value = x.ProgressMs / (float)trackLength;
-                        }
+                        localElapsed = x.ProgressMs;
+                        SetElapsed(x.ProgressMs);
                     }
                 }, ct);
+            // 更新間隔に寄らず、0.5秒周期で経過時間だけ更新
+            UniTaskAsyncEnumerable
+                .Interval(TimeSpan.FromMilliseconds(elapsedInterval))
+                .ForEachAwaitAsync(async _ => {
+                    localElapsed += elapsedInterval;
+                    await UniTask.Yield();
+                    SetElapsed(localElapsed);
+                }, ct);
+        }
+
+        void SetElapsed(int elapsed) {
+            elapsedMs.Value = elapsed;
+            if (trackLength > 0) {
+                progress.Value = elapsed / (float)trackLength;
+            }
         }
 
         public void Dispose() {
