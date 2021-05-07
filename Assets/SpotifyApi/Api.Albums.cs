@@ -10,26 +10,24 @@ namespace SpotifyApi {
             public static async UniTask<AlbumModel> GetAlbumAsync(string albumId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAlbums}/{albumId}";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<AlbumModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<AlbumModel>(req.downloadHandler.text);
             }
             public static async UniTask<TracksPagingModel> GetAlbumTracksAsync(string albumId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAlbums}/{albumId}/tracks";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<TracksPagingModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<TracksPagingModel>(req.downloadHandler.text);
             }
         }
     }

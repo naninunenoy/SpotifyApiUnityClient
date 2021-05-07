@@ -10,26 +10,24 @@ namespace SpotifyApi {
             public static async UniTask<ArtistModel> GetArtistsAsync(string artistId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiArtists}/{artistId}";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<ArtistModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<ArtistModel>(req.downloadHandler.text);
             }
             public static async UniTask<AlbumsPagingModel> GetArtistsAlbumsAsync(string artistId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAlbums}/{artistId}/albums";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<AlbumsPagingModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<AlbumsPagingModel>(req.downloadHandler.text);
             }
         }
     }

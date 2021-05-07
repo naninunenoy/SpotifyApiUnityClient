@@ -10,27 +10,25 @@ namespace SpotifyApi {
             public static async UniTask<AudioAnalysisModel> GetAudioAnalysisAsync(string trackId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAudioAnalysis}/{trackId}";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<AudioAnalysisModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<AudioAnalysisModel>(req.downloadHandler.text);
             }
 
             public static async UniTask<AudioFeaturesModel> GetAudioFeaturesAsync(string trackId, ITokenProvider token,
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAudioFeatures}/{trackId}";
-                using (var req = UnityWebRequest.Get(url)) {
-                    req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await req.SendWebRequest().WithCancellation(cancellationToken);
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
 
-                    return JsonConvert.DeserializeObject<AudioFeaturesModel>(req.downloadHandler.text);
-                }
+                return JsonConvert.DeserializeObject<AudioFeaturesModel>(req.downloadHandler.text);
             }
         }
     }
