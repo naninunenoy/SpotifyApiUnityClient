@@ -16,20 +16,21 @@ namespace n5y.SpotifyApi.Example {
         [SerializeField] Text helloText = default;
         [SerializeField] SpotifyConnectClientView _clientView = default;
 
+        IEnvironmentProvider env = new RuntimeEnvironmentProvider();
         HttpListener listener;
         ISpotifyConnectClient client;
         ISpotifyConnectClientView clientView => _clientView;
 
         void Start() {
             var accessCode = "";
-            var authUrl = Api.GetAuthorizeUrl(Environment.ClientId, Environment.RedirectUri, Scopes.All());
+            var authUrl = Api.GetAuthorizeUrl(env.ClientId, env.RedirectUri, Scopes.All());
             startAuthButton
                 .OnClickAsObservable()
                 .Subscribe(async _ => {
                     // Spotify認可のサイトからlocalhostにリダイレクトされるので、サーバを建てて待つ
                     listener = new HttpListener();
                     listener.Prefixes.Clear();
-                    listener.Prefixes.Add(Environment.RedirectUri);
+                    listener.Prefixes.Add(env.RedirectUri);
                     listener.Start();
                     attentionText.gameObject.SetActive(true);
                     // ブラウザを開いて同意するを待つ
@@ -44,7 +45,7 @@ namespace n5y.SpotifyApi.Example {
                 .OnClickAsObservable()
                 .Subscribe(async _ => {
                     var token = await Api.GetTokenAsync(accessCode,
-                        Environment.RedirectUri, Environment.ClientId, Environment.ClientSecret,
+                        env.RedirectUri, env.ClientId, env.ClientSecret,
                         this.GetCancellationTokenOnDestroy());
                     TokenHolder.Instance.SetFirstToken(token);
                     // 自分の情報取得

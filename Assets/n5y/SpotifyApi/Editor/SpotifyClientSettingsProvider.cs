@@ -44,7 +44,7 @@ namespace n5y.SpotifyApi.Editor {
         }
     }
 
-    public class SpotifyClientSettingsPrefs {
+    public class SpotifyClientSettingsPrefs : IEnvironmentProvider {
         private const string keyPrefix = "SpotifyClientEditorSettings";
         public string clientId = "";
         public string clientSecret = "";
@@ -61,5 +61,9 @@ namespace n5y.SpotifyApi.Editor {
             clientSecret = EditorPrefs.GetString($"{keyPrefix}_clientSecret", "");
             redirectUri = EditorPrefs.GetString($"{keyPrefix}_redirectUri", "");
         }
+
+        string IEnvironmentProvider.ClientId => clientId;
+        string IEnvironmentProvider.ClientSecret => clientSecret;
+        string IEnvironmentProvider.RedirectUri => redirectUri;
     }
 }

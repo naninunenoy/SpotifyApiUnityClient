@@ -1,7 +1,9 @@
-﻿{
+{
     "name": "n5y.SpotifyApi.Editor",
     "rootNamespace": "n5y.SpotifyApi.Editor",
-    "references": [],
+    "references": [
+        "n5y.SpotifyApi"
+    ],
     "includePlatforms": [
         "Editor"
     ],

@@ -9,6 +9,7 @@ namespace n5y.SpotifyApi {
         // tokenの期限が1時間固定なので55分ごとに refresh を行う
         static readonly TimeSpan tokenRefreshInterval = TimeSpan.FromMinutes(55);
         static readonly object lockObj = new object();
+        static IEnvironmentProvider env = new RuntimeEnvironmentProvider();
         static TokenHolder instance;
         TokenModel token;
         string refreshToken;
@@ -61,7 +62,7 @@ namespace n5y.SpotifyApi {
                             return instance.refreshToken;
                         }
                     })
-                    .SelectAwait(refresh => Api.RefreshTokenAsync(refresh, Environment.ClientId, Environment.ClientSecret, ct))
+                    .SelectAwait(refresh => Api.RefreshTokenAsync(refresh, env.ClientId, env.ClientSecret, ct))
                     .ForEachAsync(newToken => {
                         lock (lockObj) {
                             instance.token = newToken;
