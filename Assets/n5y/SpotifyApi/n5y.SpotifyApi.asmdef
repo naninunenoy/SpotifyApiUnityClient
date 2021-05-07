@@ -1,16 +1,17 @@
 {
-    "name": "SpotifyApi.Tests.EditMode",
+    "name": "n5y.SpotifyApi",
+    "rootNamespace": "n5y.SpotifyApi",
     "references": [
-        "GUID:225b7c7c0260d2d4fa569b150d70be4d"
+        "UniTask",
+        "UniTask.Linq",
+        "UniRx"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

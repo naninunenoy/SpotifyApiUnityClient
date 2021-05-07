@@ -1,10 +1,10 @@
 {
-    "name": "SpotifyApi",
-    "rootNamespace": "SpotifyApi",
+    "name": "n5y.SpotifyApi.Example",
+    "rootNamespace": "n5y.SpotifyApi.Example",
     "references": [
-        "UniTask",
-        "UniTask.Linq",
-        "UniRx"
+        "n5y.SpotifyApi",
+        "UniRx",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
