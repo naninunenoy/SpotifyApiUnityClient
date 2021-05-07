@@ -1,0 +1,16 @@
+﻿{
+    "name": "n5y.SpotifyApi.Editor",
+    "rootNamespace": "n5y.SpotifyApi.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
