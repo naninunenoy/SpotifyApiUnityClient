@@ -1,11 +1,9 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
     [JsonObject]
     public class SimplifiedTrackModel {
-        [JsonProperty] string id { set; get; }
-        [JsonIgnore] public TrackId Id { private set; get; }
+        [JsonProperty("id")] public string Id { private set; get; }
         [JsonProperty("artists")] public ArtistModel[] Artists { private set; get; }
         [JsonProperty("available_markets")] public string[] AvailableMarkets { private set; get; }
         [JsonProperty("disc_number")] public int DiscNumber { private set; get; }
@@ -19,11 +17,5 @@ namespace SpotifyApi.Models {
         [JsonProperty("track_number")] public int TrackNumber { private set; get; }
         [JsonProperty("type")] public string Type { private set; get; }
         [JsonProperty("uri")] public string Uri { private set; get; }
-
-        [OnDeserialized]
-        internal void OnDeserializeFinish(StreamingContext context)
-        {
-            Id = new TrackId(id);
-        }
     }
 }

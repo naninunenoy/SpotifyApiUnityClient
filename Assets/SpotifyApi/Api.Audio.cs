@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 namespace SpotifyApi {
     public static partial class Api {
         public static class Audio {
-            public static async UniTask<AudioAnalysisModel> GetAudioAnalysisAsync(TrackId trackId, ITokenProvider token,
+            public static async UniTask<AudioAnalysisModel> GetAudioAnalysisAsync(string trackId, ITokenProvider token,
                 CancellationToken cancellationToken) {
-                var url = $"{Endpoints.ApiAudioAnalysis}/{trackId.value}";
+                var url = $"{Endpoints.ApiAudioAnalysis}/{trackId}";
                 using (var req = UnityWebRequest.Get(url)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -20,9 +20,9 @@ namespace SpotifyApi {
                 }
             }
 
-            public static async UniTask<AudioFeaturesModel> GetAudioFeaturesAsync(TrackId trackId, ITokenProvider token,
+            public static async UniTask<AudioFeaturesModel> GetAudioFeaturesAsync(string trackId, ITokenProvider token,
                 CancellationToken cancellationToken) {
-                var url = $"{Endpoints.ApiAudioFeatures}/{trackId.value}";
+                var url = $"{Endpoints.ApiAudioFeatures}/{trackId}";
                 using (var req = UnityWebRequest.Get(url)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 

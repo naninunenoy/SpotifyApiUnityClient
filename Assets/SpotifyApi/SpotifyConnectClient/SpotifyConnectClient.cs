@@ -26,7 +26,6 @@ namespace SpotifyApi.SpotifyConnect {
             elapsedMs = new ReactiveProperty<int>();
 
             // Spotifyの再生情報を定期的に取りに行く
-            var currentTrackId = TrackId.Empty;
             var ct = attachTo.GetCancellationTokenOnDestroy();
             var localElapsed = 0;
             UniTaskAsyncEnumerable
@@ -37,7 +36,7 @@ namespace SpotifyApi.SpotifyConnect {
                 .ForEachAwaitAsync(async x => {
                     var track = x.Item;
                     await UniTask.Yield();
-                    if (track.Id != currentTrackId) {
+                    if (!string.IsNullOrEmpty(track.Id)) {
                         trackName.Value = track.Name;
                         albumName.Value = track.Album.Name;
                         artistName.Value = track.Artists[0].Name;
@@ -48,7 +47,6 @@ namespace SpotifyApi.SpotifyConnect {
                             var tex = await Util.DownloadTextureAsync(track.Album.Images[0].Url, ct);
                             image.Value = Util.Texture2Sprite(tex);
                         }).Forget();
-                        currentTrackId = track.Id;
                         trackLength = track.DurationMs;
                     } else {
                         localElapsed = x.ProgressMs;

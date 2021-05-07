@@ -7,9 +7,9 @@ using UnityEngine.Networking;
 namespace SpotifyApi {
     public static partial class Api {
         public static class Albums {
-            public static async UniTask<AlbumModel> GetAlbumAsync(AlbumId albumId, ITokenProvider token,
+            public static async UniTask<AlbumModel> GetAlbumAsync(string albumId, ITokenProvider token,
                 CancellationToken cancellationToken) {
-                var url = $"{Endpoints.ApiAlbums}/{albumId.value}";
+                var url = $"{Endpoints.ApiAlbums}/{albumId}";
                 using (var req = UnityWebRequest.Get(url)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 
@@ -19,9 +19,9 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<AlbumModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask<TracksPagingModel> GetAlbumTracksAsync(AlbumId albumId, ITokenProvider token,
+            public static async UniTask<TracksPagingModel> GetAlbumTracksAsync(string albumId, ITokenProvider token,
                 CancellationToken cancellationToken) {
-                var url = $"{Endpoints.ApiAlbums}/{albumId.value}/tracks";
+                var url = $"{Endpoints.ApiAlbums}/{albumId}/tracks";
                 using (var req = UnityWebRequest.Get(url)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 

@@ -37,8 +37,8 @@ namespace SpotifyApi {
                     return JsonConvert.DeserializeObject<PlayerModel>(req.downloadHandler.text);
                 }
             }
-            public static async UniTask PutPlayerAsync(DeviceId deviceId, ITokenProvider token,  CancellationToken cancellationToken) {
-                var body = "{\"device_ids\":\"" + deviceId.value + "\"}";
+            public static async UniTask PutPlayerAsync(string deviceId, ITokenProvider token,  CancellationToken cancellationToken) {
+                var body = "{\"device_ids\":\"" + deviceId + "\"}";
                 using (var req = UnityWebRequest.Put(Endpoints.ApiMyPlayer, body)) {
                     req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
 

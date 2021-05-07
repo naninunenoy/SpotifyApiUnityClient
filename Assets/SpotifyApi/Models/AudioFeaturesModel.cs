@@ -1,11 +1,9 @@
-﻿using System.Runtime.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SpotifyApi.Models {
     [JsonObject]
     public class AudioFeaturesModel {
-        [JsonProperty] string id { set; get; }
-        [JsonIgnore] public TrackId Id { private set; get; }
+        [JsonProperty("id")] public string Id { private set; get; }
         [JsonProperty("duration_ms")] public long DurationMs { private set; get; }
         [JsonProperty("key")] public int Key { private set; get; }
         [JsonProperty("mode")] public int Mode { private set; get; }
@@ -23,11 +21,5 @@ namespace SpotifyApi.Models {
         [JsonProperty("track_href")] public string TrackHref { private set; get; }
         [JsonProperty("analysis_url")] public string AnalysisUrl { private set; get; }
         [JsonProperty("type")] public string Type { private set; get; }
-
-        [OnDeserialized]
-        internal void OnDeserializeFinish(StreamingContext context)
-        {
-            Id = new TrackId(id);
-        }
     }
 }

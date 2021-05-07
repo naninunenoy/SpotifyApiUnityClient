@@ -30,8 +30,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.Email, Is.Not.Empty);
             Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
             Assert.That(model.Href, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<UserId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.Images, Is.Not.Empty);
             Assert.That(model.Images[0].Height, Is.Null);
             Assert.That(model.Images[0].Width, Is.Null);
@@ -124,8 +123,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.Valence, Is.Not.Zero);
             Assert.That(model.Tempo, Is.Not.Zero);
             Assert.That(model.Type, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<TrackId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.Uri, Is.Not.Empty);
             Assert.That(model.TrackHref, Is.Not.Empty);
             Assert.That(model.AnalysisUrl, Is.Not.Empty);
@@ -144,8 +142,7 @@ namespace SpotifyApi.Tests.EditMode {
                     var artist = album.Artists[0];
                     Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(artist.Href, Is.Not.Empty);
-                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.Not.Empty);
                     Assert.That(artist.Name, Is.Not.Empty);
                     Assert.That(artist.Type, Is.Not.Empty);
                     Assert.That(artist.Uri, Is.Not.Empty);
@@ -153,8 +150,7 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(album.AvailableMarkets, Is.Not.Empty);
                 Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(album.Href, Is.Not.Empty);
-                Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                Assert.That(album.Id.value, Is.Not.Empty);
+                Assert.That(album.Id, Is.Not.Empty);
                 Assert.That(album.Images, Is.Not.Empty);
                 {
                     var image = album.Images[0];
@@ -173,8 +169,7 @@ namespace SpotifyApi.Tests.EditMode {
                 var artist = model.Artists[0];
                 Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(artist.Href, Is.Not.Empty);
-                Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                Assert.That(artist.Id.value, Is.Not.Empty);
+                Assert.That(artist.Id, Is.Not.Empty);
                 Assert.That(artist.Name, Is.Not.Empty);
                 Assert.That(artist.Type, Is.Not.Empty);
                 Assert.That(artist.Uri, Is.Not.Empty);
@@ -186,8 +181,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.ExternalIds.Isrc, Is.Not.Empty);
             Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
             Assert.That(model.Href, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<TrackId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.IsLocal, Is.False);
             Assert.That(model.Name, Is.Not.Empty);
             Assert.That(model.Popularity, Is.Not.Zero);
@@ -209,8 +203,7 @@ namespace SpotifyApi.Tests.EditMode {
                     var addedBy = item.AddedBy;
                     Assert.That(addedBy.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(addedBy.Href, Is.Not.Empty);
-                    Assert.That(addedBy.Id, Is.InstanceOf<UserId>());
-                    Assert.That(addedBy.Id.value, Is.Not.Empty);
+                    Assert.That(addedBy.Id, Is.Not.Empty);
                     Assert.That(addedBy.Type, Is.Not.Empty);
                     Assert.That(addedBy.Uri, Is.Not.Empty);
                 }
@@ -225,8 +218,7 @@ namespace SpotifyApi.Tests.EditMode {
                             var artist = album.Artists[0];
                             Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                             Assert.That(artist.Href, Is.Not.Empty);
-                            Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                            Assert.That(artist.Id.value, Is.Not.Empty);
+                            Assert.That(artist.Id, Is.Not.Empty);
                             Assert.That(artist.Name, Is.Not.Empty);
                             Assert.That(artist.Type, Is.Not.Empty);
                             Assert.That(artist.Uri, Is.Not.Empty);
@@ -234,8 +226,7 @@ namespace SpotifyApi.Tests.EditMode {
                         Assert.That(album.AvailableMarkets, Is.Not.Empty);
                         Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(album.Href, Is.Not.Empty);
-                        Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                        Assert.That(album.Id.value, Is.Not.Empty);
+                        Assert.That(album.Id, Is.Not.Empty);
                         Assert.That(album.Images, Is.Not.Empty);
                         {
                             var image = album.Images[0];
@@ -254,8 +245,7 @@ namespace SpotifyApi.Tests.EditMode {
                         var artist = track.Artists[0];
                         Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(artist.Href, Is.Not.Empty);
-                        Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                        Assert.That(artist.Id.value, Is.Not.Empty);
+                        Assert.That(artist.Id, Is.Not.Empty);
                         Assert.That(artist.Name, Is.Not.Empty);
                         Assert.That(artist.Type, Is.Not.Empty);
                         Assert.That(artist.Uri, Is.Not.Empty);
@@ -267,8 +257,7 @@ namespace SpotifyApi.Tests.EditMode {
                     Assert.That(track.ExternalIds.Isrc, Is.Not.Empty);
                     Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(track.Href, Is.Not.Empty);
-                    Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                    Assert.That(track.Id.value, Is.Not.Empty);
+                    Assert.That(track.Id, Is.Not.Empty);
                     Assert.That(track.IsLocal, Is.False);
                     Assert.That(track.Name, Is.Not.Empty);
                     Assert.That(track.Popularity, Is.Not.Zero);
@@ -292,8 +281,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.Description, Is.Not.Empty);
             Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
             Assert.That(model.Href, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<PlaylistId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.Images, Is.Not.Empty);
             Assert.That(model.Images[0].Url, Is.Not.Empty);
             Assert.That(model.Name, Is.Not.Empty);
@@ -301,8 +289,7 @@ namespace SpotifyApi.Tests.EditMode {
                 var owner = model.Owner;
                 Assert.That(owner.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(owner.Href, Is.Not.Empty);
-                Assert.That(owner.Id, Is.InstanceOf<UserId>());
-                Assert.That(owner.Id.value, Is.Not.Empty);
+                Assert.That(owner.Id, Is.Not.Empty);
                 Assert.That(owner.Type, Is.Not.Empty);
                 Assert.That(owner.Uri, Is.Not.Empty);
             }
@@ -320,8 +307,7 @@ namespace SpotifyApi.Tests.EditMode {
                             var addedBy = item.AddedBy;
                             Assert.That(addedBy.ExternalUrls.Spotify, Is.Not.Empty);
                             Assert.That(addedBy.Href, Is.Not.Empty);
-                            Assert.That(addedBy.Id, Is.InstanceOf<UserId>());
-                            Assert.That(addedBy.Id.value, Is.Not.Empty);
+                            Assert.That(addedBy.Id, Is.Not.Empty);
                             Assert.That(addedBy.Type, Is.Not.Empty);
                             Assert.That(addedBy.Uri, Is.Not.Empty);
                         }
@@ -334,8 +320,7 @@ namespace SpotifyApi.Tests.EditMode {
                                 Assert.That(album.AvailableMarkets, Is.Not.Empty);
                                 Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                                 Assert.That(album.Href, Is.Not.Empty);
-                                Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                                Assert.That(album.Id.value, Is.Not.Empty);
+                                Assert.That(album.Id, Is.Not.Empty);
                                 Assert.That(album.Images, Is.Not.Empty);
                                 {
                                     var image = album.Images[0];
@@ -352,8 +337,7 @@ namespace SpotifyApi.Tests.EditMode {
                                 var artist = track.Artists[0];
                                 Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                                 Assert.That(artist.Href, Is.Not.Empty);
-                                Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                                Assert.That(artist.Id.value, Is.Not.Empty);
+                                Assert.That(artist.Id, Is.Not.Empty);
                                 Assert.That(artist.Name, Is.Not.Empty);
                                 Assert.That(artist.Type, Is.Not.Empty);
                                 Assert.That(artist.Uri, Is.Not.Empty);
@@ -365,8 +349,7 @@ namespace SpotifyApi.Tests.EditMode {
                             Assert.That(track.ExternalIds.Isrc, Is.Not.Empty);
                             Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                             Assert.That(track.Href, Is.Not.Empty);
-                            Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                            Assert.That(track.Id.value, Is.Not.Empty);
+                            Assert.That(track.Id, Is.Not.Empty);
                             Assert.That(track.Name, Is.Not.Empty);
                             Assert.That(track.Popularity, Is.Not.Zero);
                             Assert.That(track.PreviewUrl, Is.Not.Empty);
@@ -398,16 +381,14 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(item.Description, Is.Null);
                 Assert.That(item.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(item.Href, Is.Not.Empty);
-                Assert.That(item.Id, Is.InstanceOf<PlaylistId>());
-                Assert.That(item.Id.value, Is.Not.Empty);
+                Assert.That(item.Id, Is.Not.Empty);
                 Assert.That(item.Images, Is.Empty);
                 Assert.That(item.Name, Is.Not.Empty);
                 {
                     var owner = item.Owner;
                     Assert.That(owner.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(owner.Href, Is.Not.Empty);
-                    Assert.That(owner.Id, Is.InstanceOf<UserId>());
-                    Assert.That(owner.Id.value, Is.Not.Empty);
+                    Assert.That(owner.Id, Is.Not.Empty);
                     Assert.That(owner.Type, Is.Not.Empty);
                     Assert.That(owner.Uri, Is.Not.Empty);
                 }
@@ -446,8 +427,7 @@ namespace SpotifyApi.Tests.EditMode {
                     Assert.That(album.AlbumType, Is.Not.Empty);
                     Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(album.Href, Is.Not.Empty);
-                    Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                    Assert.That(album.Id.value, Is.Not.Empty);
+                    Assert.That(album.Id, Is.Not.Empty);
                     Assert.That(album.Images, Is.Not.Empty);
                     {
                         var image = album.Images[0];
@@ -464,8 +444,7 @@ namespace SpotifyApi.Tests.EditMode {
                     var artist = item.Artists[0];
                     Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(artist.Href, Is.Not.Empty);
-                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.Not.Empty);
                     Assert.That(artist.Name, Is.Not.Empty);
                     Assert.That(artist.Type, Is.Not.Empty);
                     Assert.That(artist.Uri, Is.Not.Empty);
@@ -477,8 +456,7 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(item.ExternalIds.Isrc, Is.Not.Empty);
                 Assert.That(item.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(item.Href, Is.Not.Empty);
-                Assert.That(item.Id, Is.InstanceOf<TrackId>());
-                Assert.That(item.Id.value, Is.Not.Empty);
+                Assert.That(item.Id, Is.Not.Empty);
                 Assert.That(item.Name, Is.Not.Empty);
                 Assert.That(item.Popularity, Is.Zero);
                 Assert.That(item.PreviewUrl, Is.Not.Empty);
@@ -494,8 +472,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.Devices, Is.Not.Empty);
             {
                 var device = model.Devices[0];
-                Assert.That(device.Id, Is.InstanceOf<DeviceId>());
-                Assert.That(device.Id.value, Is.Not.Empty);
+                Assert.That(device.Id, Is.Not.Empty);
                 Assert.That(device.IsActive, Is.False);
                 Assert.That(device.IsPrivateSession, Is.True);
                 Assert.That(device.IsRestricted, Is.False);
@@ -511,8 +488,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.Timestamp, Is.Not.Zero);
             {
                 var device = model.Device;
-                Assert.That(device.Id, Is.InstanceOf<DeviceId>());
-                Assert.That(device.Id.value, Is.Not.Empty);
+                Assert.That(device.Id, Is.Not.Empty);
                 Assert.That(device.IsActive, Is.False);
                 Assert.That(device.IsRestricted, Is.False);
                 Assert.That(device.Name, Is.Not.Empty);
@@ -551,8 +527,7 @@ namespace SpotifyApi.Tests.EditMode {
                             var artist = album.Artists[0];
                             Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                             Assert.That(artist.Href, Is.Not.Empty);
-                            Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                            Assert.That(artist.Id.value, Is.Not.Empty);
+                            Assert.That(artist.Id, Is.Not.Empty);
                             Assert.That(artist.Name, Is.Not.Empty);
                             Assert.That(artist.Type, Is.Not.Empty);
                             Assert.That(artist.Uri, Is.Not.Empty);
@@ -560,8 +535,7 @@ namespace SpotifyApi.Tests.EditMode {
                         Assert.That(album.AvailableMarkets, Is.Not.Empty);
                         Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(album.Href, Is.Not.Empty);
-                        Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                        Assert.That(album.Id.value, Is.Not.Empty);
+                        Assert.That(album.Id, Is.Not.Empty);
                         Assert.That(album.Images, Is.Not.Empty);
                         {
                             var image = album.Images[0];
@@ -578,8 +552,7 @@ namespace SpotifyApi.Tests.EditMode {
                         var artist = track.Artists[0];
                         Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(artist.Href, Is.Not.Empty);
-                        Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                        Assert.That(artist.Id.value, Is.Not.Empty);
+                        Assert.That(artist.Id, Is.Not.Empty);
                         Assert.That(artist.Name, Is.Not.Empty);
                         Assert.That(artist.Type, Is.Not.Empty);
                         Assert.That(artist.Uri, Is.Not.Empty);
@@ -591,8 +564,7 @@ namespace SpotifyApi.Tests.EditMode {
                     Assert.That(track.ExternalIds.Isrc, Is.Not.Empty);
                     Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(track.Href, Is.Not.Empty);
-                    Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                    Assert.That(track.Id.value, Is.Not.Empty);
+                    Assert.That(track.Id, Is.Not.Empty);
                     Assert.That(track.Name, Is.Not.Empty);
                     Assert.That(track.Popularity, Is.Not.Zero);
                     Assert.That(track.PreviewUrl, Is.Not.Empty);
@@ -624,8 +596,7 @@ namespace SpotifyApi.Tests.EditMode {
                         var artist = album.Artists[0];
                         Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(artist.Href, Is.Not.Empty);
-                        Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                        Assert.That(artist.Id.value, Is.Not.Empty);
+                        Assert.That(artist.Id, Is.Not.Empty);
                         Assert.That(artist.Name, Is.Not.Empty);
                         Assert.That(artist.Type, Is.Not.Empty);
                         Assert.That(artist.Uri, Is.Not.Empty);
@@ -641,8 +612,7 @@ namespace SpotifyApi.Tests.EditMode {
                     Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(album.Genres, Is.Empty);
                     Assert.That(album.Href, Is.Not.Empty);
-                    Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                    Assert.That(album.Id.value, Is.Not.Empty);
+                    Assert.That(album.Id, Is.Not.Empty);
                     Assert.That(album.Images, Is.Not.Empty);
                     {
                         var image = album.Images[0];
@@ -665,8 +635,7 @@ namespace SpotifyApi.Tests.EditMode {
                                 var artist = track.Artists[0];
                                 Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                                 Assert.That(artist.Href, Is.Not.Empty);
-                                Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                                Assert.That(artist.Id.value, Is.Not.Empty);
+                                Assert.That(artist.Id, Is.Not.Empty);
                                 Assert.That(artist.Name, Is.Not.Empty);
                                 Assert.That(artist.Type, Is.Not.Empty);
                                 Assert.That(artist.Uri, Is.Not.Empty);
@@ -677,8 +646,7 @@ namespace SpotifyApi.Tests.EditMode {
                             Assert.That(track.Explicit, Is.False);
                             Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                             Assert.That(track.Href, Is.Not.Empty);
-                            Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                            Assert.That(track.Id.value, Is.Not.Empty);
+                            Assert.That(track.Id, Is.Not.Empty);
                             Assert.That(track.Name, Is.Not.Empty);
                             Assert.That(track.PreviewUrl, Is.Not.Empty);
                             Assert.That(track.TrackNumber, Is.Not.Zero);
@@ -713,8 +681,7 @@ namespace SpotifyApi.Tests.EditMode {
                     var artist = album.Artists[0];
                     Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(artist.Href, Is.Not.Empty);
-                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.Not.Empty);
                     Assert.That(artist.Name, Is.Not.Empty);
                     Assert.That(artist.Type, Is.Not.Empty);
                     Assert.That(artist.Uri, Is.Not.Empty);
@@ -722,8 +689,7 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(album.AvailableMarkets, Is.Not.Empty);
                 Assert.That(album.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(album.Href, Is.Not.Empty);
-                Assert.That(album.Id, Is.InstanceOf<AlbumId>());
-                Assert.That(album.Id.value, Is.Not.Empty);
+                Assert.That(album.Id, Is.Not.Empty);
                 Assert.That(album.Images, Is.Not.Empty);
                 {
                     var image = album.Images[0];
@@ -750,8 +716,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
             Assert.That(model.Genres, Is.Not.Empty);
             Assert.That(model.Href, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<ArtistId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.Images, Is.Not.Empty);
             {
                 var image = model.Images[0];
@@ -777,8 +742,7 @@ namespace SpotifyApi.Tests.EditMode {
                     var artist = track.Artists[0];
                     Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(artist.Href, Is.Not.Empty);
-                    Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                    Assert.That(artist.Id.value, Is.Not.Empty);
+                    Assert.That(artist.Id, Is.Not.Empty);
                     Assert.That(artist.Name, Is.Not.Empty);
                     Assert.That(artist.Type, Is.Not.Empty);
                     Assert.That(artist.Uri, Is.Not.Empty);
@@ -789,8 +753,7 @@ namespace SpotifyApi.Tests.EditMode {
                 Assert.That(track.Explicit, Is.False);
                 Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(track.Href, Is.Not.Empty);
-                Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                Assert.That(track.Id.value, Is.Not.Empty);
+                Assert.That(track.Id, Is.Not.Empty);
                 Assert.That(track.Name, Is.Not.Empty);
                 Assert.That(track.PreviewUrl, Is.Not.Empty);
                 Assert.That(track.TrackNumber, Is.Not.Zero);
@@ -814,8 +777,7 @@ namespace SpotifyApi.Tests.EditMode {
                 var artist = model.Artists[0];
                 Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                 Assert.That(artist.Href, Is.Not.Empty);
-                Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                Assert.That(artist.Id.value, Is.Not.Empty);
+                Assert.That(artist.Id, Is.Not.Empty);
                 Assert.That(artist.Name, Is.Not.Empty);
                 Assert.That(artist.Type, Is.Not.Empty);
                 Assert.That(artist.Uri, Is.Not.Empty);
@@ -830,8 +792,7 @@ namespace SpotifyApi.Tests.EditMode {
             Assert.That(model.ExternalUrls.Spotify, Is.Not.Empty);
             Assert.That(model.Genres, Is.Empty);
             Assert.That(model.Href, Is.Not.Empty);
-            Assert.That(model.Id, Is.InstanceOf<AlbumId>());
-            Assert.That(model.Id.value, Is.Not.Empty);
+            Assert.That(model.Id, Is.Not.Empty);
             Assert.That(model.Images, Is.Not.Empty);
             {
                 var image = model.Images[0];
@@ -854,8 +815,7 @@ namespace SpotifyApi.Tests.EditMode {
                         var artist = track.Artists[0];
                         Assert.That(artist.ExternalUrls.Spotify, Is.Not.Empty);
                         Assert.That(artist.Href, Is.Not.Empty);
-                        Assert.That(artist.Id, Is.InstanceOf<ArtistId>());
-                        Assert.That(artist.Id.value, Is.Not.Empty);
+                        Assert.That(artist.Id, Is.Not.Empty);
                         Assert.That(artist.Name, Is.Not.Empty);
                         Assert.That(artist.Type, Is.Not.Empty);
                         Assert.That(artist.Uri, Is.Not.Empty);
@@ -866,8 +826,7 @@ namespace SpotifyApi.Tests.EditMode {
                     Assert.That(track.Explicit, Is.False);
                     Assert.That(track.ExternalUrls.Spotify, Is.Not.Empty);
                     Assert.That(track.Href, Is.Not.Empty);
-                    Assert.That(track.Id, Is.InstanceOf<TrackId>());
-                    Assert.That(track.Id.value, Is.Not.Empty);
+                    Assert.That(track.Id, Is.Not.Empty);
                     Assert.That(track.Name, Is.Not.Empty);
                     Assert.That(track.PreviewUrl, Is.Not.Empty);
                     Assert.That(track.TrackNumber, Is.Not.Zero);
