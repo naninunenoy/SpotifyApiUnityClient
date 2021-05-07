@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class ImageModel {
         [JsonProperty("height")] public float? Height { private set; get; }

@@ -2,7 +2,7 @@
 using UniRx;
 using UnityEngine;
 
-namespace SpotifyApi.SpotifyConnect {
+namespace n5y.SpotifyApi.SpotifyConnect {
     public interface ISpotifyConnectClient : IDisposable {
         IReadOnlyReactiveProperty<string> TrackName { get; }
         IReadOnlyReactiveProperty<string> AlbumName { get; }

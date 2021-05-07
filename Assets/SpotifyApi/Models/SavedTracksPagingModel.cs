@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class SavedTracksPagingModel : PagingModel {
         [JsonProperty("items")] public SavedTrackModel[] Items { private set; get; }

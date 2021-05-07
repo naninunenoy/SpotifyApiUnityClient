@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class AudioAnalysisModel {
         [JsonProperty("bars")] public AudioAnalysisBars[] Bars { private set; get; }

@@ -1,4 +1,4 @@
-﻿namespace SpotifyApi.Models {
+﻿namespace n5y.SpotifyApi.Models {
     public static class Scopes {
         public static class SpotifyConnect {
             public const string UserReadPlayBackState = "user-read-playback-state";

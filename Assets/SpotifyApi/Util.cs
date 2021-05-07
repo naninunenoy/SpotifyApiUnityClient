@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace SpotifyApi {
+namespace n5y.SpotifyApi {
     public static class Util {
         public static string ToBase64(string str) => Convert.ToBase64String(Encoding.UTF8.GetBytes(str));
 

@@ -1,11 +1,11 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 using UniRx;
 using UnityEngine;
 
-namespace SpotifyApi.SpotifyConnect {
+namespace n5y.SpotifyApi.SpotifyConnect {
     public class SpotifyConnectClient : ISpotifyConnectClient {
         const int elapsedInterval = 500;
         readonly ReactiveProperty<string> trackName;

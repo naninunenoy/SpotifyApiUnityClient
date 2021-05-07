@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SpotifyApi.SpotifyConnect.View {
+namespace n5y.SpotifyApi.SpotifyConnect.View {
     public interface ISpotifyConnectClientView {
         void SetTrack(string track, string artist);
         void SetImage(Sprite image);

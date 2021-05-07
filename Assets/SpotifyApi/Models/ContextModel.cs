@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class ContextModel {
         [JsonProperty("external_urls")] public ExternalUrlModel ExternalUrls { private set; get; }

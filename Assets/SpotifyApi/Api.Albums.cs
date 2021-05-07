@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 using UnityEngine.Networking;
 
-namespace SpotifyApi {
+namespace n5y.SpotifyApi {
     public static partial class Api {
         public static class Albums {
             public static async UniTask<AlbumModel> GetAlbumAsync(string albumId, ITokenProvider token,

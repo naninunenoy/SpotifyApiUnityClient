@@ -1,6 +1,6 @@
-﻿using SpotifyApi.Models;
+﻿using n5y.SpotifyApi.Models;
 
-namespace SpotifyApi {
+namespace n5y.SpotifyApi {
     public interface ITokenProvider {
         TokenModel Token { get; }
     }

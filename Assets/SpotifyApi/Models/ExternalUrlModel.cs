@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class ExternalUrlModel {
         [JsonProperty("spotify")] public string Spotify { private set; get; }

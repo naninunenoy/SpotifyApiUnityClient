@@ -4,11 +4,11 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
-using SpotifyApi.Models;
-using SpotifyApi.SpotifyConnect;
-using SpotifyApi.SpotifyConnect.View;
+using n5y.SpotifyApi.Models;
+using n5y.SpotifyApi.SpotifyConnect;
+using n5y.SpotifyApi.SpotifyConnect.View;
 
-namespace SpotifyApi.Example {
+namespace n5y.SpotifyApi.Example {
     public class ExampleSceneEntry : MonoBehaviour {
         [SerializeField] Button startAuthButton = default;
         [SerializeField] Text attentionText = default;

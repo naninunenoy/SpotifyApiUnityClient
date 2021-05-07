@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpotifyApi.SpotifyConnect.View {
+namespace n5y.SpotifyApi.SpotifyConnect.View {
     public class SpotifyConnectClientView : MonoBehaviour, ISpotifyConnectClientView {
         [SerializeField] Text trackText = default;
         [SerializeField] Text artistText = default;

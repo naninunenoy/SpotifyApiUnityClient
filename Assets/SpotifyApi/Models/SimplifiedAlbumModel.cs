@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace SpotifyApi.Models {
+namespace n5y.SpotifyApi.Models {
     [JsonObject]
     public class SimplifiedAlbumModel {
         [JsonProperty("id")] public string Id { private set; get; }

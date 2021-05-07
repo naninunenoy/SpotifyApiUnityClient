@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace SpotifyApi {
+namespace n5y.SpotifyApi {
     public static partial class Api {
         public static async UniTask<TokenModel> GetTokenAsync(string accessCode, string redirectUri,
             string clientId, string clientSecret, CancellationToken cancellationToken) {

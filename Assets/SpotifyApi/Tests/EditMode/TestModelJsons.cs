@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SpotifyApi.Tests.EditMode {
+namespace n5y.SpotifyApi.Tests.EditMode {
     //[CreateAssetMenu(fileName = "FILENAME", menuName = "MENUNAME", order = 0)]
     public class TestModelJsons : ScriptableObject {
         [SerializeField] [Multiline] string albumResponse = "";

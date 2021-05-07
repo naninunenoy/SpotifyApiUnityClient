@@ -1,8 +1,8 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 
-namespace SpotifyApi.SpotifyConnect {
+namespace n5y.SpotifyApi.SpotifyConnect {
     public interface ISpotifyConnectApiAdapter {
         UniTask<CurrentlyPlayingTrackModel> GetCurrentlyPlayingAsync(CancellationToken cancellationToken);
     }

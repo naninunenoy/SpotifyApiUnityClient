@@ -1,4 +1,4 @@
-﻿namespace SpotifyApi.Models {
+﻿namespace n5y.SpotifyApi.Models {
     public enum RepeatState {
         Track = 0,
         Context,

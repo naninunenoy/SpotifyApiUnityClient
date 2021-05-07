@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using NUnit.Framework;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace SpotifyApi.Tests.EditMode {
+namespace n5y.SpotifyApi.Tests.EditMode {
     public class JsonToModelsTest {
         TestModelJsons testJson;
 

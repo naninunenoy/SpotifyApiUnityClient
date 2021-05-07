@@ -1,10 +1,10 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
-using SpotifyApi.Models;
+using n5y.SpotifyApi.Models;
 using UnityEngine;
 
-namespace SpotifyApi {
+namespace n5y.SpotifyApi {
     public class TokenHolder : MonoBehaviour, ITokenProvider {
         // tokenの期限が1時間固定なので55分ごとに refresh を行う
         static readonly TimeSpan tokenRefreshInterval = TimeSpan.FromMinutes(55);
