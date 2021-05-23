@@ -11,6 +11,7 @@
         }
         public static class Library {
             public const string Read = "user-library-read";
+            public const string PlayList = "playlist-read-private";
         }
 
         public static string All() => $"{SpotifyConnect.UserReadPlayBackState} " +
@@ -18,6 +19,7 @@
                                       $"{SpotifyConnect.UserReadCurrentlyPlaying} " +
                                       $"{Playback.AppRemoteControl} " +
                                       $"{Playback.Streaming} " +
-                                      $"{Library.Read}";
+                                      $"{Library.Read} " +
+                                      $"{Library.PlayList}";
     }
 }

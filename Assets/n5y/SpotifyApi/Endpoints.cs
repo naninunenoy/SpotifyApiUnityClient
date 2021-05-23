@@ -4,7 +4,7 @@
         public const string ApiToken = "https://accounts.spotify.com/api/token";
         public const string ApiMe = "https://api.spotify.com/v1/me";
         public const string ApiMyAlbums = "https://api.spotify.com/v1/me/albums";
-        public const string ApiMyPlaylist = "https://api.spotify.com/v1/me/playlist";
+        public const string ApiMyPlaylist = "https://api.spotify.com/v1/me/playlists";
         public const string ApiMyPlayer = "https://api.spotify.com/v1/me/player";
         public const string ApiMyPlayerQueue = "https://api.spotify.com/v1/me/player/queue";
         public const string ApiMyPlayerDevices = "https://api.spotify.com/v1/me/player/devices";
