@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="MusicControl" src="MusicControl.uxml" />
+    <ui:VisualElement name="MusicView" style="width: 320px; height: 320px; align-items: center;">
+        <ui:Label text="==SONG==" name="Title" style="font-size: 24px;" />
+        <ui:Label text="==ALBUM==" name="Album" />
+        <ui:Label text="==ARTIST==" display-tooltip-when-elided="true" name="Artist" />
+        <ui:VisualElement name="MusicView" style="width: 300px; height: 300px; background-image: url(&apos;/Assets/n5y/SpotifyApi/Ui/iconmonstr-spotify-1-240.png#iconmonstr-spotify-1-240&apos;); background-color: rgb(255, 255, 255); -unity-background-scale-mode: scale-to-fit;" />
+    </ui:VisualElement>
+    <ui:Instance template="MusicControl" name="MusicControl" />
+</ui:UXML>
