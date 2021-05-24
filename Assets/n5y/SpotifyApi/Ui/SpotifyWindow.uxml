@@ -1,8 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="MusicView" src="MusicView.uxml" />
     <ui:Template name="MusicControl" src="MusicControl.uxml" />
-    <ui:Button text="Open List" name="open" display-tooltip-when-elided="true" />
-    <ui:Instance template="MusicView" name="MusicView" />
-    <ui:Instance template="MusicControl" name="MusicControl" />
-    <ui:Button text="Authorization" name="auth" display-tooltip-when-elided="true" />
+    <ui:Button text="Open List" name="openButton" display-tooltip-when-elided="true" />
+    <ui:VisualElement style="align-items: center;">
+        <ui:Instance template="MusicView" name="MusicView" />
+        <ui:Instance template="MusicControl" name="MusicControl" />
+    </ui:VisualElement>
+    <ui:Button text="Authorization" name="authButton" display-tooltip-when-elided="true" />
 </ui:UXML>

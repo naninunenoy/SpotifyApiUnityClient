@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:ScrollView>
+        <ui:Foldout text="Device" name="Device" value="false" />
+        <ui:Foldout text="Album" name="Album" value="false" />
+        <ui:Foldout text="Playlist" name="Playlist" value="false" />
+    </ui:ScrollView>
+</ui:UXML>
