@@ -19,6 +19,7 @@
     "com.unity.textmeshpro": "3.0.4",
     "com.unity.timeline": "1.5.4",
     "com.unity.ugui": "1.0.0",
+    "com.unity.ui": "1.0.0-preview.14",
     "dev.n5y.asmdefhelper": "https://github.com/naninunenoy/AsmdefHelper.git?path=Assets",
     "jillejr.newtonsoft.json-for-unity": "12.0.301",
     "com.unity.modules.ai": "1.0.0",
