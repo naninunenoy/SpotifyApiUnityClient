@@ -1,12 +1,8 @@
-{
-    "name": "n5y.SpotifyApi.Ui.Editor",
-    "rootNamespace": "n5y.SpotifyApi.Ui.Editor",
-    "references": [
-        "n5y.SpotifyApi.Ui.Core"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+﻿{
+    "name": "n5y.SpotifyApi.Ui.Core",
+    "rootNamespace": "n5y.SpotifyApi.Ui.Core",
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
