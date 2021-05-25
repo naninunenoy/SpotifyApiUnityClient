@@ -6,15 +6,27 @@ namespace n5y.SpotifyApi.Ui.Runtime {
     public class SpotifyView : MonoBehaviour, ISpotifyListOpen {
         [SerializeField] UIDocument musicView;
         [SerializeField] UIDocument listView;
+        SpotifyMusicViewMain main;
 
+        void Start() {
+            SetUp();
+        }
+
+        void SetUp() {
+            main = new SpotifyMusicViewMain(musicView.rootVisualElement, this);
+            main.Process();
+        }
 
         VisualElement ISpotifyListOpen.OpenListView() {
+            musicView.gameObject.SetActive(false);
             listView.gameObject.SetActive(true);
             return listView.rootVisualElement;
         }
 
         void ISpotifyListOpen.Close() {
             listView.gameObject.SetActive(false);
+            musicView.gameObject.SetActive(true);
+            SetUp();
         }
     }
 }

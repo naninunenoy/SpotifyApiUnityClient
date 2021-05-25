@@ -23,6 +23,7 @@ namespace n5y.SpotifyApi.Ui.Editor {
             root.Add(uxml);
 
             musicView = new SpotifyMusicViewMain(root, this);
+            musicView.Process();
         }
 
         void OnDestroy() {
