@@ -2,7 +2,8 @@
     "name": "n5y.SpotifyApi.Ui.Runtime",
     "rootNamespace": "n5y.SpotifyApi.Ui.Runtime",
     "references": [
-        "n5y.SpotifyApi.Ui.Core"
+        "n5y.SpotifyApi.Ui.Core",
+        "UnityEngine.UIElementsGameObjectsModule"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
