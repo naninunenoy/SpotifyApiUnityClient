@@ -1,7 +1,11 @@
-﻿{
+{
     "name": "n5y.SpotifyApi.Ui.Core",
     "rootNamespace": "n5y.SpotifyApi.Ui.Core",
-    "references": [],
+    "references": [
+        "UniRx",
+        "UniTask",
+        "MessagePipe"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
