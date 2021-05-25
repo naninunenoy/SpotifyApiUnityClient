@@ -2,14 +2,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace n5y.SpotifyApi.Ui {
+namespace n5y.SpotifyApi.Ui.Editor {
     // クラス名が SpotifyWindow だとなぜか window が表示されない
-    public class SpotifyWindow0 : EditorWindow {
-        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/SpotifyWindow.uxml";
+    public class SpotifyWindow00 : EditorWindow {
+        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/Editor/SpotifyWindow.uxml";
 
         [MenuItem("Window/UI Toolkit/SpotifyWindow")]
         public static void ShowExample() {
-            var wnd = GetWindow<SpotifyWindow0>();
+            var wnd = GetWindow<SpotifyWindow00>();
             wnd.titleContent = new GUIContent("SpotifyWindow");
         }
 
@@ -18,9 +18,6 @@ namespace n5y.SpotifyApi.Ui {
             var visualTree = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(uxmlPath);
             var uxml = visualTree.Instantiate();
             root.Add(uxml);
-
-            var listButton = root.Q<Button>("openButton");
-            listButton.clickable.clicked += SpotifyListWindow.ShowListWindow;
         }
     }
 }

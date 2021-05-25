@@ -2,9 +2,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace n5y.SpotifyApi.Ui {
+namespace n5y.SpotifyApi.Ui.Editor {
     public class SpotifyListWindow : EditorWindow {
-        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/SpotifyListWindow.uxml";
+        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/Editor/SpotifyListWindow.uxml";
 
         //[MenuItem("Window/UI Toolkit/SpotifyListWindow")]
         public static void ShowListWindow() {
