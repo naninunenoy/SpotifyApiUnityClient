@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 namespace n5y.SpotifyApi.Ui.Editor {
     // クラス名が SpotifyWindow だとなぜか window が表示されない
     public class SpotifyWindow00 : EditorWindow {
-        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/Editor/SpotifyWindow.uxml";
+        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/ToolKit/SpotifyWindow.uxml";
 
         [MenuItem("Window/UI Toolkit/SpotifyWindow")]
         public static void ShowExample() {

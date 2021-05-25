@@ -1,12 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="MusicControl" style="width: 320px; height: 120px; align-items: center;">
         <ui:VisualElement name="Control">
-            <ui:Button text="＜back" name="left" display-tooltip-when-elided="true" />
-            <ui:Button text="Play" name="play" display-tooltip-when-elided="true"  style="height: 30px;"/>
-            <ui:Button text="next＞" name="right" display-tooltip-when-elided="true" />
+            <ui:Button name="left" display-tooltip-when-elided="true" text="back" />
+            <ui:Button text="Play" name="play" display-tooltip-when-elided="true" style="height: 30px;" />
+            <ui:Button text="next" name="right" display-tooltip-when-elided="true" />
         </ui:VisualElement>
         <ui:VisualElement name="Progress" style="align-items: center;">
-            <ui:Slider name="progress slider" style="width: 300px;"/>
+            <ui:Slider name="progress slider" style="width: 300px;" />
             <ui:Label text="00:00/00:00" name="progress time" />
         </ui:VisualElement>
     </ui:VisualElement>

@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Editor {
     public class SpotifyListWindow : EditorWindow {
-        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/Editor/SpotifyListWindow.uxml";
+        const string uxmlPath = "Assets/n5y/SpotifyApi/Ui/ToolKit/SpotifyListWindow.uxml";
 
         //[MenuItem("Window/UI Toolkit/SpotifyListWindow")]
         public static void ShowListWindow() {
