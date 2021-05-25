@@ -1,7 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Button text="Close" name="closeButton" display-tooltip-when-elided="true" />
     <ui:ScrollView>
-        <ui:Foldout text="Device" name="Device" value="false" />
-        <ui:Foldout text="Album" name="Album" value="false" />
-        <ui:Foldout text="Playlist" name="Playlist" value="false" />
+        <ui:Foldout text="Playlist" name="PlaylistFoldout" value="false" />
+        <ui:Foldout text="Album" name="AlbumFoldout" value="false" />
+        <ui:Foldout text="Device" name="DeviceFoldout" value="false" />
     </ui:ScrollView>
 </ui:UXML>
