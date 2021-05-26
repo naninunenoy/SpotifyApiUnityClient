@@ -2,7 +2,7 @@ using System;
 using UniRx;
 
 namespace n5y.SpotifyApi.Ui.Core.Trigger {
-    public interface IMusicViewTrigger {
+    public interface IMusicViewObservable {
         IObservable<Unit> OnListOpenTrigger { get; }
         IObservable<Unit> OnAuthorizationTrigger { get; }
         IObservable<Unit> OnPlayTrigger { get; }

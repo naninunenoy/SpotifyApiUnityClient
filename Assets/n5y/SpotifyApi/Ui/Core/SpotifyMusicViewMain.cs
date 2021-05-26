@@ -32,7 +32,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             openButton.clickable.clicked += OpenListView;
             // 表示する音楽の更新
             var bag = DisposableBag.CreateBuilder();
-            musicSubscriber.MusicDataAsync.Subscribe(OnMusicUpdate).AddTo(bag);
+            musicSubscriber.MusicData.Subscribe(OnMusicUpdate).AddTo(bag);
             musicViewDisposable = bag.Build();
         }
 
