@@ -4,7 +4,8 @@
     "references": [
         "UniRx",
         "UniTask",
-        "MessagePipe"
+        "MessagePipe",
+        "n5y.SpotifyApi"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

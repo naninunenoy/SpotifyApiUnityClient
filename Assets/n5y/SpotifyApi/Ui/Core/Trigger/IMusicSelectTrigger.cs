@@ -2,7 +2,7 @@ using MessagePipe;
 
 namespace n5y.SpotifyApi.Ui.Core.Trigger {
     public interface IMusicSelectTrigger {
-        IAsyncPublisher<MusicId> MusicSelectAsync { get; }
-        IAsyncPublisher<DeviceId> DeviceSelectAsync { get; }
+        IAsyncSubscriber<MusicId> MusicSelectAsync { get; }
+        IAsyncSubscriber<DeviceId> DeviceSelectAsync { get; }
     }
 }
