@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using MessagePipe;
-using UnityEngine;
 
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.Cqrs {
     public readonly struct PlaylistTuple {
         public readonly PlaylistId playlistId;
         public readonly string name;

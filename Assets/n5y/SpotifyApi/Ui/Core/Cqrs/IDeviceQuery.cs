@@ -1,6 +1,6 @@
 using MessagePipe;
 
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.Cqrs {
     public readonly struct DeviceTuple {
         public readonly DeviceId deviceId;
         public readonly string name;

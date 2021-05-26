@@ -1,10 +1,12 @@
 using System;
+using n5y.SpotifyApi.Ui.Core.Cqrs;
 using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class SpotifyMusicViewMain : IDisposable {
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
+        readonly IPlaylistQuery playlistQuery;
         VisualElement listViewRoot;
 
         public SpotifyMusicViewMain(VisualElement musicViewRoot, ISpotifyListOpen listViewOpen) {
