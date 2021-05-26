@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.View {
     public interface IPlayingMusicPresentation {
         void SetTitle(string title);
         void SetAlbumName(string albumName);

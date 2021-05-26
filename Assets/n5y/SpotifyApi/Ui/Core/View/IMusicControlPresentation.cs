@@ -1,4 +1,4 @@
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.View {
     public enum PlayState {
         Playing,
         Paused
