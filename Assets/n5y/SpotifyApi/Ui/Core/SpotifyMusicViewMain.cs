@@ -9,6 +9,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
         readonly IMusicQuery musicQuery;
+        readonly IMusicControlCommand musicControlCommand;
         readonly IMusicCatalogSubscriber musicCatalogSubscriber;
         readonly ICurrentMusicSubscriber currentMusicSubscriber;
         readonly ICurrentMusicPublisher currentMusicPublisher;
@@ -16,10 +17,12 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IPlayingMusicPresentation musicPresentation;
         readonly IMusicControlPresentation controlPresentation;
         readonly IMusicListPresentation musicListPresentation;
+        readonly IMusicViewTrigger musicViewTrigger;
         readonly IListViewTrigger listViewTrigger;
 
         VisualElement listViewRoot;
         CurrentMusicAgent currentMusicAgent;
+        MusicControlAgent musicControlAgent;
         MusicPlayingAgent musicPlayingAgent;
         SelectMusicInListAgent selectMusicInListAgent;
 
@@ -38,10 +41,14 @@ namespace n5y.SpotifyApi.Ui.Core {
             // 表示する音楽の更新
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
             musicPlayingAgent.Process();
+            // 一時停止などの操作
+            musicControlAgent = new MusicControlAgent(musicControlCommand, controlPresentation, musicViewTrigger);
+            musicControlAgent.Process();
         }
 
         public void Dispose() {
             currentMusicAgent?.Dispose();
+            musicControlAgent?.Dispose();
             musicPlayingAgent?.Dispose();
             selectMusicInListAgent?.Dispose();
         }
