@@ -8,10 +8,7 @@ namespace n5y.SpotifyApi.Ui.Core {
     public class SpotifyMusicViewMain : IDisposable {
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
-        readonly IMusicQuery musicQuery;
-        readonly IPlaylistQuery playlistQuery;
-        readonly IAlbumQuery albumQuery;
-        readonly IDeviceQuery deviceQuery;
+        readonly IMusicCatalogSubscriber musicCatalogSubscriber;
         readonly IPlayingMusicPresentation musicPresentation;
         readonly IMusicControlPresentation controlPresentation;
         readonly IMusicListPresentation musicListPresentation;
@@ -47,8 +44,8 @@ namespace n5y.SpotifyApi.Ui.Core {
             var closeButton = listViewRoot.Q<Button>("closeButton");
             closeButton.clickable.clicked += OnCloseListView;
             // リストから音楽/デバイスを選択する
-            selectMusicInListAgent = new SelectMusicInListAgent(musicQuery, playlistQuery, albumQuery, deviceQuery,
-                musicListPresentation, musicSelectPublisher);
+            selectMusicInListAgent = new SelectMusicInListAgent(
+                musicCatalogSubscriber, musicListPresentation, musicSelectPublisher);
             selectMusicInListAgent.Process();
         }
 

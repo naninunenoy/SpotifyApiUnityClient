@@ -5,20 +5,13 @@ using n5y.SpotifyApi.Ui.Core.View;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class SelectMusicInListAgent : AgentBase {
-        readonly IMusicQuery musicQuery;
-        readonly IPlaylistQuery playlistQuery;
-        readonly IAlbumQuery albumQuery;
-        readonly IDeviceQuery deviceQuery;
+        readonly IMusicCatalogSubscriber catalog;
         readonly IMusicListPresentation listPresentation;
         readonly IMusicSelectPublisher selectPublisher;
 
-        public SelectMusicInListAgent(IMusicQuery musicQuery, IPlaylistQuery playlistQuery, IAlbumQuery albumQuery,
-            IDeviceQuery deviceQuery, IMusicListPresentation listPresentation,
+        public SelectMusicInListAgent(IMusicCatalogSubscriber catalog, IMusicListPresentation listPresentation,
             IMusicSelectPublisher selectPublisher) {
-            this.musicQuery = musicQuery;
-            this.playlistQuery = playlistQuery;
-            this.albumQuery = albumQuery;
-            this.deviceQuery = deviceQuery;
+            this.catalog = catalog;
             this.listPresentation = listPresentation;
             this.selectPublisher = selectPublisher;
         }
@@ -26,17 +19,17 @@ namespace n5y.SpotifyApi.Ui.Core {
         public void Process() {
             var bag = DisposableBag.CreateBuilder();
             // 取得したプレイリストなど一覧情報を随時更新
-            playlistQuery.Playlist
+            catalog.Playlist
                 .Subscribe(x => {
                     listPresentation.AddPlaylist(x);
                 })
                 .AddTo(bag);
-            albumQuery.Album
+            catalog.Album
                 .Subscribe(x => {
                     listPresentation.AddAlbum(x);
                 })
                 .AddTo(bag);
-            deviceQuery.Device
+            catalog.Device
                 .Subscribe(x => {
                     listPresentation
                         .AddDevice(x)
@@ -45,20 +38,18 @@ namespace n5y.SpotifyApi.Ui.Core {
                 })
                 .AddTo(bag);
             // 取得した音楽を随時更新
-            musicQuery.PlaylistMusic
+            catalog.PlaylistMusic
                 .Subscribe(x => {
-                    var (playlist, music) = x;
                     listPresentation
-                        .AddPlaylistMusic(playlist.playlistId, music)
+                        .AddPlaylistMusic(x.playlist.playlistId, x.music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
                         .AddTo(agentDisposable);
                 })
                 .AddTo(bag);
-            musicQuery.AlbumMusic
+            catalog.AlbumMusic
                 .Subscribe(x => {
-                    var (album, music) = x;
                     listPresentation
-                        .AddAlbumMusic(album.albumId, music)
+                        .AddAlbumMusic(x.album.albumId, x.music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
                         .AddTo(agentDisposable);
                 })
