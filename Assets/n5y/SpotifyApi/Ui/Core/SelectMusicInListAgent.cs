@@ -11,7 +11,6 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IDeviceQuery deviceQuery;
         readonly IMusicListPresentation listPresentation;
         readonly IMusicSelectPublisher selectPublisher;
-        readonly MusicDictionary musicDictionary;
 
         public SelectMusicInListAgent(IMusicQuery musicQuery, IPlaylistQuery playlistQuery, IAlbumQuery albumQuery,
             IDeviceQuery deviceQuery, IMusicListPresentation listPresentation,
@@ -22,7 +21,6 @@ namespace n5y.SpotifyApi.Ui.Core {
             this.deviceQuery = deviceQuery;
             this.listPresentation = listPresentation;
             this.selectPublisher = selectPublisher;
-            musicDictionary = new MusicDictionary();
         }
 
         public void Process() {
@@ -30,19 +28,16 @@ namespace n5y.SpotifyApi.Ui.Core {
             // 取得したプレイリストなど一覧情報を随時更新
             playlistQuery.Playlist
                 .Subscribe(x => {
-                    musicDictionary.AddNewPlaylist(x);
                     listPresentation.AddPlaylist(x);
                 })
                 .AddTo(bag);
             albumQuery.Album
                 .Subscribe(x => {
-                    musicDictionary.AddNewAlbum(x);
                     listPresentation.AddAlbum(x);
                 })
                 .AddTo(bag);
             deviceQuery.Device
                 .Subscribe(x => {
-                    musicDictionary.AddDevice(x);
                     listPresentation
                         .AddDevice(x)
                         .Subscribe(selectPublisher.DeviceSelect.Publish)
@@ -53,7 +48,6 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicQuery.PlaylistMusic
                 .Subscribe(x => {
                     var (playlist, music) = x;
-                    musicDictionary.AddMusicInPlaylist(playlist, music);
                     listPresentation
                         .AddPlaylistMusic(playlist.playlistId, music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
@@ -63,7 +57,6 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicQuery.AlbumMusic
                 .Subscribe(x => {
                     var (album, music) = x;
-                    musicDictionary.AddMusicInAlbum(album, music);
                     listPresentation
                         .AddAlbumMusic(album.albumId, music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
