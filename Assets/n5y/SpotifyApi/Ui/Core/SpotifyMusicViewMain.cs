@@ -1,4 +1,5 @@
 using System;
+using n5y.SpotifyApi.Ui.Core.Cqrs;
 using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 using UnityEngine.UIElements;
@@ -7,14 +8,18 @@ namespace n5y.SpotifyApi.Ui.Core {
     public class SpotifyMusicViewMain : IDisposable {
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
+        readonly IMusicQuery musicQuery;
         readonly IMusicCatalogSubscriber musicCatalogSubscriber;
+        readonly ICurrentMusicSubscriber currentMusicSubscriber;
+        readonly ICurrentMusicPublisher currentMusicPublisher;
+        readonly IMusicSelectPublisher musicSelectPublisher;
         readonly IPlayingMusicPresentation musicPresentation;
         readonly IMusicControlPresentation controlPresentation;
         readonly IMusicListPresentation musicListPresentation;
-        readonly IMusicSubscriber musicSubscriber;
-        readonly IMusicSelectPublisher musicSelectPublisher;
+        readonly IListViewTrigger listViewTrigger;
 
         VisualElement listViewRoot;
+        CurrentMusicAgent currentMusicAgent;
         MusicPlayingAgent musicPlayingAgent;
         SelectMusicInListAgent selectMusicInListAgent;
 
@@ -27,12 +32,16 @@ namespace n5y.SpotifyApi.Ui.Core {
             // リストを開くボタン
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
+            // リストから選択された音楽の伝達
+            currentMusicAgent = new CurrentMusicAgent(listViewTrigger.OnSelectMusic, musicQuery, currentMusicPublisher);
+            currentMusicAgent.Process();
             // 表示する音楽の更新
-            musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, musicSubscriber);
+            musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
             musicPlayingAgent.Process();
         }
 
         public void Dispose() {
+            currentMusicAgent?.Dispose();
             musicPlayingAgent?.Dispose();
             selectMusicInListAgent?.Dispose();
         }

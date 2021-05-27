@@ -7,21 +7,21 @@ namespace n5y.SpotifyApi.Ui.Core {
     public class MusicPlayingAgent : AgentBase {
         readonly IPlayingMusicPresentation musicPresentation;
         readonly IMusicControlPresentation controlPresentation;
-        readonly IMusicSubscriber musicSubscriber;
+        readonly ICurrentMusicSubscriber currentMusicSubscriber;
         readonly Url2Sprite url2Sprite;
 
         public MusicPlayingAgent(IPlayingMusicPresentation musicPresentation,
-            IMusicControlPresentation controlPresentation, IMusicSubscriber musicSubscriber) {
+            IMusicControlPresentation controlPresentation, ICurrentMusicSubscriber currentMusicSubscriber) {
             this.musicPresentation = musicPresentation;
             this.controlPresentation = controlPresentation;
-            this.musicSubscriber = musicSubscriber;
+            this.currentMusicSubscriber = currentMusicSubscriber;
             url2Sprite = new Url2Sprite();
         }
 
         public void Process() {
             // 表示する音楽の更新
             var bag = DisposableBag.CreateBuilder();
-            musicSubscriber.MusicData.Subscribe(OnMusicUpdate).AddTo(bag);
+            currentMusicSubscriber.NewMusic.Subscribe(OnMusicUpdate).AddTo(bag);
             agentInnerDisposable = bag.Build();
         }
 

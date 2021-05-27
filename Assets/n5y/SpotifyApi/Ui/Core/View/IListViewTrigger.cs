@@ -7,5 +7,6 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         IObservable<Unit> OnPlaylistSelect { get; }
         IObservable<Unit> OnAlbumSelect { get; }
         IObservable<Unit> OnDeviceSelect { get; }
+        IObservable<MusicId> OnSelectMusic { get; }
     }
 }
