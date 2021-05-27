@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 using MessagePipe;
-using n5y.SpotifyApi.Ui.Core.Trigger;
+using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 
 namespace n5y.SpotifyApi.Ui.Core {

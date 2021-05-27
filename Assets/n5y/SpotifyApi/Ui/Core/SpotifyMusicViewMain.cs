@@ -1,6 +1,5 @@
 using System;
-using n5y.SpotifyApi.Ui.Core.Cqrs;
-using n5y.SpotifyApi.Ui.Core.Trigger;
+using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 using UnityEngine.UIElements;
 
