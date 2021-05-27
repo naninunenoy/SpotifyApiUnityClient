@@ -1,12 +1,17 @@
 using Cysharp.Threading.Tasks;
+using MessagePipe;
+using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 using UniRx;
+using UnityEngine;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class MusicControlAgent : AgentBase {
+        readonly ICurrentMusicSubscriber currentMusicSubscriber;
         readonly IMusicControlCommand musicControlCommand;
         readonly IMusicControlPresentation controlPresentation;
         readonly IMusicViewTrigger musicViewTrigger;
+        MusicData currentMusic = default;
         MusicPlayState state;
 
         public MusicControlAgent(IMusicControlCommand musicControlCommand,
@@ -18,6 +23,13 @@ namespace n5y.SpotifyApi.Ui.Core {
 
         public void Process() {
             state = MusicPlayState.Paused;
+            var bag = DisposableBag.CreateBuilder();
+            currentMusicSubscriber.Music
+                .Subscribe(x => {
+                    currentMusic = x;
+                })
+                .AddTo(bag);
+            agentInnerDisposable = bag.Build();
             BindControlCommand();
         }
 
@@ -31,6 +43,7 @@ namespace n5y.SpotifyApi.Ui.Core {
                         await musicControlCommand.ResumeAsync(agentCts.Token);
                         state = MusicPlayState.Playing;
                     }
+
                     controlPresentation.SetPlayState(state);
                 }))
                 .AddTo(agentDisposable);
@@ -39,6 +52,12 @@ namespace n5y.SpotifyApi.Ui.Core {
                 .AddTo(agentDisposable);
             musicViewTrigger.OnPrevious
                 .Subscribe(_ => { musicControlCommand.GoBackAsync(agentCts.Token).Forget(); })
+                .AddTo(agentDisposable);
+            musicViewTrigger.SeekValue
+                .Where(_ => currentMusic != null && currentMusic.TotalSeconds > 0.0F)
+                .Select(x => x * currentMusic.TotalSeconds)
+                .Select(x => Mathf.RoundToInt(x * 1000))
+                .Subscribe(x => { musicControlCommand.SeekAsync(x, agentCts.Token).Forget(); })
                 .AddTo(agentDisposable);
         }
     }

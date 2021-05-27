@@ -21,7 +21,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         public void Process() {
             // 表示する音楽の更新
             var bag = DisposableBag.CreateBuilder();
-            currentMusicSubscriber.NewMusic.Subscribe(OnMusicUpdate).AddTo(bag);
+            currentMusicSubscriber.Music.Subscribe(OnMusicUpdate).AddTo(bag);
             agentInnerDisposable = bag.Build();
         }
 

@@ -8,5 +8,6 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         IObservable<Unit> OnPlay { get; }
         IObservable<Unit> OnPrevious { get; }
         IObservable<Unit> OnNext { get; }
+        IReadOnlyReactiveProperty<float> SeekValue { get; }
     }
 }

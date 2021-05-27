@@ -7,6 +7,6 @@ namespace n5y.SpotifyApi.Ui.Core {
         UniTask PauseAsync(CancellationToken cancellationToken);
         UniTask GoNextAsync(CancellationToken cancellationToken);
         UniTask GoBackAsync(CancellationToken cancellationToken);
-        UniTask SeekAsync(float seekValue, CancellationToken cancellationToken);
+        UniTask SeekAsync(int milliSeconds, CancellationToken cancellationToken);
     }
 }
