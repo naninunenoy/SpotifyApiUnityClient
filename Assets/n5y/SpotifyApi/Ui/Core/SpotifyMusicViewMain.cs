@@ -9,8 +9,10 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
         readonly IMusicQuery musicQuery;
+        readonly IMusicCatalogQuery musicCatalogQuery;
         readonly IMusicControlCommand musicControlCommand;
         readonly IMusicCatalogSubscriber musicCatalogSubscriber;
+        readonly IMusicCatalogPublisher musicCatalogPublisher;
         readonly ICurrentMusicSubscriber currentMusicSubscriber;
         readonly ICurrentMusicPublisher currentMusicPublisher;
         readonly IMusicSelectPublisher musicSelectPublisher;
@@ -25,6 +27,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         MusicControlAgent musicControlAgent;
         MusicPlayingAgent musicPlayingAgent;
         SelectMusicInListAgent selectMusicInListAgent;
+        MusicCatalogFetchAgent catalogFetchAgent;
 
         public SpotifyMusicViewMain(VisualElement musicViewRoot, ISpotifyListOpen listViewOpen) {
             this.musicViewRoot = musicViewRoot;
@@ -36,7 +39,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
             // リストから選択された音楽の伝達
-            currentMusicAgent = new CurrentMusicAgent(listViewTrigger.OnSelectMusic, musicQuery, currentMusicPublisher);
+            currentMusicAgent = new CurrentMusicAgent(listViewTrigger.OnDecideMusic, musicQuery, currentMusicPublisher);
             currentMusicAgent.Process();
             // 表示する音楽の更新
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
@@ -62,12 +65,18 @@ namespace n5y.SpotifyApi.Ui.Core {
             selectMusicInListAgent = new SelectMusicInListAgent(
                 musicCatalogSubscriber, musicListPresentation, musicSelectPublisher);
             selectMusicInListAgent.Process();
+            // 選択されたプレイリストなどの情報を取得する
+            catalogFetchAgent = new MusicCatalogFetchAgent(musicCatalogPublisher, musicSelectPublisher,
+                musicCatalogQuery, listViewTrigger);
+            catalogFetchAgent.Process();
         }
 
         void OnCloseListView() {
             listViewOpen?.Close();
             selectMusicInListAgent?.Dispose();
             selectMusicInListAgent = null;
+            catalogFetchAgent?.Dispose();
+            catalogFetchAgent = null;
         }
     }
 }

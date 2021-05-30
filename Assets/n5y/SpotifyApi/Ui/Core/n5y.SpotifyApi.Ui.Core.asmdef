@@ -4,6 +4,7 @@
     "references": [
         "UniRx",
         "UniTask",
+        "UniTask.Linq",
         "MessagePipe",
         "n5y.SpotifyApi"
     ],

@@ -41,7 +41,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             catalog.PlaylistMusic
                 .Subscribe(x => {
                     listPresentation
-                        .AddPlaylistMusic(x.playlist.playlistId, x.music)
+                        .AddPlaylistMusic(x.playlistId, x.music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
                         .AddTo(agentDisposable);
                 })
@@ -49,7 +49,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             catalog.AlbumMusic
                 .Subscribe(x => {
                     listPresentation
-                        .AddAlbumMusic(x.album.albumId, x.music)
+                        .AddAlbumMusic(x.albumId, x.music)
                         .Subscribe(selectPublisher.MusicSelect.Publish)
                         .AddTo(agentDisposable);
                 })

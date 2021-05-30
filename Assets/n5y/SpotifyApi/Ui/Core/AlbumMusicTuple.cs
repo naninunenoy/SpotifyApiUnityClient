@@ -1,10 +1,10 @@
 namespace n5y.SpotifyApi.Ui.Core {
     public readonly struct AlbumMusicTuple {
-        public readonly AlbumTuple album;
+        public readonly AlbumId albumId;
         public readonly MusicTuple music;
 
-        public AlbumMusicTuple(AlbumTuple album, MusicTuple music) {
-            this.album = album;
+        public AlbumMusicTuple(AlbumId albumId, MusicTuple music) {
+            this.albumId = albumId;
             this.music = music;
         }
     }
