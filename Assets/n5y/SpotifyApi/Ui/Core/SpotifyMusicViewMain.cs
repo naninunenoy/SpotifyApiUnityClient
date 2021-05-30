@@ -2,6 +2,7 @@ using System;
 using n5y.SpotifyApi.Ui.Core.Cqrs;
 using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
+using UniRx;
 using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Core {
@@ -10,6 +11,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly ISpotifyListOpen listViewOpen;
         readonly IMusicQuery musicQuery;
         readonly IMusicCatalogQuery musicCatalogQuery;
+        readonly ICurrentMusicQuery currentMusicQuery;
         readonly IMusicControlCommand musicControlCommand;
         readonly IMusicCatalogSubscriber musicCatalogSubscriber;
         readonly IMusicCatalogPublisher musicCatalogPublisher;
@@ -26,6 +28,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         CurrentMusicAgent currentMusicAgent;
         MusicControlAgent musicControlAgent;
         MusicPlayingAgent musicPlayingAgent;
+        MusicSyncAgent musicSyncAgent;
         SelectMusicInListAgent selectMusicInListAgent;
         MusicCatalogFetchAgent catalogFetchAgent;
 
@@ -47,13 +50,20 @@ namespace n5y.SpotifyApi.Ui.Core {
             // 一時停止などの操作
             musicControlAgent = new MusicControlAgent(musicControlCommand, controlPresentation, musicViewTrigger);
             musicControlAgent.Process();
+            // 再生音楽の同期
+            var oneSecondsSync = Observable.Interval(TimeSpan.FromSeconds(1)).AsUnitObservable();
+            musicSyncAgent = new MusicSyncAgent(oneSecondsSync, currentMusicQuery, currentMusicPublisher,
+                controlPresentation);
+            musicSyncAgent.Process();
         }
 
         public void Dispose() {
             currentMusicAgent?.Dispose();
             musicControlAgent?.Dispose();
             musicPlayingAgent?.Dispose();
+            musicSyncAgent?.Dispose();
             selectMusicInListAgent?.Dispose();
+            catalogFetchAgent?.Dispose();
         }
 
         void OpenListView() {
