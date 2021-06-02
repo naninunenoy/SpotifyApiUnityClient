@@ -9,5 +9,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         public bool IsPlaying { get; }
         public int ProgressMs { get; }
         public MusicData Music { get; }
+
+        public static CurrentMusic Empty() => new CurrentMusic(false, 0, MusicData.Empty());
     }
 }
