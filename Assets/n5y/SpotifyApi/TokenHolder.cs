@@ -14,13 +14,12 @@ namespace n5y.SpotifyApi {
         TokenModel token;
         string refreshToken;
 
-        public TokenModel Token {
-            get {
-                lock (lockObj) {
-                    return instance.token;
-                }
+        public string GetAuthorizationHeaderValue() {
+            lock (lockObj) {
+                return instance.token.GetAuthorizationHeaderValue();
             }
         }
+
         public void SetFirstToken(TokenModel firstToken) {
             lock (lockObj) {
                 // RefreshToken があるのは最初に取得される TokenModel のみ

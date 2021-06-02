@@ -11,7 +11,7 @@ namespace n5y.SpotifyApi {
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiArtists}/{artistId}";
                 using var req = UnityWebRequest.Get(url);
-                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
 
                 cancellationToken.ThrowIfCancellationRequested();
                 await req.SendWebRequest().WithCancellation(cancellationToken);
@@ -22,7 +22,7 @@ namespace n5y.SpotifyApi {
                 CancellationToken cancellationToken) {
                 var url = $"{Endpoints.ApiAlbums}/{artistId}/albums";
                 using var req = UnityWebRequest.Get(url);
-                req.SetRequestHeader("Authorization", token.Token.GetAuthorizationHeaderValue());
+                req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
 
                 cancellationToken.ThrowIfCancellationRequested();
                 await req.SendWebRequest().WithCancellation(cancellationToken);
