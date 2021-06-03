@@ -12,7 +12,7 @@ namespace n5y.SpotifyApi.SpotifyConnect {
 
         UniTask<CurrentlyPlayingTrackModel> ISpotifyConnectApiAdapter.GetCurrentlyPlayingAsync(
             CancellationToken cancellationToken) {
-            return Api.Player.GetCurrentlyPlayingAsync(tokenProvider, cancellationToken);
+            return Api.GetCurrentlyPlayingAsync(tokenProvider, cancellationToken);
         }
     }
 }

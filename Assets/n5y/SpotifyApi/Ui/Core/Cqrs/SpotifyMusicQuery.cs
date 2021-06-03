@@ -16,7 +16,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
 
         async UniTask<CurrentMusic> ICurrentMusicQuery.GetCurrentMusic(CancellationToken cancellationToken) {
             await tokenValidation.ValidateAsync(cancellationToken);
-            var current = await Api.Player.GetCurrentlyPlayingAsync(tokenProvider, cancellationToken);
+            var current = await Api.GetCurrentlyPlayingAsync(tokenProvider, cancellationToken);
             return current == null
                 ? CurrentMusic.Empty()
                 : new CurrentMusic(current.IsPlaying, current.ProgressMs, current.ToMusicData());

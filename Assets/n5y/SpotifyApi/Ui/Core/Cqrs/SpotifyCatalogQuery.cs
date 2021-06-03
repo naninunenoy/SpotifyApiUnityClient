@@ -28,7 +28,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
                     await IntervalAsync();
                     cancellationToken.ThrowIfCancellationRequested();
                     await tokenValidation.ValidateAsync(cancellationToken);
-                    var paging = await Api.Playlists.GetPlaylistsByUrlAsync(nextUrl, tokenProvider, cancellationToken);
+                    var paging = await Api.GetPlaylistsByUrlAsync(nextUrl, tokenProvider, cancellationToken);
                     foreach (var x in paging.Items) {
                         var id = new PlaylistId(x.Id);
                         await writer.YieldAsync(new PlaylistTuple(id, x.Name));
@@ -53,7 +53,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
                     await IntervalAsync();
                     cancellationToken.ThrowIfCancellationRequested();
                     await tokenValidation.ValidateAsync(cancellationToken);
-                    var paging = await Api.Albums.GetSavedAlbumsByUrlAsync(nextUrl, tokenProvider, cancellationToken);
+                    var paging = await Api.GetSavedAlbumsByUrlAsync(nextUrl, tokenProvider, cancellationToken);
                     foreach (var x in paging.Items) {
                         var id = new AlbumId(x.Album.Id);
                         await writer.YieldAsync(new AlbumTuple(id, x.Album.Name));
@@ -67,7 +67,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
         IUniTaskAsyncEnumerable<DeviceTuple> IMusicCatalogQuery.GetDevicesAsync(CancellationToken cancellationToken) {
             return UniTaskAsyncEnumerable.Create<DeviceTuple>(async (writer, _) => {
                 await tokenValidation.ValidateAsync(cancellationToken);
-                var list = await Api.Player.GetDevicesAsync(tokenProvider, cancellationToken);
+                var list = await Api.GetDevicesAsync(tokenProvider, cancellationToken);
                 foreach (var x in list.Devices) {
                     var id = new DeviceId(x.Id);
                     await writer.YieldAsync(new DeviceTuple(id, x.Name));
@@ -79,7 +79,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
             CancellationToken cancellationToken) {
             return UniTaskAsyncEnumerable.Create<MusicTuple>(async (writer, _) => {
                 await tokenValidation.ValidateAsync(cancellationToken);
-                var first = await Api.Playlists.GetPlaylistTracksAsync(playlistId.Identifier, tokenProvider,
+                var first = await Api.GetPlaylistTracksAsync(playlistId.Identifier, tokenProvider,
                     cancellationToken);
                 foreach (var x in first.Items) {
                     var id = new MusicId(x.Track.Id);
@@ -91,7 +91,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
                     await IntervalAsync();
                     cancellationToken.ThrowIfCancellationRequested();
                     await tokenValidation.ValidateAsync(cancellationToken);
-                    var paging = await Api.Playlists.GetPlaylistTracksByUrlAsync(nextUrl, tokenProvider, cancellationToken);
+                    var paging = await Api.GetPlaylistTracksByUrlAsync(nextUrl, tokenProvider, cancellationToken);
                     foreach (var x in paging.Items) {
                         var id = new MusicId(x.Track.Id);
                         await writer.YieldAsync(new MusicTuple(id, x.Track.Name));
@@ -106,7 +106,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
             CancellationToken cancellationToken) {
             return UniTaskAsyncEnumerable.Create<MusicTuple>(async (writer, _) => {
                 await tokenValidation.ValidateAsync(cancellationToken);
-                var first = await Api.Albums.GetAlbumTracksAsync(albumId.Identifier, tokenProvider, cancellationToken);
+                var first = await Api.GetAlbumTracksAsync(albumId.Identifier, tokenProvider, cancellationToken);
                 foreach (var x in first.Items) {
                     var id = new MusicId(x.Id);
                     await writer.YieldAsync(new MusicTuple(id, x.Name));
@@ -117,7 +117,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
                     await IntervalAsync();
                     cancellationToken.ThrowIfCancellationRequested();
                     await tokenValidation.ValidateAsync(cancellationToken);
-                    var paging = await Api.Albums.GetAlbumTracksByUrlAsync(nextUrl, tokenProvider, cancellationToken);
+                    var paging = await Api.GetAlbumTracksByUrlAsync(nextUrl, tokenProvider, cancellationToken);
                     foreach (var x in paging.Items) {
                         var id = new MusicId(x.Id);
                         await writer.YieldAsync(new MusicTuple(id, x.Name));
