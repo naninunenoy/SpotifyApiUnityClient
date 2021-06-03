@@ -3,13 +3,14 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using n5y.SpotifyApi.Models;
+using n5y.SpotifyApi.Ui.Core.Cqrs;
 
 namespace n5y.SpotifyApi.Ui.Core {
-    public class SpotifyCurrentMusicQuery : ICurrentMusicQuery {
+    public class SpotifyMusicQuery : IMusicQuery, ICurrentMusicQuery {
         readonly ITokenProvider tokenProvider;
         readonly ITokenValidation tokenValidation;
 
-        public SpotifyCurrentMusicQuery(ITokenProvider tokenProvider, ITokenValidation tokenValidation) {
+        public SpotifyMusicQuery(ITokenProvider tokenProvider, ITokenValidation tokenValidation) {
             this.tokenProvider = tokenProvider;
             this.tokenValidation = tokenValidation;
         }
@@ -21,9 +22,24 @@ namespace n5y.SpotifyApi.Ui.Core {
                 ? CurrentMusic.Empty()
                 : new CurrentMusic(current.IsPlaying, current.ProgressMs, current.ToMusicData());
         }
+
+        async UniTask<MusicData> IMusicQuery.GetMusicDataAsync(MusicId musicId, CancellationToken cancellationToken) {
+            await tokenValidation.ValidateAsync(cancellationToken);
+            var track = await Api.GetTruckAsync(musicId.Identifier, tokenProvider, cancellationToken);
+            return track.ToMusicData();
+        }
     }
 
-    public static class CurrentPlayingTrackModelToMusicDataExtension {
+    public static class SpotifyModelExtension {
+        public static MusicData ToMusicData(this TrackModel track) {
+            if (track == null) return MusicData.Empty();
+            var name = track.Name;
+            var albumName = track.Album?.Name ?? "???";
+            var artistName = track.Artists?.FirstOrDefault()?.Name ?? "???";
+            var imageUrl = track.Album?.Images.GetBiggestImageUrl() ?? "";
+            float seconds = track.DurationMs;
+            return new MusicData(name, albumName, artistName, imageUrl, seconds);
+        }
         public static MusicData ToMusicData(this CurrentlyPlayingTrackModel track) {
             var item = track.Item;
             if (item == null) return MusicData.Empty();
@@ -34,17 +50,15 @@ namespace n5y.SpotifyApi.Ui.Core {
             float seconds = item.DurationMs;
             return new MusicData(name, albumName, artistName, imageUrl, seconds);
         }
-    }
 
-    public static class ImageModelExtension {
-        public static string GetBiggestImageUrl(this ImageModel[] images) {
+        static string GetBiggestImageUrl(this ImageModel[] images) {
             var validImages = FilterMultiCandidateAndWithValidRect(images, out var first);
             if (validImages == null) return first;
             var ordered = validImages.OrderBy(x => x.Height! * x.Width!);
             return ordered.LastOrDefault()?.Url;
         }
 
-        public static string GetSmallestImageUrl(this ImageModel[] images) {
+        static string GetSmallestImageUrl(this ImageModel[] images) {
             var validImages = FilterMultiCandidateAndWithValidRect(images, out var first);
             if (validImages == null) return first;
             var ordered = validImages.OrderBy(x => x.Height! * x.Width!);
