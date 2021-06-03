@@ -29,6 +29,26 @@ namespace n5y.SpotifyApi {
 
                 return JsonConvert.DeserializeObject<TracksPagingModel>(req.downloadHandler.text);
             }
+            public static async UniTask<SavedAlbumsPagingModel> GetSavedAlbumsByUrlAsync(string url, ITokenProvider token,
+                CancellationToken cancellationToken) {
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
+
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
+
+                return JsonConvert.DeserializeObject<SavedAlbumsPagingModel>(req.downloadHandler.text);
+            }
+            public static async UniTask<TracksPagingModel> GetAlbumTracksByUrlAsync(string url, ITokenProvider token,
+                CancellationToken cancellationToken) {
+                using var req = UnityWebRequest.Get(url);
+                req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
+
+                cancellationToken.ThrowIfCancellationRequested();
+                await req.SendWebRequest().WithCancellation(cancellationToken);
+
+                return JsonConvert.DeserializeObject<TracksPagingModel>(req.downloadHandler.text);
+            }
         }
     }
 }

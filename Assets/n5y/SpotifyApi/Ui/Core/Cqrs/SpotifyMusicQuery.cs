@@ -3,9 +3,8 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using n5y.SpotifyApi.Models;
-using n5y.SpotifyApi.Ui.Core.Cqrs;
 
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.Cqrs {
     public class SpotifyMusicQuery : IMusicQuery, ICurrentMusicQuery {
         readonly ITokenProvider tokenProvider;
         readonly ITokenValidation tokenValidation;
