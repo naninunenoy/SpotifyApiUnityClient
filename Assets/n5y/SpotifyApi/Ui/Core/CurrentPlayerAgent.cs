@@ -23,7 +23,7 @@ namespace n5y.SpotifyApi.Ui.Core {
                 .OnDecideMusic
                 .Subscribe(id => UniTask.Void(async () => {
                     // 選択された音楽を通知
-                    playerCommand.PushCurrentMusic(id).Forget();
+                    playerCommand.PushCurrentMusic(id, agentCts.Token).Forget();
                     // 新しい音楽が選択されたら詳細を取得して表示する
                     var music = await musicQuery.GetMusicDataAsync(id, agentCts.Token);
                     musicPublisher.NewMusic.Publish(music);
@@ -34,7 +34,7 @@ namespace n5y.SpotifyApi.Ui.Core {
                 .OnDecideDevice
                 .Subscribe(id => {
                     // 選択された音楽を通知
-                    playerCommand.PushCurrentDevice(id).Forget();
+                    playerCommand.PushCurrentDevice(id, agentCts.Token).Forget();
                 })
                 .AddTo(agentDisposable);
         }
