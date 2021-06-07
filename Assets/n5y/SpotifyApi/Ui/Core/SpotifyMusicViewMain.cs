@@ -13,6 +13,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IMusicCatalogQuery musicCatalogQuery;
         readonly ICurrentMusicQuery currentMusicQuery;
         readonly IMusicControlCommand musicControlCommand;
+        readonly ICurrentPlayerCommand playerCommand;
         readonly IMusicCatalogSubscriber musicCatalogSubscriber;
         readonly IMusicCatalogPublisher musicCatalogPublisher;
         readonly ICurrentMusicSubscriber currentMusicSubscriber;
@@ -25,7 +26,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IListViewTrigger listViewTrigger;
 
         VisualElement listViewRoot;
-        CurrentMusicAgent currentMusicAgent;
+        CurrentPlayerAgent currentPlayerAgent;
         MusicControlAgent musicControlAgent;
         MusicPlayingAgent musicPlayingAgent;
         MusicSyncAgent musicSyncAgent;
@@ -42,8 +43,8 @@ namespace n5y.SpotifyApi.Ui.Core {
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
             // リストから選択された音楽の伝達
-            currentMusicAgent = new CurrentMusicAgent(listViewTrigger.OnDecideMusic, musicQuery, currentMusicPublisher);
-            currentMusicAgent.Process();
+            currentPlayerAgent = new CurrentPlayerAgent(listViewTrigger, musicQuery, playerCommand, currentMusicPublisher);
+            currentPlayerAgent.Process();
             // 表示する音楽の更新
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
             musicPlayingAgent.Process();
@@ -58,7 +59,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         }
 
         public void Dispose() {
-            currentMusicAgent?.Dispose();
+            currentPlayerAgent?.Dispose();
             musicControlAgent?.Dispose();
             musicPlayingAgent?.Dispose();
             musicSyncAgent?.Dispose();
