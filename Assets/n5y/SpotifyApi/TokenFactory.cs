@@ -10,14 +10,15 @@ namespace n5y.SpotifyApi {
         readonly string clientId;
         readonly string clientSecret;
         readonly string redirectUrl;
+        readonly IRefreshTokenStorage refreshTokenStorage;
 
-        string refreshToken;
         AccessTokenTuple accessToken;
 
-        public TokenFactory(string clientId, string clientSecret, string redirectUrl) {
-            this.clientId = clientId;
-            this.clientSecret = clientSecret;
-            this.redirectUrl = redirectUrl;
+        public TokenFactory(IEnvironmentProvider env, IRefreshTokenStorage refreshTokenStorage) {
+            clientId = env.ClientId;
+            clientSecret = env.ClientSecret;
+            redirectUrl = env.RedirectUri;
+            this.refreshTokenStorage = refreshTokenStorage;
         }
 
         public async UniTask<ITokenProvider> AuthorizeAsync(CancellationToken cancellationToken) {
@@ -49,28 +50,33 @@ namespace n5y.SpotifyApi {
             context.Response.Close();
             httpListener.Close();
             // codeからtokenを取得
+            var createdAt = DateTime.Now;
             var token = await Api.GetTokenAsync(code, redirectUrl, clientId, clientSecret, cancellationToken);
             if (token == null) return new EmptyTokenProvider();
-            accessToken = new AccessTokenTuple(token.AccessToken, token.ExpiresIn, GetNowDateTime());
-            refreshToken = token.RefreshToken;
+            accessToken = new AccessTokenTuple(token.AccessToken, token.ExpiresIn, createdAt);
+            // refresh_tokenの保存
+            await refreshTokenStorage.SaveAsync(token.RefreshToken, cancellationToken);
             return this;
         }
 
-        public async UniTask<ITokenProvider> AuthorizeByRefreshTokenAsync(string localRefreshToken, CancellationToken cancellationToken) {
-            var token = await Api.RefreshTokenAsync(localRefreshToken, clientId, clientSecret, cancellationToken);
+        public async UniTask<ITokenProvider> AuthorizeByRefreshTokenAsync(string refreshToken, CancellationToken cancellationToken) {
+            var refreshedAt = DateTime.Now;
+            var token = await Api.RefreshTokenAsync(refreshToken, clientId, clientSecret, cancellationToken);
             if (token == null) return new EmptyTokenProvider();
-            accessToken = new AccessTokenTuple(token.AccessToken, token.ExpiresIn, GetNowDateTime());
-            refreshToken = token.RefreshToken;
+            accessToken = new AccessTokenTuple(token.AccessToken, token.ExpiresIn, refreshedAt);
+            // refresh_token で token を取得した場合のレスポンスに新たな refresh_token は含まれない
             return this;
         }
 
         public string GetAuthorizationHeaderValue() => $"Bearer {accessToken.value}";
-        public DateTime GetNowDateTime() => DateTime.Now;
-        public string GetRefreshToken() => refreshToken;
 
         public async UniTask ValidateAsync(CancellationToken cancellationToken) {
-            if (accessToken.IsExpired(GetNowDateTime())) {
-                await AuthorizeByRefreshTokenAsync(GetRefreshToken(), cancellationToken);
+            if (accessToken.IsExpired(DateTime.Now)) {
+                var refreshToken = await refreshTokenStorage.LoadAsync(cancellationToken);
+                if (string.IsNullOrEmpty(refreshToken)) {
+                    throw new Exception("refresh_token is not stored and needs to be authenticated.");
+                }
+                await AuthorizeByRefreshTokenAsync(refreshToken, cancellationToken);
             }
         }
     }

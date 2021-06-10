@@ -8,8 +8,6 @@ namespace n5y.SpotifyApi {
     }
 
     public interface ITokenValidation {
-        DateTime GetNowDateTime();
-        string GetRefreshToken();
         UniTask ValidateAsync(CancellationToken cancellationToken);
     }
 
