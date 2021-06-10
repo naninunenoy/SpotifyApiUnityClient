@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Core.View {
-    public class MusicPlayerVisualTree : IPlayingMusicPresentation, IMusicControlPresentation, IMusicViewTrigger {
+    public class MusicPlayerVisualElement : IPlayingMusicPresentation, IMusicControlPresentation, IMusicViewTrigger {
         readonly VisualElement root;
         readonly Subject<Unit> onListOpen;
         readonly Subject<Unit> onAuthorization;
@@ -25,7 +25,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         Label artistLabel;
         VisualElement  artworkElm;
 
-        public MusicPlayerVisualTree(VisualElement visualElement, CompositeDisposable lifeTime) {
+        public MusicPlayerVisualElement(VisualElement visualElement, CompositeDisposable lifeTime) {
             root = visualElement;
             onListOpen = new Subject<Unit>();
             onAuthorization = new Subject<Unit>();
