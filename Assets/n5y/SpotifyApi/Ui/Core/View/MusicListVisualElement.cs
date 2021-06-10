@@ -44,16 +44,46 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             albumFoldout = root.Q<Foldout>("AlbumFoldout");
             deviceFoldout = root.Q<Foldout>("DeviceFoldout");
             closeButton.clickable.clicked += () => onClose.OnNext(Unit.Default);
+
+            playlistFoldout.OnValueChangedObservable()
+                .Subscribe(isOn => {
+                    if (isOn) {
+                        onPlaylistSelect.OnNext(Unit.Default);
+                    } else {
+                        playlistFoldout.contentContainer.Clear();
+                        playlistMusicFoldoutDict.Clear();
+                    }
+                })
+                .AddTo(disposable);
+            albumFoldout.OnValueChangedObservable()
+                .Subscribe(isOn => {
+                    if (isOn) {
+                        onAlbumSelect.OnNext(Unit.Default);
+                    } else {
+                        albumFoldout.contentContainer.Clear();
+                        albumMusicFoldoutDict.Clear();
+                    }
+                })
+                .AddTo(disposable);
+            deviceFoldout.OnValueChangedObservable()
+                .Subscribe(isOn => {
+                    if (isOn) {
+                        onDeviceSelect.OnNext(Unit.Default);
+                    } else {
+                        deviceFoldout.contentContainer.Clear();
+                    }
+                })
+                .AddTo(disposable);
         }
 
         void IMusicListPresentation.AddPlaylist(PlaylistTuple playlist) {
-            var foldout = new Foldout{ text = playlist.name };
+            var foldout = new Foldout { text = playlist.name };
             playlistFoldout.contentContainer.Add(foldout);
             playlistMusicFoldoutDict.Add(playlist.playlistId, foldout);
         }
 
         void IMusicListPresentation.AddAlbum(AlbumTuple album) {
-            var foldout = new Foldout{ text = album.name };
+            var foldout = new Foldout { text = album.name };
             albumFoldout.contentContainer.Add(foldout);
             albumMusicFoldoutDict.Add(album.albumId, foldout);
         }
@@ -91,5 +121,15 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         IObservable<AlbumId> IListViewTrigger.OnDecideAlbum => onDecideAlbum;
         IObservable<DeviceId> IListViewTrigger.OnDecideDevice => onDecideDevice;
         IObservable<MusicId> IListViewTrigger.OnDecideMusic => onDecideMusic;
+    }
+
+    internal static class FoldoutValueChangedObservable {
+        public static IObservable<bool> OnValueChangedObservable(this Foldout foldout) {
+            return Observable.IntervalFrame(1)
+                .Select(_ => foldout.value)
+                .Pairwise()
+                .Where(x => x.Previous != x.Current)
+                .Select(x => x.Current);
+        }
     }
 }
