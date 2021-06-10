@@ -3,10 +3,10 @@ using Cysharp.Threading.Tasks;
 
 namespace n5y.SpotifyApi.Editor {
     public class EditorPrefsTokenStorage : IRefreshTokenStorage {
-        static SpotifyClientSettingsPrefs settings;
+        readonly SpotifyClientSettingsPrefs settings;
 
-        public EditorPrefsTokenStorage() {
-            settings = new SpotifyClientSettingsPrefs();
+        public EditorPrefsTokenStorage(SpotifyClientSettingsPrefs settings) {
+            this.settings = settings;
         }
 
         UniTask<string> IRefreshTokenStorage.LoadAsync(CancellationToken cancellationToken) {

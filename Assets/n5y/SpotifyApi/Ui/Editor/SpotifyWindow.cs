@@ -1,3 +1,4 @@
+using n5y.SpotifyApi.Editor;
 using n5y.SpotifyApi.Ui.Core;
 using UnityEditor;
 using UnityEngine;
@@ -22,7 +23,10 @@ namespace n5y.SpotifyApi.Ui.Editor {
             var uxml = visualTree.Instantiate();
             root.Add(uxml);
 
-            musicView = new SpotifyMusicViewMain(root, this);
+            var spotifySettings = new SpotifyClientSettingsPrefs();
+            var tokenStorage = new EditorPrefsTokenStorage(spotifySettings);
+
+            musicView = new SpotifyMusicViewMain(root, this, spotifySettings, tokenStorage);
             musicView.Process();
         }
 

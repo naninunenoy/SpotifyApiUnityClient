@@ -13,7 +13,8 @@ namespace n5y.SpotifyApi.Ui.Runtime {
         }
 
         void SetUp() {
-            main = new SpotifyMusicViewMain(musicView.rootVisualElement, this);
+            // TODO runtime env and token storage
+            main = new SpotifyMusicViewMain(musicView.rootVisualElement, this, null,null);
             main.Process();
         }
 

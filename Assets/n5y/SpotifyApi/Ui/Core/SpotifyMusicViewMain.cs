@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class SpotifyMusicViewMain : IDisposable {
+        readonly IEnvironmentProvider env;
+        readonly IRefreshTokenStorage refreshToken;
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
         readonly IMusicQuery musicQuery;
@@ -26,6 +28,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IListViewTrigger listViewTrigger;
 
         VisualElement listViewRoot;
+        AuthorizeAgent authorizeAgent;
         CurrentPlayerAgent currentPlayerAgent;
         MusicControlAgent musicControlAgent;
         MusicPlayingAgent musicPlayingAgent;
@@ -33,9 +36,12 @@ namespace n5y.SpotifyApi.Ui.Core {
         SelectMusicInListAgent selectMusicInListAgent;
         MusicCatalogFetchAgent catalogFetchAgent;
 
-        public SpotifyMusicViewMain(VisualElement musicViewRoot, ISpotifyListOpen listViewOpen) {
+        public SpotifyMusicViewMain(VisualElement musicViewRoot, ISpotifyListOpen listViewOpen,
+            IEnvironmentProvider env, IRefreshTokenStorage refreshToken) {
             this.musicViewRoot = musicViewRoot;
             this.listViewOpen = listViewOpen;
+            this.env = env;
+            this.refreshToken = refreshToken;
         }
 
         public void Process() {
