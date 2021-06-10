@@ -90,7 +90,10 @@ namespace n5y.SpotifyApi.Ui.Core.View {
 
         IObservable<DeviceId> IMusicListPresentation.AddDevice(DeviceTuple device) {
             var button = new Button { text = device.name };
-            button.clickable.clicked += () => onDecideDevice.OnNext(device.deviceId);
+            button.clickable.clicked += () => {
+                onDecideDevice.OnNext(device.deviceId);
+                onClose.OnNext(Unit.Default);
+            };
             deviceFoldout.contentContainer.Add(button);
             return onDecideDevice;
         }
@@ -98,7 +101,10 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         IObservable<MusicId> IMusicListPresentation.AddPlaylistMusic(PlaylistId playlistId, MusicTuple music) {
             if (playlistMusicFoldoutDict.TryGetValue(playlistId, out var foldout)) {
                 var button = new Button { text = music.name };
-                button.clickable.clicked += () => onDecideMusic.OnNext(music.musicId);
+                button.clickable.clicked += () => {
+                    onDecideMusic.OnNext(music.musicId);
+                    onClose.OnNext(Unit.Default);
+                };
                 foldout.contentContainer.Add(button);
             }
             return onDecideMusic;
@@ -107,7 +113,10 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         IObservable<MusicId> IMusicListPresentation.AddAlbumMusic(AlbumId albumId, MusicTuple music) {
             if (albumMusicFoldoutDict.TryGetValue(albumId, out var foldout)) {
                 var button = new Button { text = music.name };
-                button.clickable.clicked += () => onDecideMusic.OnNext(music.musicId);
+                button.clickable.clicked += () => {
+                    onDecideMusic.OnNext(music.musicId);
+                    onClose.OnNext(Unit.Default);
+                };
                 foldout.contentContainer.Add(button);
             }
             return onDecideMusic;
