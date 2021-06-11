@@ -46,7 +46,7 @@ namespace n5y.SpotifyApi.Ui.Core.Cqrs {
             var albumName = item.Album?.Name ?? "???";
             var artistName = item.Artists?.FirstOrDefault()?.Name ?? "???";
             var imageUrl = item.Album?.Images.GetBiggestImageUrl() ?? "";
-            float seconds = item.DurationMs;
+            var seconds = item.DurationMs / 1000.0F;
             return new MusicData(name, albumName, artistName, imageUrl, seconds);
         }
 

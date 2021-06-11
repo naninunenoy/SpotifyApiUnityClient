@@ -6,7 +6,7 @@
             <ui:Button text="next" name="right" display-tooltip-when-elided="true" />
         </ui:VisualElement>
         <ui:VisualElement name="Progress" style="align-items: center;">
-            <ui:Slider name="progress slider" style="width: 300px;" />
+            <ui:Slider name="progress slider" high-value="1" style="width: 300px;" />
             <ui:Label text="00:00/00:00" name="progress time" />
         </ui:VisualElement>
     </ui:VisualElement>

@@ -92,6 +92,9 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             var elapsed = TimeSpan.FromSeconds(musicTime.elapsedSeconds);
             var total = TimeSpan.FromSeconds(musicTime.totalSeconds);
             timeLabel.text = $"{elapsed:mm\\:ss}/{total:mm\\:ss}";
+            if (musicTime.totalSeconds > 0.0F) {
+                slider.value = musicTime.elapsedSeconds / musicTime.totalSeconds;
+            }
         }
 
         IObservable<Unit> IMusicViewTrigger.OnListOpen => onListOpen;
