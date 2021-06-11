@@ -50,6 +50,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             this.listViewOpen = listViewOpen;
             this.env = env;
             this.refreshToken = refreshToken;
+            compositeDisposable = new CompositeDisposable();
         }
 
         public async void Process() {
@@ -159,6 +160,7 @@ namespace n5y.SpotifyApi.Ui.Core {
 
         void InitializeMusicView() {
             var view = new MusicPlayerVisualElement(musicViewRoot, compositeDisposable);
+            view.Bind();
             musicPresentation = view;
             controlPresentation = view;
             musicViewTrigger = view;
@@ -166,6 +168,7 @@ namespace n5y.SpotifyApi.Ui.Core {
 
         void InitializeListView() {
             var view = new MusicListVisualElement(listViewRoot, compositeDisposable);
+            view.Bind();
             musicListPresentation = view;
             listViewTrigger = view;
         }

@@ -32,6 +32,8 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicPresentation?.SetArtistName(musicData.ArtistName);
             // urlから画像を読み込んで表示
             UniTask.Void(async () => {
+                var url = musicData?.ArtworkUrl;
+                if (string.IsNullOrEmpty(url)) return;
                 var sprite = await url2Sprite.GetSpriteFromUrl(musicData.ArtworkUrl, agentCts.Token);
                 musicPresentation.SetArtwork(sprite);
             });
