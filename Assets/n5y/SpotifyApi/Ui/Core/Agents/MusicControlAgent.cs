@@ -15,8 +15,9 @@ namespace n5y.SpotifyApi.Ui.Core {
         MusicData currentMusic = default;
         MusicPlayState state;
 
-        public MusicControlAgent(IMusicControlCommand musicControlCommand,
+        public MusicControlAgent(ICurrentMusicSubscriber currentMusicSubscriber, IMusicControlCommand musicControlCommand,
             IMusicControlPresentation controlPresentation, IMusicViewTrigger musicViewTrigger) {
+            this.currentMusicSubscriber = currentMusicSubscriber;
             this.musicControlCommand = musicControlCommand;
             this.controlPresentation = controlPresentation;
             this.musicViewTrigger = musicViewTrigger;

@@ -16,8 +16,8 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly IRefreshTokenStorage refreshToken;
         readonly CompositeDisposable compositeDisposable;
 
-        ITokenProvider tokenProvider;
-        ITokenValidation tokenValidation;
+        ITokenProvider tokenProvider = new EmptyTokenProvider();
+        ITokenValidation tokenValidation = new EmptyITokenValidation();
         IMusicQuery musicQuery;
         IMusicCatalogQuery musicCatalogQuery;
         ICurrentMusicQuery currentMusicQuery;
@@ -69,7 +69,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
             musicPlayingAgent.Process();
             // 一時停止などの操作
-            musicControlAgent = new MusicControlAgent(musicControlCommand, controlPresentation, musicViewTrigger);
+            musicControlAgent = new MusicControlAgent(currentMusicSubscriber, musicControlCommand, controlPresentation, musicViewTrigger);
             musicControlAgent.Process();
             // 再生音楽の同期
             var oneSecondsSync = Observable.Interval(TimeSpan.FromSeconds(1)).AsUnitObservable();
@@ -135,6 +135,7 @@ namespace n5y.SpotifyApi.Ui.Core {
 
         void InitializePubSub() {
             var builder = new BuiltinContainerBuilder();
+            builder.AddMessagePipe();
             builder.AddMessageBroker<MusicData>();
             builder.AddMessageBroker<PlaylistTuple>();
             builder.AddMessageBroker<AlbumTuple>();
