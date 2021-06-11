@@ -25,6 +25,7 @@ namespace n5y.SpotifyApi.Ui.Editor {
 
             var spotifySettings = new SpotifyClientSettingsPrefs();
             var tokenStorage = new EditorPrefsTokenStorage(spotifySettings);
+            spotifySettings.Load();
 
             musicView = new SpotifyMusicViewMain(root, this, spotifySettings, tokenStorage);
             musicView.Process();

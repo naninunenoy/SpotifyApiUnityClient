@@ -16,8 +16,8 @@ namespace n5y.SpotifyApi.Editor {
 
         UniTask IRefreshTokenStorage.SaveAsync(string refreshToken, CancellationToken cancellationToken) {
             settings.Load();
+            settings.refreshToken.value = refreshToken;
             if (settings.refreshToken.isSave) {
-                settings.refreshToken.value = refreshToken;
                 settings.Save();
             }
             return UniTask.CompletedTask;

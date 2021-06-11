@@ -93,7 +93,7 @@ namespace n5y.SpotifyApi {
         }
 
         public bool IsExpired(DateTime now) {
-            return createdAt.AddSeconds(expiresIn).ToBinary() > now.ToBinary();
+            return createdAt.AddSeconds(expiresIn).ToBinary() < now.ToBinary();
         }
     }
 }

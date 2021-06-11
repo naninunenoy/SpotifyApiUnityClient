@@ -55,28 +55,29 @@ namespace n5y.SpotifyApi.Ui.Core {
 
         public async void Process() {
             // 初回の認証
+            authorizeAgent = new AuthorizeAgent(env, refreshToken);
             await FirstAuthAsync();
             // 初期化
             InitializeCqrs();
             InitializePubSub();
             InitializeMusicView();
+            InitializeMusicAgent();
             // リストを開くボタン
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
-            // リストから選択された音楽の伝達
-            currentPlayerAgent = new CurrentPlayerAgent(musicSelectSubscriber, musicQuery, playerCommand, currentMusicPublisher);
-            currentPlayerAgent.Process();
-            // 表示する音楽の更新
-            musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
-            musicPlayingAgent.Process();
-            // 一時停止などの操作
-            musicControlAgent = new MusicControlAgent(currentMusicSubscriber, musicControlCommand, controlPresentation, musicViewTrigger);
-            musicControlAgent.Process();
-            // 再生音楽の同期
-            var oneSecondsSync = Observable.Interval(TimeSpan.FromSeconds(1)).AsUnitObservable();
-            musicSyncAgent = new MusicSyncAgent(oneSecondsSync, currentMusicQuery, currentMusicPublisher,
-                controlPresentation);
-            musicSyncAgent.Process();
+            // 認証ボタンで認証開始
+            musicViewTrigger.OnAuthorization
+                .Subscribe(_ => UniTask.Void(async () => {
+                    var tuple = await authorizeAgent.TryAuthorize();
+                    tokenProvider = tuple.TokenProvider;
+                    tokenValidation = tuple.TokenValidation;
+                    // 初期化
+                    InitializeCqrs();
+                    InitializePubSub();
+                    InitializeMusicView();
+                    InitializeMusicAgent();
+                }))
+                .AddTo(compositeDisposable);
         }
 
         public void Dispose() {
@@ -115,7 +116,6 @@ namespace n5y.SpotifyApi.Ui.Core {
         }
 
         async UniTask FirstAuthAsync() {
-            authorizeAgent = new AuthorizeAgent(env, refreshToken);
             try {
                 var tuple = await authorizeAgent.TryFirstAuthorize();
                 tokenProvider = tuple.TokenProvider;
@@ -171,6 +171,21 @@ namespace n5y.SpotifyApi.Ui.Core {
             view.Bind();
             musicListPresentation = view;
             listViewTrigger = view;
+        }
+
+        void InitializeMusicAgent() {
+            currentPlayerAgent =
+                new CurrentPlayerAgent(musicSelectSubscriber, musicQuery, playerCommand, currentMusicPublisher);
+            musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
+            musicControlAgent = new MusicControlAgent(currentMusicSubscriber, musicControlCommand, controlPresentation,
+                musicViewTrigger);
+            var oneSecondsSync = Observable.Interval(TimeSpan.FromSeconds(1)).AsUnitObservable();
+            musicSyncAgent = new MusicSyncAgent(oneSecondsSync, currentMusicQuery, currentMusicPublisher,
+                controlPresentation);
+            currentPlayerAgent.Process();
+            musicPlayingAgent.Process();
+            musicControlAgent.Process();
+            musicSyncAgent.Process();
         }
     }
 }
