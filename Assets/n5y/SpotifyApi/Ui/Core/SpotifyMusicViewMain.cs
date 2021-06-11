@@ -58,7 +58,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
             // リストから選択された音楽の伝達
-            currentPlayerAgent = new CurrentPlayerAgent(listViewTrigger, musicQuery, playerCommand, currentMusicPublisher);
+            currentPlayerAgent = new CurrentPlayerAgent(musicSelectSubscriber, musicQuery, playerCommand, currentMusicPublisher);
             currentPlayerAgent.Process();
             // 表示する音楽の更新
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);

@@ -72,6 +72,10 @@ namespace n5y.SpotifyApi.Ui.Core {
             listViewTrigger.OnDecideMusic
                 .Subscribe(musicSelectPublisher.MusicSelect.Publish)
                 .AddTo(agentDisposable);
+            // 選択されたデバイスを通知
+            listViewTrigger.OnDecideDevice
+                .Subscribe(musicSelectPublisher.DeviceSelect.Publish)
+                .AddTo(agentDisposable);
         }
     }
 }

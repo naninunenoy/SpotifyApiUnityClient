@@ -1,26 +1,27 @@
 using Cysharp.Threading.Tasks;
 using n5y.SpotifyApi.Ui.Core.Cqrs;
-using n5y.SpotifyApi.Ui.Core.View;
-using UniRx;
+using n5y.SpotifyApi.Ui.Core.PubSub;
+using MessagePipe;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class CurrentPlayerAgent : AgentBase {
-        readonly IListViewTrigger listViewTrigger;
+        readonly IMusicSelectSubscriber musicSelectSubscriber;
         readonly IMusicQuery musicQuery;
         readonly ICurrentPlayerCommand playerCommand;
         readonly ICurrentMusicPublisher musicPublisher;
 
-        public CurrentPlayerAgent(IListViewTrigger listViewTrigger, IMusicQuery musicQuery,
+        public CurrentPlayerAgent(IMusicSelectSubscriber musicSelectSubscriber, IMusicQuery musicQuery,
             ICurrentPlayerCommand playerCommand, ICurrentMusicPublisher musicPublisher) {
-            this.listViewTrigger = listViewTrigger;
+            this.musicSelectSubscriber = musicSelectSubscriber;
             this.musicQuery = musicQuery;
             this.playerCommand = playerCommand;
             this.musicPublisher = musicPublisher;
         }
 
         public void Process() {
-            listViewTrigger
-                .OnDecideMusic
+            var bag = DisposableBag.CreateBuilder();
+            musicSelectSubscriber
+                .MusicSelect
                 .Subscribe(id => UniTask.Void(async () => {
                     // 選択された音楽を通知
                     playerCommand.PushCurrentMusic(id, agentCts.Token).Forget();
@@ -28,15 +29,15 @@ namespace n5y.SpotifyApi.Ui.Core {
                     var music = await musicQuery.GetMusicDataAsync(id, agentCts.Token);
                     musicPublisher.NewMusic.Publish(music);
                 }))
-                .AddTo(agentDisposable);
-
-            listViewTrigger
-                .OnDecideDevice
+                .AddTo(bag);
+            musicSelectSubscriber
+                .DeviceSelect
                 .Subscribe(id => {
                     // 選択された音楽を通知
                     playerCommand.PushCurrentDevice(id, agentCts.Token).Forget();
                 })
-                .AddTo(agentDisposable);
+                .AddTo(bag);
+            agentInnerDisposable = bag.Build();
         }
     }
 }
