@@ -14,6 +14,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         readonly ISpotifyListOpen listViewOpen;
         readonly IEnvironmentProvider env;
         readonly IRefreshTokenStorage refreshToken;
+        readonly CompositeDisposable compositeDisposable;
 
         ITokenProvider tokenProvider;
         ITokenValidation tokenValidation;
@@ -54,6 +55,10 @@ namespace n5y.SpotifyApi.Ui.Core {
         public async void Process() {
             // 初回の認証
             await FirstAuthAsync();
+            // 初期化
+            InitializeCqrs();
+            InitializePubSub();
+            InitializeMusicView();
             // リストを開くボタン
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
@@ -81,10 +86,12 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicSyncAgent?.Dispose();
             selectMusicInListAgent?.Dispose();
             catalogFetchAgent?.Dispose();
+            compositeDisposable?.Clear();
         }
 
         void OpenListView() {
             listViewRoot = listViewOpen.OpenListView();
+            InitializeListView();
             // リストを閉じるボタン
             var closeButton = listViewRoot.Q<Button>("closeButton");
             closeButton.clickable.clicked += OnCloseListView;
@@ -147,6 +154,19 @@ namespace n5y.SpotifyApi.Ui.Core {
             musicCatalogSubscriber = subscriber;
             currentMusicSubscriber = subscriber;
             musicSelectSubscriber = subscriber;
+        }
+
+        void InitializeMusicView() {
+            var view = new MusicPlayerVisualElement(musicViewRoot, compositeDisposable);
+            musicPresentation = view;
+            controlPresentation = view;
+            musicViewTrigger = view;
+        }
+
+        void InitializeListView() {
+            var view = new MusicListVisualElement(listViewRoot, compositeDisposable);
+            musicListPresentation = view;
+            listViewTrigger = view;
         }
     }
 }
