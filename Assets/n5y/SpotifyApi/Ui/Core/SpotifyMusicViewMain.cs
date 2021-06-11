@@ -174,6 +174,11 @@ namespace n5y.SpotifyApi.Ui.Core {
         }
 
         void InitializeMusicAgent() {
+            currentPlayerAgent?.Dispose();
+            musicPlayingAgent?.Dispose();
+            musicControlAgent?.Dispose();
+            musicSyncAgent?.Dispose();
+
             currentPlayerAgent =
                 new CurrentPlayerAgent(musicSelectSubscriber, musicQuery, playerCommand, currentMusicPublisher);
             musicPlayingAgent = new MusicPlayingAgent(musicPresentation, controlPresentation, currentMusicSubscriber);
@@ -182,6 +187,7 @@ namespace n5y.SpotifyApi.Ui.Core {
             var oneSecondsSync = Observable.Interval(TimeSpan.FromSeconds(1)).AsUnitObservable();
             musicSyncAgent = new MusicSyncAgent(oneSecondsSync, currentMusicQuery, currentMusicPublisher,
                 controlPresentation);
+
             currentPlayerAgent.Process();
             musicPlayingAgent.Process();
             musicControlAgent.Process();
