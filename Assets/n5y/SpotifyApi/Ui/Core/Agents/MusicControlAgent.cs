@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using MessagePipe;
+using n5y.SpotifyApi.Ui.Core.Cqrs;
 using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 using UniRx;
@@ -43,7 +44,6 @@ namespace n5y.SpotifyApi.Ui.Core {
                         await musicControlCommand.ResumeAsync(agentCts.Token);
                         state = MusicPlayState.Playing;
                     }
-
                     controlPresentation.SetPlayState(state);
                 }))
                 .AddTo(agentDisposable);

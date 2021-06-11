@@ -28,7 +28,7 @@ namespace n5y.SpotifyApi.Ui.Core {
                 throw new Exception("failed to authenticate by refresh_token. Please authenticate at the Spotify website again.");
             }
 
-            return new AuthorizeTuple { TokenProvider = tokenProvider, TokenValidation = tokenFactory };
+            return new AuthorizeTuple(tokenProvider, tokenFactory);
         }
 
         public async UniTask<AuthorizeTuple> TryAuthorize() {
@@ -40,11 +40,16 @@ namespace n5y.SpotifyApi.Ui.Core {
                     $"ClientId={environmentProvider.ClientId}, ClientSecret={environmentProvider.ClientSecret}, RedirectUri={environmentProvider.RedirectUri}";
                 throw new Exception($"failed to authenticate at the Spotify website. Please confirm parameters. {param}");
             }
-            return new AuthorizeTuple { TokenProvider = tokenProvider, TokenValidation = tokenFactory };
+
+            return new AuthorizeTuple(tokenProvider, tokenFactory);
         }
     }
     public class AuthorizeTuple {
-        public ITokenProvider TokenProvider { set; get; }
-        public ITokenValidation TokenValidation { set; get; }
+        public ITokenProvider TokenProvider { private set; get; }
+        public ITokenValidation TokenValidation { private set; get; }
+        public AuthorizeTuple(ITokenProvider tokenProvider, ITokenValidation tokenValidation) {
+            TokenProvider = tokenProvider;
+            TokenValidation = tokenValidation;
+        }
     }
 }

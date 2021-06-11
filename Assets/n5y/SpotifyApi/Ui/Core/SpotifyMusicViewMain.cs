@@ -1,31 +1,38 @@
 using System;
+using Cysharp.Threading.Tasks;
+using MessagePipe;
 using n5y.SpotifyApi.Ui.Core.Cqrs;
 using n5y.SpotifyApi.Ui.Core.PubSub;
 using n5y.SpotifyApi.Ui.Core.View;
 using UniRx;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace n5y.SpotifyApi.Ui.Core {
     public class SpotifyMusicViewMain : IDisposable {
-        readonly IEnvironmentProvider env;
-        readonly IRefreshTokenStorage refreshToken;
         readonly VisualElement musicViewRoot;
         readonly ISpotifyListOpen listViewOpen;
-        readonly IMusicQuery musicQuery;
-        readonly IMusicCatalogQuery musicCatalogQuery;
-        readonly ICurrentMusicQuery currentMusicQuery;
-        readonly IMusicControlCommand musicControlCommand;
-        readonly ICurrentPlayerCommand playerCommand;
-        readonly IMusicCatalogSubscriber musicCatalogSubscriber;
-        readonly IMusicCatalogPublisher musicCatalogPublisher;
-        readonly ICurrentMusicSubscriber currentMusicSubscriber;
-        readonly ICurrentMusicPublisher currentMusicPublisher;
-        readonly IMusicSelectPublisher musicSelectPublisher;
-        readonly IPlayingMusicPresentation musicPresentation;
-        readonly IMusicControlPresentation controlPresentation;
-        readonly IMusicListPresentation musicListPresentation;
-        readonly IMusicViewTrigger musicViewTrigger;
-        readonly IListViewTrigger listViewTrigger;
+        readonly IEnvironmentProvider env;
+        readonly IRefreshTokenStorage refreshToken;
+
+        ITokenProvider tokenProvider;
+        ITokenValidation tokenValidation;
+        IMusicQuery musicQuery;
+        IMusicCatalogQuery musicCatalogQuery;
+        ICurrentMusicQuery currentMusicQuery;
+        IMusicControlCommand musicControlCommand;
+        ICurrentPlayerCommand playerCommand;
+        IMusicCatalogSubscriber musicCatalogSubscriber;
+        IMusicCatalogPublisher musicCatalogPublisher;
+        ICurrentMusicSubscriber currentMusicSubscriber;
+        ICurrentMusicPublisher currentMusicPublisher;
+        IMusicSelectPublisher musicSelectPublisher;
+        IMusicSelectSubscriber musicSelectSubscriber;
+        IPlayingMusicPresentation musicPresentation;
+        IMusicControlPresentation controlPresentation;
+        IMusicListPresentation musicListPresentation;
+        IMusicViewTrigger musicViewTrigger;
+        IListViewTrigger listViewTrigger;
 
         VisualElement listViewRoot;
         AuthorizeAgent authorizeAgent;
@@ -44,7 +51,9 @@ namespace n5y.SpotifyApi.Ui.Core {
             this.refreshToken = refreshToken;
         }
 
-        public void Process() {
+        public async void Process() {
+            // 初回の認証
+            await FirstAuthAsync();
             // リストを開くボタン
             var openButton = musicViewRoot.Q<Button>("openButton");
             openButton.clickable.clicked += OpenListView;
@@ -65,6 +74,7 @@ namespace n5y.SpotifyApi.Ui.Core {
         }
 
         public void Dispose() {
+            authorizeAgent?.Dispose();
             currentPlayerAgent?.Dispose();
             musicControlAgent?.Dispose();
             musicPlayingAgent?.Dispose();
@@ -94,6 +104,49 @@ namespace n5y.SpotifyApi.Ui.Core {
             selectMusicInListAgent = null;
             catalogFetchAgent?.Dispose();
             catalogFetchAgent = null;
+        }
+
+        async UniTask FirstAuthAsync() {
+            authorizeAgent = new AuthorizeAgent(env, refreshToken);
+            try {
+                var tuple = await authorizeAgent.TryFirstAuthorize();
+                tokenProvider = tuple.TokenProvider;
+                tokenValidation = tuple.TokenValidation;
+            } catch (Exception e) {
+                Debug.LogWarning(e.Message);
+            }
+        }
+
+        void InitializeCqrs() {
+            var spotifyMusicQuery =  new SpotifyMusicQuery(tokenProvider, tokenValidation);
+            musicQuery = spotifyMusicQuery;
+            currentMusicQuery = spotifyMusicQuery;
+            musicCatalogQuery = new SpotifyCatalogQuery(tokenProvider, tokenValidation);
+            musicControlCommand = new SpotifyControlCommand(tokenProvider, tokenValidation);
+            playerCommand = new SpotifyPlayerCommand(tokenProvider, tokenValidation);
+        }
+
+        void InitializePubSub() {
+            var builder = new BuiltinContainerBuilder();
+            builder.AddMessageBroker<MusicData>();
+            builder.AddMessageBroker<PlaylistTuple>();
+            builder.AddMessageBroker<AlbumTuple>();
+            builder.AddMessageBroker<DeviceTuple>();
+            builder.AddMessageBroker<PlaylistMusicTuple>();
+            builder.AddMessageBroker<AlbumMusicTuple>();
+            builder.AddMessageBroker<MusicId>();
+            builder.AddMessageBroker<DeviceId>();
+            var resolver = builder.BuildServiceProvider();
+            GlobalMessagePipe.SetProvider(resolver);
+
+            var publisher = new MusicMessagePipePublisher(resolver);
+            musicCatalogPublisher = publisher;
+            currentMusicPublisher = publisher;
+            musicSelectPublisher = publisher;
+            var subscriber = new MusicMessagePipeSubscriber(resolver);
+            musicCatalogSubscriber = subscriber;
+            currentMusicSubscriber = subscriber;
+            musicSelectSubscriber = subscriber;
         }
     }
 }

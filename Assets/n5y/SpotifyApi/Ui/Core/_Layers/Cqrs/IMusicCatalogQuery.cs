@@ -1,7 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace n5y.SpotifyApi.Ui.Core {
+namespace n5y.SpotifyApi.Ui.Core.Cqrs {
     public interface IMusicCatalogQuery {
         IUniTaskAsyncEnumerable<PlaylistTuple> GetPlaylistsAsync(CancellationToken cancellationToken);
         IUniTaskAsyncEnumerable<AlbumTuple> GetAlbumsAsync(CancellationToken cancellationToken);

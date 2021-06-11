@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace n5y.SpotifyApi.Ui.Core.n5y.SpotifyApi.Ui.Core.Cqrs {
+namespace n5y.SpotifyApi.Ui.Core.Cqrs {
     public class SpotifyControlCommand : IMusicControlCommand {
         readonly ITokenProvider tokenProvider;
         readonly ITokenValidation tokenValidation;
