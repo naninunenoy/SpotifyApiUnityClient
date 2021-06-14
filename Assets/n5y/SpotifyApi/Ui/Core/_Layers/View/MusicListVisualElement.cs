@@ -20,6 +20,9 @@ namespace n5y.SpotifyApi.Ui.Core.View {
         Foldout playlistFoldout;
         Foldout albumFoldout;
         Foldout deviceFoldout;
+        Box playlistFoldoutBox;
+        Box albumFoldoutBox;
+        Box deviceFoldoutBox;
         readonly Dictionary<PlaylistId, Foldout> playlistMusicFoldoutDict;
         readonly Dictionary<AlbumId, Foldout> albumMusicFoldoutDict;
 
@@ -48,6 +51,8 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             playlistFoldout.OnValueChangedObservable()
                 .Subscribe(isOn => {
                     if (isOn) {
+                        playlistFoldoutBox = new Box();
+                        playlistFoldout.Add(playlistFoldoutBox);
                         onPlaylistSelect.OnNext(Unit.Default);
                     } else {
                         playlistFoldout.Clear();
@@ -58,6 +63,8 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             albumFoldout.OnValueChangedObservable()
                 .Subscribe(isOn => {
                     if (isOn) {
+                        albumFoldoutBox = new Box();
+                        albumFoldout.Add(albumFoldoutBox);
                         onAlbumSelect.OnNext(Unit.Default);
                     } else {
                         albumFoldout.Clear();
@@ -68,6 +75,8 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             deviceFoldout.OnValueChangedObservable()
                 .Subscribe(isOn => {
                     if (isOn) {
+                        deviceFoldoutBox = new Box();
+                        deviceFoldout.Add(deviceFoldoutBox);
                         onDeviceSelect.OnNext(Unit.Default);
                     } else {
                         deviceFoldout.Clear();
@@ -87,7 +96,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     }
                 })
                 .AddTo(disposable);
-            playlistFoldout.Add(foldout);
+            playlistFoldoutBox?.Add(foldout);
             playlistMusicFoldoutDict.Add(playlist.playlistId, foldout);
         }
 
@@ -102,7 +111,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     }
                 })
                 .AddTo(disposable);
-            albumFoldout.Add(foldout);
+            albumFoldoutBox?.Add(foldout);
             albumMusicFoldoutDict.Add(album.albumId, foldout);
         }
 
@@ -112,7 +121,8 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                 onDecideDevice.OnNext(device.deviceId);
                 onClose.OnNext(Unit.Default);
             };
-            deviceFoldout.Add(button);
+            deviceFoldoutBox?.Add(button);
+            deviceFoldout.Add(deviceFoldoutBox);
         }
 
         void IMusicListPresentation.AddPlaylistMusic(PlaylistId playlistId, MusicTuple music) {
