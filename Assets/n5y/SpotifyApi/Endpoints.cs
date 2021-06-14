@@ -22,7 +22,7 @@
         public const string ApiAudioFeatures = "https://api.spotify.com/v1/audio-features";
         public const string ApiAlbums = "https://api.spotify.com/v1/albums";
         public const string ApiArtists = "https://api.spotify.com/v1/artists";
-        public const string ApiPlaylist = "https://api.spotify.com/v1/playlist";
+        public const string ApiPlaylists = "https://api.spotify.com/v1/playlists";
         public const string ApiTracks = "https://api.spotify.com/v1/tracks";
     }
 }

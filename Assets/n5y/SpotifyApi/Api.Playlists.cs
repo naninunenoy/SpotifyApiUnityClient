@@ -8,7 +8,7 @@ namespace n5y.SpotifyApi {
     public static partial class Api {
         public static async UniTask<PlaylistsPagingModel> GetPlaylistAsync(string playlistId, ITokenProvider token,
             CancellationToken cancellationToken) {
-            var url = $"{Endpoints.ApiPlaylist}/{playlistId}";
+            var url = $"{Endpoints.ApiPlaylists}/{playlistId}";
             using var req = UnityWebRequest.Get(url);
             req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
 
@@ -21,7 +21,7 @@ namespace n5y.SpotifyApi {
         public static async UniTask<PlaylistTrackPagingModel> GetPlaylistTracksAsync(string playlistId,
             ITokenProvider token,
             CancellationToken cancellationToken) {
-            var url = $"{Endpoints.ApiPlaylist}/{playlistId}/tracks";
+            var url = $"{Endpoints.ApiPlaylists}/{playlistId}/tracks";
             using var req = UnityWebRequest.Get(url);
             req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
 
