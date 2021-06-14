@@ -50,7 +50,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     if (isOn) {
                         onPlaylistSelect.OnNext(Unit.Default);
                     } else {
-                        playlistFoldout.contentContainer.Clear();
+                        playlistFoldout.Clear();
                         playlistMusicFoldoutDict.Clear();
                     }
                 })
@@ -60,7 +60,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     if (isOn) {
                         onAlbumSelect.OnNext(Unit.Default);
                     } else {
-                        albumFoldout.contentContainer.Clear();
+                        albumFoldout.Clear();
                         albumMusicFoldoutDict.Clear();
                     }
                 })
@@ -70,21 +70,40 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     if (isOn) {
                         onDeviceSelect.OnNext(Unit.Default);
                     } else {
-                        deviceFoldout.contentContainer.Clear();
+                        deviceFoldout.Clear();
                     }
                 })
                 .AddTo(disposable);
         }
 
         void IMusicListPresentation.AddPlaylist(PlaylistTuple playlist) {
-            var foldout = new Foldout { text = playlist.name };
-            playlistFoldout.contentContainer.Add(foldout);
+            var foldout = new Foldout { text = playlist.name, value = false};
+            foldout.OnValueChangedObservable()
+                .Subscribe(isOn => {
+                    UnityEngine.Debug.Log($"AddPlaylist {playlist.playlistId} {isOn}");
+                    if (isOn) {
+                        onDecidePlaylist.OnNext(playlist.playlistId);
+                    } else {
+                        foldout.Clear();
+                    }
+                })
+                .AddTo(disposable);
+            playlistFoldout.Add(foldout);
             playlistMusicFoldoutDict.Add(playlist.playlistId, foldout);
         }
 
         void IMusicListPresentation.AddAlbum(AlbumTuple album) {
-            var foldout = new Foldout { text = album.name };
-            albumFoldout.contentContainer.Add(foldout);
+            var foldout = new Foldout { text = album.name, value = false};
+            foldout.OnValueChangedObservable()
+                .Subscribe(isOn => {
+                    if (isOn) {
+                        onDecideAlbum.OnNext(album.albumId);
+                    } else {
+                        foldout.Clear();
+                    }
+                })
+                .AddTo(disposable);
+            albumFoldout.Add(foldout);
             albumMusicFoldoutDict.Add(album.albumId, foldout);
         }
 
@@ -94,7 +113,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                 onDecideDevice.OnNext(device.deviceId);
                 onClose.OnNext(Unit.Default);
             };
-            deviceFoldout.contentContainer.Add(button);
+            deviceFoldout.Add(button);
             return onDecideDevice;
         }
 
@@ -105,7 +124,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     onDecideMusic.OnNext(music.musicId);
                     onClose.OnNext(Unit.Default);
                 };
-                foldout.contentContainer.Add(button);
+                foldout.Add(button);
             }
             return onDecideMusic;
         }
@@ -117,7 +136,7 @@ namespace n5y.SpotifyApi.Ui.Core.View {
                     onDecideMusic.OnNext(music.musicId);
                     onClose.OnNext(Unit.Default);
                 };
-                foldout.contentContainer.Add(button);
+                foldout.Add(button);
             }
             return onDecideMusic;
         }
