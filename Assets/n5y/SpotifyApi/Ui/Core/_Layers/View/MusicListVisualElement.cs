@@ -80,7 +80,6 @@ namespace n5y.SpotifyApi.Ui.Core.View {
             var foldout = new Foldout { text = playlist.name, value = false};
             foldout.OnValueChangedObservable()
                 .Subscribe(isOn => {
-                    UnityEngine.Debug.Log($"AddPlaylist {playlist.playlistId} {isOn}");
                     if (isOn) {
                         onDecidePlaylist.OnNext(playlist.playlistId);
                     } else {
