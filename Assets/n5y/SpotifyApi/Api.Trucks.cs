@@ -4,12 +4,11 @@ using n5y.SpotifyApi.Models;
 using Newtonsoft.Json;
 using UnityEngine.Networking;
 
-namespace n5y.SpotifyApi
-{
+namespace n5y.SpotifyApi {
     public static partial class Api {
         public static async UniTask<TrackModel> GetTruckAsync(string truckId, ITokenProvider token,
             CancellationToken cancellationToken) {
-            var url = $"{Endpoints.ApiAlbums}/{truckId}";
+            var url = $"{Endpoints.ApiTracks}/{truckId}";
             using var req = UnityWebRequest.Get(url);
             req.SetRequestHeader("Authorization", token.GetAuthorizationHeaderValue());
 

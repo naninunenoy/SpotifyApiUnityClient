@@ -31,27 +31,18 @@ namespace n5y.SpotifyApi.Ui.Core {
                 .AddTo(bag);
             catalog.Device
                 .Subscribe(x => {
-                    listPresentation
-                        .AddDevice(x)
-                        .Subscribe(selectPublisher.DeviceSelect.Publish)
-                        .AddTo(agentDisposable);
+                    listPresentation.AddDevice(x);
                 })
                 .AddTo(bag);
             // 取得した音楽を随時更新
             catalog.PlaylistMusic
                 .Subscribe(x => {
-                    listPresentation
-                        .AddPlaylistMusic(x.playlistId, x.music)
-                        .Subscribe(selectPublisher.MusicSelect.Publish)
-                        .AddTo(agentDisposable);
+                    listPresentation.AddPlaylistMusic(x.playlistId, x.music);
                 })
                 .AddTo(bag);
             catalog.AlbumMusic
                 .Subscribe(x => {
-                    listPresentation
-                        .AddAlbumMusic(x.albumId, x.music)
-                        .Subscribe(selectPublisher.MusicSelect.Publish)
-                        .AddTo(agentDisposable);
+                    listPresentation.AddAlbumMusic(x.albumId, x.music);
                 })
                 .AddTo(bag);
             agentInnerDisposable = bag.Build();
